@@ -1,0 +1,109 @@
+\documentclass[12pt, a4paper, oneside]{book}
+
+
+
+\usepackage{fullpage}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{alltt}
+\usepackage{latexsym}   
+
+
+%a useful package if you write url addresses:
+\usepackage{url}
+
+
+\usepackage[iso]{umlaute}
+
+\usepackage[arrow,matrix,frame,curve,ps]{xy}
+\usepackage{xypic}
+
+%\usepackage[iso]{umlaute}
+%\usepackage{amssymb}
+\usepackage{fleqn}
+
+\usepackage{alltt,epsfig,array}
+
+\setlength{\parindent}{0pt}
+
+
+
+%Create your own environments
+\newtheorem{definition}{Definition}
+\newtheorem{example}{Example}
+
+
+\newcommand{\incgen}[4]{%
+  \begin{figure}[htbp]\begin{center}
+     \includegraphics[#4]{#1}
+
+      \caption{#2}
+      \label{fig:#3}
+    \end{center}
+  \end{figure}
+}
+\newcommand{\incps}[3]{\incgen{ps/#1.ps}{#2}{#3}{scale=0.3,angle=270}}
+\newcommand{\incfig}[3]{\incgen{fig/#1.eps}{#2}{#3}{scale=0.58}}
+
+\usepackage{makeidx}
+
+\makeindex
+\makeindex
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\submissionDay}[0]{12}
+\newcommand{\submissionMonth}[0]{July}
+\newcommand{\submissionYear}[0]{2007}
+
+\newcommand{\typeOfThesis}[0]{Bachelor Thesis}
+
+\newcommand{\titleOfThesisOne}[0]{Title of the Thesis}
+\newcommand{\titleOfThesisTwo}[0]{Title 2. line}
+\newcommand{\titleOfThesisThree}[0]{Titel 3. line}
+
+\newcommand{\authorOfThesis}[0]{Name of the Author}
+\newcommand{\supervisorOne}[0]{Name of the Reviewer}
+\newcommand{\reviewerOne}[0]{Name of the Reviewer}
+%\newcommand{\reviewerTwo}[0]{}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+\input{GUC_TitlePage}
+
+\pagenumbering{Roman}
+\setcounter{page}{3}
+
+%if you want to include acknowledgements, uncomment the following:
+%\include{acknowledgement}
+
+%Abstract 
+\include{abstract}
+
+
+\tableofcontents
+\clearpage 
+
+%include all chapters here
+\pagenumbering{arabic}
+\include{introduction}
+\include{background}
+\include{approach}
+\include{conclusion}
+
+
+%The following adds references to the table of contents
+\addcontentsline{toc}{chapter}{References}
+\bibliographystyle{plain}
+\bibliography{bachelor}
+
+%\printindex
+%\addcontentsline{toc}{chapter}{Index}
+
+\end{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\thispagestyle{empty}
+%\clearpage

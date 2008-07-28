@@ -1,0 +1,40 @@
+Table of Contents
+	Abstract
+	Acknowledgements
+	List of Tables
+	List of Figures
+	List of Abbreviations
+
+	Chapter 1: Introduction
+		Background Information
+		Motivation
+		Thesis Overview
+
+	Chapter 2: The State of The Art
+		Problem Description
+		Investigated Tools
+		Comparision
+		Difference of Implementations
+
+	Chapter 3: System Functionalities
+		Features
+		Users
+		Use-Cases
+	// add concepts chapter..
+	
+	Chapter 4: Implementation
+		Arrow Keys Navigation:
+			Prototype
+			Dia
+		Smart Navigation:
+			Prototype
+			Dia
+		Problems	
+
+	Chapter 5: Conclusion and Future work
+		Conclusion
+		Recommendations for Future work
+		TODO
+
+	References
+End of Table of Contents
