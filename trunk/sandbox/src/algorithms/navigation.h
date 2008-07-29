@@ -35,5 +35,14 @@
 - (void) unselect_all_edges;
 
 - (void) unselect_all_nodes;
+
+- (void) node_to_right;
+
+- (void) node_to_left;
+
+- (void) node_to_up;
+
+- (void) node_to_down;
+
 @end
 
