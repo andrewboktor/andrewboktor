@@ -21,6 +21,7 @@
 #import <graph.h>
 #import <layout.h>
 #import <nodes.h>
+#import <gdk/gdkkeysyms.h>
 
 static gboolean area_expose(GtkWidget *, GdkEventExpose *, gpointer);
 static void nodeapply_click(GtkButton *, gpointer);
@@ -74,20 +75,45 @@ static void event_handler (GtkWindow *window, GdkEvent *event, gpointer data) {
 	{
 		
 		printf ("Key Pressed\n");
-		if (((GdkEventKey *) event)->keyval == 'n')
+		if (((GdkEventKey *) event)->keyval == 'n' |((GdkEventKey *) event)->keyval == 'm') 
 			if (navigating) navigating = 0;
-			else navigating = 1;
+			else navigating = ((GdkEventKey *) event)->keyval;
 		
 
 		if ([graph get_navigation] && navigating)
 		{
-			if (((GdkEventKey *) event)->keyval == 's')
-			{
-				[[graph get_navigation] next_edge];	
+			if (navigating == 'n')
+			{	
+				switch (((GdkEventKey *) event)->keyval)
+				{
+					case 's':
+							[[graph get_navigation] next_edge];	
+						break;
+					case 'd':
+						[[graph get_navigation] next_node];
+						break;
+				}
 			}
-			else if (((GdkEventKey *) event)->keyval == 'd')
+
+			if (navigating == 'm')
 			{
-				[[graph get_navigation] next_node];
+	
+				switch (((GdkEventKey *) event)->keyval)
+				{
+					case GDK_Left:
+						[[graph get_navigation] node_to_left];
+						break;
+					case GDK_Right:
+						[[graph get_navigation] node_to_right];
+						break;
+					case GDK_Up:
+						[[graph get_navigation] node_to_up];
+						break;
+					case GDK_Down:
+						[[graph get_navigation] node_to_down];
+						break;
+				}
+
 			}
 			[app->drawarea queueDraw];
 		}

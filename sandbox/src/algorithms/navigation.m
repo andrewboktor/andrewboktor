@@ -23,7 +23,6 @@
 }
 
 - (void) next_edge {
-	printf ("Edge List Size: %d, current edge: %d\n", [edgelist size], current_edge);
 	if ([edgelist size]<=0) return;
 	if (current_edge < 0)
 		current_edge = 0;
@@ -106,6 +105,123 @@
 		i++;
 	}
 }
+
+- (int) abs: (int) x {
+	if (x<0) return -x;
+	else return x;
+}
+
+- (void) node_to_right {
+	List *temp = [[List alloc] init];
+	int smallest = -1, smallest_i=-1, i=0;
+	while (i<[graph_nodelist size])
+	{
+		if ([graph_nodelist getItem: i] != current_node)
+		{
+			if ([[graph_nodelist getItem: i] x] < [current_node x])
+			{
+				i++;
+				continue;
+			}
+			int dist =  [self abs: [[graph_nodelist getItem: i] y] - [current_node y]];
+			if (dist < smallest || smallest < 0)
+			{
+				smallest = dist;
+				smallest_i = i;
+			}
+		}
+		i++;
+	}
+	if (smallest_i < 0) return;
+	[self unselect_all_nodes];
+	current_node = [graph_nodelist getItem: smallest_i];
+	[current_node select];
+}
+
+- (void) node_to_left {
+	List *temp = [[List alloc] init];
+	int smallest = -1, smallest_i=-1, i=0;
+	while (i<[graph_nodelist size])
+	{
+		if ([graph_nodelist getItem: i] != current_node)
+		{
+			if ([[graph_nodelist getItem: i] x] > [current_node x])
+			{
+				i++;
+				continue;
+			}
+			int dist =  [self abs: [[graph_nodelist getItem: i] y] - [current_node y]];
+			if (dist < smallest || smallest < 0)
+			{
+				smallest = dist;
+				smallest_i = i;
+			}
+		}
+		i++;
+	}
+	if (smallest_i < 0) return;
+	[self unselect_all_nodes];
+	current_node = [graph_nodelist getItem: smallest_i];
+	[current_node select];
+}
+
+
+- (void) node_to_up {
+	List *temp = [[List alloc] init];
+	int smallest = -1, smallest_i=-1, i=0;
+	while (i<[graph_nodelist size])
+	{
+		if ([graph_nodelist getItem: i] != current_node)
+		{
+			if ([[graph_nodelist getItem: i] y] > [current_node y])
+			{
+				i++;
+				continue;
+			}
+			int dist =  [self abs: [[graph_nodelist getItem: i] x] - [current_node x]];
+			if (dist < smallest || smallest < 0)
+			{
+				smallest = dist;
+				smallest_i = i;
+			}
+		}
+		i++;
+	}
+	if (smallest_i < 0) return;
+	[self unselect_all_nodes];
+	current_node = [graph_nodelist getItem: smallest_i];
+	[current_node select];
+}
+
+
+- (void) node_to_down {
+	List *temp = [[List alloc] init];
+	int smallest = -1, smallest_i=-1, i=0;
+	while (i<[graph_nodelist size])
+	{
+		if ([graph_nodelist getItem: i] != current_node)
+		{
+			if ([[graph_nodelist getItem: i] y] < [current_node y])
+			{
+				i++;
+				continue;
+			}
+			int dist =  [self abs: [[graph_nodelist getItem: i] x] - [current_node x]];
+			if (dist < smallest || smallest < 0)
+			{
+				smallest = dist;
+				smallest_i = i;
+			}
+		}
+		i++;
+	}
+	if (smallest_i < 0) return;
+	[self unselect_all_nodes];
+	current_node = [graph_nodelist getItem: smallest_i];
+	[current_node select];
+}
+
+
 
 @end
 
