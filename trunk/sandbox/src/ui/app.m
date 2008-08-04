@@ -24,6 +24,11 @@
 - init {
 	if ((self = [super init])) {
 		generalbox = [[GeneralBox alloc] init];
+		
+		drawarea_commandbox = [[[[VBox alloc] init] homogeneous: NO] spacing: 2];
+		commandbox = [[[[HBox alloc] init] homogeneous: NO] spacing: 5];
+		commandlabel = [[[Label alloc] init] text: "Command:"];
+		commandtext = [[TextView alloc] init];
 
 		coulconstlabel = [[[Label alloc] init] text: "Electr Const:"];
 		coulconstspin = [[[[SpinButton alloc] init] range: 0: 1000000] step: 1: 5];
@@ -87,11 +92,18 @@
 		[notebook appendPage: filebox: [[[Label alloc] init] text: "File"]];
 		[notebook appendPage: layoutbox: [[[Label alloc] init] text: "Layout"]];
 		[notebook appendPage: searchbox: [[[Label alloc] init] text: "Search"]];
+		[[commandbox
+			packStart: commandlabel: NO: NO: 5]
+			packStart: commandtext: YES: YES: 5];
+
+		[[drawarea_commandbox
+			packStart: drawarea: YES: YES: 0]
+			packStart: commandbox: NO: NO: 5];
 
 		[[[mainbox 
 			packStart: notebook] 
-			packStart: drawareasep: NO: NO: 5]
-			packStart: drawarea: YES: YES: 0];
+			packStart: drawareasep: NO: NO: 0]
+			packStart: drawarea_commandbox: YES: YES: 0];
 
 		[[[[[self borderWidth: 2] defaultSize: 800: 600] add: mainbox] showAll] 
 				   onDestroy: (GCallback) gtk_main_quit: NULL];
@@ -102,7 +114,9 @@
 - free {
 	[generalbox free];
 	[notebook free];
-
+	g_free(commandbox);
+	g_free(commandlabel);
+	g_free(drawarea_commandbox);
 	g_free(layoutbox);
 	g_free(filebox);
 	g_free(searchbox);
