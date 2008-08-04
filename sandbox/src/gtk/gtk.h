@@ -43,6 +43,7 @@
 #import "progress.h"
 #import "progressbar.h"
 #import "notebook.h"
+#import "textview.h"
 
 @interface Gtk {
 }

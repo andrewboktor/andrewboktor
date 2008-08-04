@@ -7,6 +7,6 @@ add_library(gtk object.m widget.m container.m bin.m
 	label.m separator.m hseparator.m vseparator.m 
 	combobox.m range.m scale.m hscale.m vscale.m 
 	togglebutton.m progress.m progressbar.m 
-	notebook.m gtk.m)
+	notebook.m gtk.m textview.m textbuffer.m)
 target_link_libraries(gtk ${GTK_LIBRARIES})
 

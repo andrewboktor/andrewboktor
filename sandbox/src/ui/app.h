@@ -19,6 +19,7 @@
 
 #import <gtk.h>
 #import "general.h"
+#import "textview.h"
 
 @interface SBApp : Window {
 @public
@@ -27,6 +28,14 @@
 	VBox *layoutbox;
 	VBox *filebox;
 	VBox *searchbox;
+	
+	VBox *drawarea_commandbox;
+
+
+	HBox *commandbox;
+	Label *commandlabel;
+	TextView *commandtext;
+
 
 	Label *coulconstlabel;
 	SpinButton *coulconstspin;
