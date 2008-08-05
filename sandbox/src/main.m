@@ -21,6 +21,7 @@
 #import <graph.h>
 #import <layout.h>
 #import <nodes.h>
+#import "script.h"
 #import <gdk/gdkkeysyms.h>
 
 static gboolean area_expose(GtkWidget *, GdkEventExpose *, gpointer);
@@ -75,6 +76,13 @@ static void event_handler (GtkWindow *window, GdkEvent *event, gpointer data) {
 	{
 		
 		printf ("Key Pressed\n");
+		if (((GdkEventKey *) event)->keyval == 'z')
+		{
+			printf ("Script called\n");
+			//[Script exec_commands: "rectangle 100 100 50 50\ncircle 200 200 30\nrectangle 300 300 30 50": graph];
+			[Script exec_file: "/home/drew/Desktop/script": graph];
+			[app->drawarea queueDraw];
+		}
 		if (((GdkEventKey *) event)->keyval == 'n' |((GdkEventKey *) event)->keyval == 'm') 
 			if (navigating) navigating = 0;
 			else navigating = ((GdkEventKey *) event)->keyval;
@@ -225,9 +233,9 @@ static gboolean area_press(GtkWidget *widget, GdkEventButton *event, gpointer da
 	else if (event->button == 1) {	/* dragging */
 		drag_node = n;
 		
-		if(n != NULL)
-			printf("Node Properties: %i, %i, %i, %i, %s\n", [n type], [n lineStyle], 
-				[n lineColor], [n fillColor], [n comment]);
+		//if(n != NULL)
+			//printf("Node Properties: %i, %i, %i, %i, %s\n", [n type], [n lineStyle], 
+			//	[n lineColor], [n fillColor], [n comment]);
 		
 		if ([n selected])
 			[n unselect];

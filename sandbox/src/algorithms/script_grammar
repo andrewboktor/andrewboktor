@@ -1,0 +1,8 @@
+S -> Rectangle | Circle | Triangle | Ellipse | Note | Square
+Rectangle -> rectangle x x x x
+Circle -> circle x x x
+Triangle -> triangle x x x x
+Ellipse -> ellipse x x x x
+Note -> note x x x x
+Square -> square x x x
+x -> int
