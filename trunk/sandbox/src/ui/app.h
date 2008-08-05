@@ -20,6 +20,7 @@
 #import <gtk.h>
 #import "general.h"
 #import "textview.h"
+#import <gtk/gtk.h>
 
 @interface SBApp : Window {
 @public
@@ -35,6 +36,7 @@
 	HBox *commandbox;
 	Label *commandlabel;
 	TextView *commandtext;
+	GtkTextBuffer *commandbuffer;
 
 
 	Label *coulconstlabel;

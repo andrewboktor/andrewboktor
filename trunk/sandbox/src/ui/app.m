@@ -29,6 +29,8 @@
 		commandbox = [[[[HBox alloc] init] homogeneous: NO] spacing: 5];
 		commandlabel = [[[Label alloc] init] text: "Command:"];
 		commandtext = [[TextView alloc] init];
+		commandbuffer = (GtkTextBuffer *) gtk_text_buffer_new (NULL);
+		[commandtext setBuffer: commandbuffer];
 
 		coulconstlabel = [[[Label alloc] init] text: "Electr Const:"];
 		coulconstspin = [[[[SpinButton alloc] init] range: 0: 1000000] step: 1: 5];

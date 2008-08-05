@@ -76,17 +76,31 @@ static void event_handler (GtkWindow *window, GdkEvent *event, gpointer data) {
 	{
 		
 		printf ("Key Pressed\n");
+		/*
 		if (((GdkEventKey *) event)->keyval == 'z')
 		{
 			printf ("Script called\n");
+			[Script exec_command: "file /home/drew/Desktop/script": graph];
 			//[Script exec_commands: "rectangle 100 100 50 50\ncircle 200 200 30\nrectangle 300 300 30 50": graph];
-			[Script exec_file: "/home/drew/Desktop/script": graph];
+			//[Script exec_file: "/home/drew/Desktop/script": graph];
 			[app->drawarea queueDraw];
 		}
+		*/
+		if (((GdkEventKey *) event)->keyval == GDK_Return)
+		{
+			GtkTextIter end, start;
+			gtk_text_buffer_get_start_iter (app->commandbuffer, &start);
+			gtk_text_buffer_get_end_iter (app->commandbuffer, &end);
+			char *command = gtk_text_buffer_get_text (app->commandbuffer, &start, &end, TRUE);
+			gtk_text_buffer_set_text (app->commandbuffer, "", 0);
+			[Script exec_command: command: graph];
+			[app->drawarea queueDraw];
+		}
+		/*
 		if (((GdkEventKey *) event)->keyval == 'n' |((GdkEventKey *) event)->keyval == 'm') 
 			if (navigating) navigating = 0;
 			else navigating = ((GdkEventKey *) event)->keyval;
-		
+		*/
 
 		if ([graph get_navigation] && navigating)
 		{
