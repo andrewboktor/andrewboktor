@@ -162,6 +162,13 @@
 		
 		[graph addNode: x];
 	}
+	else if ( strcmp ( temp, "file" ) == 0)
+	{
+		char *temp1 = strtok (NULL, " ");
+		printf ("URL: %s\n", temp1);
+		//drawhere
+		[self exec_file: temp1: graph];
+	}
 	free (temp);
 	printf ("Script Done\n\n");
 }
