@@ -35,7 +35,7 @@ static gboolean area_motion(GtkWidget *, GdkEventMotion *, gpointer);
 static void scale_valuechanged(GtkRange *, gpointer);
 static void wall_toggle(GtkToggleButton *, gpointer);
 static gboolean area_config(GtkWidget *, GdkEventConfigure *, gpointer);
-static void event_handler (GtkWindow *, GdkEvent *, gpointer);
+static int event_handler (GtkWindow *, GdkEvent *, gpointer);
 
 
 SBApp *app = NULL;
@@ -59,7 +59,7 @@ int main(int argc, char* argv[])
 	[app->walltog onToggled: (GCallback) wall_toggle: NULL];
 	[app->drawarea onConfigure: (GCallback) area_config: NULL];
 	[app->save onClicked: (GCallback) save_click: NULL];
-	[app gtk_event: (GCallback) event_handler: NULL];
+	[app->commandtext gtk_event: (GCallback) event_handler: NULL];
 	graph = [[Graph alloc] init];
 	(void)area_config(NULL, NULL, NULL);
 	
@@ -69,7 +69,7 @@ int main(int argc, char* argv[])
 	return 0;
 }
 
-static void event_handler (GtkWindow *window, GdkEvent *event, gpointer data) {
+static int event_handler (GtkWindow *window, GdkEvent *event, gpointer data) {
 	static int navigating;
 
 	if (event->type == GDK_KEY_PRESS)
@@ -95,6 +95,7 @@ static void event_handler (GtkWindow *window, GdkEvent *event, gpointer data) {
 			gtk_text_buffer_set_text (app->commandbuffer, "", 0);
 			[Script exec_command: command: graph];
 			[app->drawarea queueDraw];
+			return 1;
 		}
 		/*
 		if (((GdkEventKey *) event)->keyval == 'n' |((GdkEventKey *) event)->keyval == 'm') 
