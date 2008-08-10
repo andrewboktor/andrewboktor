@@ -1,0 +1,57 @@
+Abstract [1]
+
+Introduction [2]
+	Background Information
+	Motivation
+	Thesis Overview
+	
+Background Information [2]
+	Graphs [1]
+	Diagrams [1]
+	
+The State Of The Art [7]
+	Problem Description
+	Investigated Tools
+		(add a part about graphviz)
+	
+
+Concepts [15]
+	keyboard navigation [9]
+		
+		tab navigation [.5]
+		
+		arrow keys navigation [4.5]
+			smallest deviation [1]
+			quadrants [1]
+			why they failed [1]
+			smallest deviation and quadrants [.5]
+			weighed coordinates differences [1]
+		
+		smart navigation [3]
+			single stepped [1.5]
+			double stepped [1.5]
+		
+		navigation completeness [1]
+		
+		
+	Editing using keyboard [6]
+		accelerators
+		menu based editing
+		command based editing
+		scripting
+
+Implementation [10]
+	Arrow keys navigation
+		prototype
+	
+	Smart Navigation
+		prototype
+		
+	Use-Cases for both
+	
+	Problems that i faced
+	
+Conclusion [4]
+	Conclusion
+	Recommendations for future work
+	TODO

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="345pt" height="59pt" viewBox="0 0 345 59" version="1.1">
+<g id="surface0">
+<path style=" stroke:none;fill-rule: nonzero; fill: rgb(100%,100%,100%); fill-opacity: 1;" d="M 0 0 L 499 0 L 499 160 L 0 160 Z M 0 0 "/>
+<path style="fill-rule: nonzero; fill: rgb(100%,100%,100%); fill-opacity: 1;stroke-width: 0.1; stroke-linecap: butt; stroke-linejoin: miter; stroke: rgb(0%,0%,0%); stroke-opacity: 1;stroke-miterlimit: 10; " d="M 7.75 5.15 L 10.95 5.15 L 10.95 7.95 L 7.75 7.95 Z M 7.75 5.15 " transform="matrix(20,0,0,20,-154,-101)"/>
+<path style="fill-rule: nonzero; fill: rgb(100%,100%,100%); fill-opacity: 1;stroke-width: 0.1; stroke-linecap: butt; stroke-linejoin: miter; stroke: rgb(100%,0%,0%); stroke-opacity: 1;stroke-miterlimit: 10; " d="M 21.6 5.1 L 24.9 5.1 L 24.9 7.85 L 21.6 7.85 Z M 21.6 5.1 " transform="matrix(20,0,0,20,-154,-101)"/>
+<path style="fill: none; stroke-width: 0.1; stroke-linecap: butt; stroke-linejoin: miter; stroke: rgb(0%,0%,0%); stroke-opacity: 1;stroke-miterlimit: 10; " d="M 11.000195 6.541016 L 21.551562 6.48418 " transform="matrix(20,0,0,20,-154,-101)"/>
+</g>
+</svg>
