@@ -169,6 +169,12 @@
 		//drawhere
 		[self exec_file: temp1: graph];
 	}
+	else if ( strcmp ( temp, "layout" ) == 0)
+	{
+		//drawhere
+		
+	}
+
 	free (temp);
 	printf ("Script Done\n\n");
 }
