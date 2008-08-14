@@ -1,33 +1,27 @@
 \documentclass[12pt, a4paper, oneside]{book}
 
-
-
 \usepackage{fullpage}
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{graphicx}
 \usepackage{alltt}
 \usepackage{latexsym}   
-
-
 %a useful package if you write url addresses:
 \usepackage{url}
-
-
 \usepackage[iso]{umlaute}
-
 \usepackage[arrow,matrix,frame,curve,ps]{xy}
-\usepackage{xypic}
-
+%\usepackage{xypic}
 %\usepackage[iso]{umlaute}
 %\usepackage{amssymb}
 \usepackage{fleqn}
-
 \usepackage{alltt,epsfig,array}
+\usepackage{algorithmic}
+\usepackage{algorithm}
+
 
 \setlength{\parindent}{0pt}
 
-
+\thispagestyle{plain}
 
 %Create your own environments
 \newtheorem{definition}{Definition}
@@ -50,31 +44,43 @@
 \makeindex
 \makeindex
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\newcommand{\submissionDay}[0]{02}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% Thesis Specific Commands %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\submissionDay}[0]{2\superscript{nd}}
 \newcommand{\submissionMonth}[0]{September}
 \newcommand{\submissionYear}[0]{2008}
+\newcommand{\submissionDate}[0]{\submissionDay~of~\submissionMonth,~\submissionYear}
 
 \newcommand{\typeOfThesis}[0]{Bachelor Thesis}
 
-\newcommand{\titleOfThesisOne}[0]{Title of the Thesis}
+\newcommand{\titleOfThesisOne}[0]{Keyboard Supported Diagram Editing and Navigating}
 \newcommand{\titleOfThesisTwo}[0]{Title 2. line}
 \newcommand{\titleOfThesisThree}[0]{Titel 3. line}
 
-\newcommand{\authorOfThesis}[0]{Name of the Author}
-\newcommand{\supervisorOne}[0]{Name of the Reviewer}
-\newcommand{\supervisorTwo}[0]{Name of the Reviewer}
-\newcommand{\reviewerOne}[0]{Name of the Reviewer}
+\newcommand{\authorOfThesis}[0]{Andrew M. B. Boktor}
+\newcommand{\supervisorOne}[0]{Dipl. Inf. Steffen Koch}
+\newcommand{\supervisorTwo}[0]{Dipl. Inf. Christiane Taras}
+\newcommand{\reviewerOne}[0]{Prof. Dr. Thomas Ertl}
 %\newcommand{\reviewerTwo}[0]{}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Formatting Commands %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\superscript}[1]{\ensuremath{^{\textnormal{#1}}}}
+\newcommand{\subscript}[1]{\ensuremath{_{\textnormal{#1}}}}
+
+\newcommand{\beginchapter}[0]{\vspace{-0.5cm}\hrule\vspace{0.02cm}\hrule\vspace{0.01cm}\hrulefill\hrule\hrule\vspace{1cm}}
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
-
 \input{GUC_TitlePage}
+\input{GUC_TitlePage}
+\input{certification}
 
 \pagenumbering{Roman}
 \setcounter{page}{3}
+
 
 %if you want to include acknowledgements, uncomment the following:
 %\include{acknowledgement}
@@ -82,14 +88,14 @@
 %Abstract 
 \include{abstract}
 
-
 \tableofcontents
 \clearpage
 
-%include all chapters here
 \pagenumbering{arabic}
+%include all chapters here
 \include{introduction}
 \include{background}
+\include{concepts}
 \include{approach}
 \include{conclusion}
 
