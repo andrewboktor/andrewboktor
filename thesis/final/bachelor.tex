@@ -1,0 +1,107 @@
+\documentclass[12pt, a4paper, oneside]{book}
+
+\usepackage{fullpage}
+%\usepackage{amsmath}
+%\usepackage{amssymb}
+\usepackage{graphicx}
+%\usepackage{alltt}
+%\usepackage{latexsym}
+%\usepackage{url}
+%\usepackage[iso]{umlaute}
+%\usepackage[arrow,matrix,frame,curve,ps]{xy}
+\usepackage[vcentering,dvips]{geometry}
+%\usepackage{xypic}
+%\usepackage[iso]{umlaute}
+%\usepackage{amssymb}
+%\usepackage{fleqn}
+%\usepackage{alltt,epsfig,array}
+\usepackage{algorithmic}
+\usepackage{algorithm}
+\usepackage{makeidx}
+
+\geometry{total={155mm,235mm}}
+%\setlength{\parindent}{0pt}
+
+\thispagestyle{plain}
+
+%Create your own environments
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% inclusion commands %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newtheorem{definition}{Definition}
+\newtheorem{example}{Example}
+
+\newcommand{\incgen}[4]{%
+  \begin{figure}[htbp]\begin{center}
+     \includegraphics[#4]{#1}
+      \caption{#2}
+      \label{fig:#3}
+    \end{center}
+  \end{figure}
+}
+\newcommand{\incps}[3]{\incgen{ps/#1.ps}{#2}{#3}{scale=0.3,angle=270}}
+\newcommand{\incfig}[3]{\incgen{fig/#1.eps}{#2}{#3}{scale=0.58}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% Thesis Specific Commands %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Submission Date
+\newcommand{\submissionDay}[0]{2\superscript{nd}}
+\newcommand{\submissionMonth}[0]{September}
+\newcommand{\submissionYear}[0]{2008}
+\newcommand{\submissionDate}[0]{\submissionDay~of~\submissionMonth,~\submissionYear}
+
+%Thesis
+\newcommand{\typeOfThesis}[0]{Bachelor Thesis}
+\newcommand{\titleOfThesisOne}[0]{Keyboard Supported Diagram Editing and Navigating}
+
+%Author and Reviewers
+\newcommand{\authorOfThesis}[0]{Andrew M. B. Boktor}
+\newcommand{\supervisorOne}[0]{Dipl. Inf. Steffen Koch}
+\newcommand{\supervisorTwo}[0]{Dipl. Inf. Christiane Taras}
+\newcommand{\reviewerOne}[0]{Prof. Dr. Thomas Ertl}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Formatting Commands %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\superscript}[1]{\ensuremath{^{\textnormal{#1}}}}
+\newcommand{\subscript}[1]{\ensuremath{_{\textnormal{#1}}}}
+\newcommand{\beginchapter}[0]{\vspace{-0.5cm}\hrule\vspace{0.02cm}\hrule\vspace{0.01cm}\hrulefill\hrule\hrule\vspace{1cm}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% Document Initialization %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\makeindex
+\makeindex
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+\input{GUC_TitlePage}
+\input{GUC_TitlePage}
+\input{certification}
+
+\pagenumbering{Roman}
+\setcounter{page}{3}
+
+
+%\include{acknowledgement}
+%\include{abstract}
+
+\tableofcontents
+\clearpage
+
+\pagenumbering{arabic}
+
+\include{introduction}
+\include{background}
+\include{concepts}
+\include{approach}
+\include{conclusion}
+
+
+%The following adds references to the table of contents
+%\addcontentsline{toc}{chapter}{Acknowledgments}
+
+\bibliographystyle{plain}
+\bibliography{bachelor}
+
+%\printindex
+%\addcontentsline{toc}{chapter}{Index}
+
+\end{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\thispagestyle{empty}
+%\clearpage

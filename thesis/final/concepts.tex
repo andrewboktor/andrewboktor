@@ -1,0 +1,235 @@
+\chapter* {Concepts}
+%-----------------------
+\beginchapter
+%-----------------------
+\par \noindent
+This chapter will talk about different concepts or strategies used to navigate and/or edit a diagram.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Section Start %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Keyboard Navigation}
+\par \noindent
+The most common way used to navigate diagrams are implemented and used with the help of some sort of pointing devices. These provide a very easy way to the user to pinpoint the shape/node he wants and just select it with the pointing device he/she is using. It is also the most natural way of selecting things as it relatively emulates the normal behavior of human beings towards objects, the user will move his hand towards the object he/she wants to deal with, and then grab it (or click it). On the other hand, navigation using pointing devices can be a little bit hard for the developer to detect the exact edges of the shape and toggle the selection in the right way. It also can be very challenging for people with some disabilities in their hands that prevents them form using pointing devices accurately if not at all. Although navigation using pointing devices is the closest to the natural way people would like to select things, in some points one could think of a better way to do it because in diagrams, connections between shapes means some sort of relation between them, and when navigating a diagram using a pointing divide, the interpretation of the meanings of the connections are left to the user. For example, if the user wants to select the parent node of another certain node, he/she will have to look at the connections, determine where is the parent, and then select it. This piece of information cannot be processed by the computer in case of the use of pointing devices, because the selection is only triggered based on the coordinates ignoring any information about previously selected nodes/shapes and their relation or connections to their neighbor nodes.
+\paragraph{}
+This is why we thought about implementing diagram navigation in another way, using only the keyboard, this will allow people that are not able to handle pointing devices to navigate diagrams as easy as others do, and will also allow the processing of the meanings of the connections to be done by the computer. Also keyboard keys could be mapped to voice commands which will allow people with further disabilities to use the system. We investigated three ways to navigate the diagram using the keyboard.
+
+\subsection{Tab Navigation}
+\par \noindent
+The first way is Tab Navigation. This is the most trivial way of navigation using the keyboard. The user will navigate using a single key, with each press, the selection will change between the nodes/shapes based on a predefined order, probably the order they were created, and thus leaving the user with no choice but to follow that order. It is sometimes very inefficient, especially when nodes/shapes created in sequence are laid out dispersedly on the screen.
+
+\subsection{Arrow Keys Navigation}
+\par \noindent
+An improvement on the Tab Navigation would be to give the user the ability to control where the selection will go. This can be done using the Arrow Keys Navigation, where the user will user the arrow keys to change the selection throughout the diagram in the direction he prefers. This navigation poses a challenge to the developers choosing the way they will sort the nodes in order to retrieve the closest node in the direction the user wants to navigate in. This method can completely replace the Tab Navigation. But still this mode of navigation doesn't interpret the meaning or the connections nor base the target node/shape based on its connections.
+Arrow keys navigation can either be implemented to navigate nodes/shapes or to navigate connections. Both will be implemented exactly the same way.
+\paragraph{}
+As mentioned before, this method can provide a challenge for the programmer in the way he will choose to simulate something that would seem natural for human beings. Three approaches were proposed to implement this method of navigation.
+
+\begin{itemize} 
+\item {\it Approach 1: Smallest Deviation}
+\par \noindent
+In this approach we try to minimize the deviation from the direction the user selected, in other words, we try to move exactly in the direction of the arrow key the user pressed. The result of this approach can easily be simulated by drawing a line (horizontal or vertical) in the direction of the arrow key the user pressed, and then selecting the closest node to that line. Although this is the most logical way, but sometimes it doesn't yield preferable results. This might happen when there is a node in the direction of the arrow key the user presses that is very far away but almost exactly on the virtual line in that direction. This node will get selected although it might be even out of the view of the user.
+
+\item {\it Approach 2: Quadrants}
+\par \noindent
+Pseudo-Code:
+\par
+\begin{algorithmic}
+\STATE list $considered$
+\FORALL{node $i$ in graph}
+	\IF{$i$ is in quadrant}
+		\STATE $considered$.insert($i$)
+	\ENDIF
+\ENDFOR
+
+\FORALL{node $i$ in $considered$}
+	\STATE $i.distance\gets sqrt(($x$-$xi$)\superscript{2}+($y$-$yi$)\superscript{2})$
+\ENDFOR
+
+\STATE $considered$.sort()
+\STATE select($considered$[0])
+\end{algorithmic}
+\par \noindent
+As the name for this methods suggests, the screen is divided into four quadrants and only the nodes in the quadrant corresponding to the arrow key pressed are considered. The considered nodes are sorted relative to their absolute distance from the central node. Then the one with the smallest distance will be selected. But this method also has some behavior that doesn't seem very natural to humans. This method yields results that are much more natural to human beings because it considers both, the direction and the distance to the target node. The only drawback of this method is that it prioritizes the nodes in one quadrant based only on their distance from the central node and doesn't give any further priority to nodes based on their relative position to the central node.
+
+\paragraph{Why they failed?}
+To overcome the drawbacks of the first and second approaches one would think why they failed to produce accurate decisions at the first place. The Smallest Deviation approach used only the direction of the arrow key pressed to be the base for its decision, and the Quadrants approach used a partial information about the direction (not the exact direction but one of four spans of directions dividing the whole space into four spans each 90 degrees) and the information about the distance. If we consider how a point can be define in some well known coordinates system, we'll then notice that the first two approaches failed to yield valid results due to the non-complete information they base their decision on. The first two approaches take polar coordinates system data (angle and distance) but both don't take the complete data. The Smallest Deviation approach takes only direction information while neglecting the distance, and the Quadrant approach takes only partial direction information. Thus, to construct a system that is able to yield correct results, it has to take complete position information for the target nodes, of course this is not restricted to angle and direction like in Polar coordinates system, but it can be in x position and y position like in the Cartesian coordinates system, or any other complete information from any coordinates system.
+
+\paragraph{}
+Two approaches were thought of to compensate the deficiencies in the {\it Smallest Deviation} and {\it Quadrant} approaches these are approaches 3 and 4.
+
+\item {\it Approach 3: Smallest Deviation and Quadrants in conjunction}
+\par \noindent
+We use both {\it Smallest Deviation} and {\it Quadrants} in conjunction. This could be achieved by giving numbers to the sorted lists out of the {\it Smallest Deviation} and  {\it Quadrants} and then for each node sum those two numbers, and then select the node with the smallest sum.
+
+\item {\it Approach 4: Weighed Coordinates Differences}
+\par \noindent
+The second would be to consider something else other than the distance and the direction but that carries the same information. Like the data from the Cartesian coordinates system, x position and y position relative position of the target node relative to the central node. These could be used in a weighed manner to calculate the factor that will be used to sort the nodes. For example we could calculate the x difference and the y difference, multiply each by a constant weigh for all nodes, and then sum the result, then sort the nodes based on the sum.
+\end{itemize}
+
+\subsection{Smart Navigation Following Connections}
+\par \noindent
+A third way of navigation that would take into account the connections between the nodes/shapes would be the Smart Navigation Following Connections. In this navigation mode, the user can switch selection between a connected part of the diagram based on the connections between the nodes/shapes. As this method of navigation follows connections, I will only navigate a connected subgraph without having the ability to go to other parts that are not connected to the subgraph being navigated. Thus it will have to be accompanied with another navigation method to ensure the presence of this functionality.\\
+In this method, the user is given the option to switch between the connections going in and/or out from the currently selected node/shape, then he will choose the connection he/she would like to follow. The user selects the shape where he would like to start the navigation from the then clicks the ``navigation-next-connection-clockwise'' or the ``navigation-next-connection-counterclockwise'' button which will cause one of the connections going in or out of this shape to be selected as well. With each press of the previously mentioned buttons, the selected connection will change in a clockwise or counter clockwise matter respectively taking the center to be the node the user initially selected. Once the user has settled on the connection he would like to follow he will press the ``navigation-follow-connection'' button, this will allow him to follow this connection. Following the connection can be implemented in two almost completely different ways, Single Stepped and Double Stepped.
+
+\begin{itemize}
+\item {\it Single Stepped Navigation}
+\par \noindent
+In the single stepped navigation, once the user chooses to follow a connection, the selection is moved only one step away from the initial node, selecting only the connection the user chose to follow. This situation is illustrated in figures ADD FIGURE HERE and ADD FIGURE HERE.\\
+This method of navigation allows the handling of the connections as normal shapes giving the possibility to other connections to be connected to them like in figure ADD FIGURE HERE. This might not be possible in other types of navigation.\\
+The single steps this method involves slow down the navigation compared to other methods like the Double Stepped navigation as it requires double the number of actions from the user thus also requiring more time.
+
+
+\item {\it Double Stepped Navigation}
+\par \noindent
+The double stepped navigation, on contrary to the single stepped navigation, totally jumps over the connections and only targets shapes. When the user chooses a connection to follow, the selection moves from the initial shape to the shape at the other end of the navigation where the final state has only the latter shape selected. Using the double stepped navigation to select nodes is not possible, although this might be complemented using something like arrow keys navigation in two different modes, one for connections and one for shapes.\\
+Also as the double stepped navigation cannot reference connections, thus the connections that act like shapes will normally cause problems. For example, in figure *, if we have the node at the left selected it will not be possible to move to the node at the bottom right corner, because for this graph to be realized, the connection between the left and top right shapes also has to be considered also as a shape so that other connections could connect to it.
+
+\subsection{Diagram Navigation Completeness}
+\par \noindent
+To ensure that the navigation method implemented is complete, using only the keyboard, we have to make sure that using these methods of navigation we can visit each and every node/shape and connection in the diagram considering every all types of diagrams of course.\\
+To do that we have to consider visiting all nodes and connections in connected as well as non connected diagrams or graphs. We have then to consider including the ability to move between non connected subgraphs, the ability to select connections and the ability to select nodes. To implement such a complete keyboard diagram navigation we have to implement a set of navigation methods in conjunction. The exact set is subject to change based on the application and the user preferences. But to ensure that it is complete a set has to be chosen so that it fulfills all the criteria in table ADD TABLE HERE.\\
+The possibilities are either to implement a single mode arrow keys navigation with a single mode only for shapes, along with a single stepped smart navigation. Or an arrow keys navigation with two modes, for nodes and for connections, along with a double stepped smart navigation. Or one could implement the two types of arrow keys navigation, either separate, or both integrated into a single navigation mode. But this will not offer navigation based on nodes/shapes connections to others.
+
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Section End %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Section Start %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Diagram Editing Using the Keyboard}
+\par \noindent
+As diagram navigation, the most common way to edit a diagram is done using pointing devices. The user can easily point the tool he wants, and drags on the canvas to draw the shape. But again, away from pointing devices, how to accomplish this task using only the keyboard might be a little challenging. Different paradigms of keyboard diagram editing are discussed below.\\
+To fully edit a diagram we need to provide five functionalities, choosing the tool, adding, editing, deleting, and connecting shapes.
+
+\subsection{Editing Using Accelerators}
+\par \noindent
+Accomplishing the previously mentioned functionality is possible through various ways. One of which is using Keyboard Accelerators. Using this method, the user will have to press a combination of keys representing the action he wants to perform on the diagram. Then he might be required to enter some other necessary arguments.
+
+\begin{itemize}
+\item {\bf Choosing the Tool}
+\par \noindent
+The user chooses the tool mainly based on the first combination of keys he will press. For example he could press CtrlR for rectangle. This will choose the rectangle drawing tool, and activate it to be ready for drawing.
+
+\item {\bf Adding shapes}
+\par \noindent
+After choosing the tool that will be used, there are two options for how to place the shapes, one or both can be implemented.
+	\begin{itemize}
+	\item {\it Dragging}
+	\par \noindent
+	The user will then use the keyboard arrow keys to move the cursor along with another key to simulate the mouse click and make the drag. This method simulates the mouse movement using the keyboard. Thus it doesn't emphasize productiveness, using the mouse in most cases will be easier (of course if the person has the ability to). And also as it simulates a movement on the screen, it cannot be mapped to voice commands.
+	
+	\item {\it Arguments}
+	\par \noindent
+	The other way would be to type in a set of arguments representing the position and the size of the shape to insert. This way can be easily mapped to voice commands to supply the arguments and is of course faster to deploy the shape, but on the other hand is not good for visualizing the output before adding the shape.
+	\end{itemize}
+
+\item {\bf Editing Shapes}
+\par \noindent
+	The user can edit the shapes in a way relatively similar to placing it. The user would first select the shape he wants to edit, then press a combination of keys representing the property he wants to edit for that shape, then he will enter the arguments representing the values for the property to change. In another way of implementation, which is actually taken from the menu based editing, after pressing the combination of keys representing the property to edit, the user would be presented with a pop-up dialog  designed in a simple way containing the current value of that property, the user then can switch between those one or more values and change them as he likes and then apply the changes by pressing the return key for example.
+
+\item {\bf Deleting Shapes}
+\par \noindent
+	Deleting shapes is an easy task to implement using accelerators. Probably the user will press the delete (or another) key after selecting the shape he wants to delete, and the shape will be deleted.
+
+\item {\bf Connecting Shapes}
+\par \noindent
+Connecting shapes is not an easy task to implement using keyboard accelerators, but some work around can be done to accomplish it. Such work around can be by requiring the user to select the two shapes he wants to connect, and then press the combination of keys for the connection, this way of doing it will not allow to determine a direction for the newly created connection. Another way to do it is to select a shape,  then press the connection accelerator, and navigate to the other shape and press the Return key for example, this will allow defining a direction for the connection directed from the initial shape towards the latter selected one. This way will also give the ability to give the user a preview of how the to-be-created connection will look like while he is navigating to the end shape.
+
+\end{itemize}
+
+\subsection{Menu Based Editing}
+\par \noindent
+In menu based editing, the user will have a menu key that he will press to access all the functions he can perform on a shape. For example, after selecting a shape, the user will press the menu key, and that would display either a menu or a dialog, both leading to someplace where the user can edit the object properties. In both options, it will not enable connecting shapes. Thus we will not investigate this point here.
+
+\begin{itemize}
+\item {\it Menu with the properties}
+\par \noindent
+after selecting a shape, once the user presses the menu key, a drop down menu will be displayed containing all possible actions on that shape. The user will then choose the item he wants and presses  the Return key for example.
+
+	\begin{itemize}
+	\item {\bf Choosing the Tool}
+	\par \noindent
+	with no shapes selected, the user will press the menu key, and a menu with all tools will be displayed, the user will choose the tool he needs and hit the Return key. The shape will be drawn with the default options and in a default position.
+	
+	\item {\bf Adding Shapes}
+	\par \noindent
+	After the shape is drawn in the default position and with default options, the user can navigate to that shape and edit its properties to customize it to what he needs. The properties should of course contain the position and the size of the shape.
+
+	\item {\bf Editing Shapes}
+	\par \noindent
+	To edit the shape, the user will simply have to select the property he wants to edit from the drop down menu, then a dialog containing the value of this property will be displayed where the user can edit the value, and the changes are applied when Return is pressed.
+
+	\item {\bf Deleting Shapes}
+	\par \noindent
+	deleting the object here will be as simple as choosing delete from the menu and hitting the Return key.
+	\end{itemize}
+
+\item {\it Properties Dialog}
+\par \noindent
+The other way to implement the menu based editing, is to display a dialog with all the properties of the object and their values on the press of the menu key. This dialog will contain the real values for the properties of the object. The user will then access those values directly and change them.
+
+	\begin{itemize}
+	\item {\bf Choosing the Tool}
+	\par \noindent
+	If the user hits his menu key with no shapes selected, the property dialog will be opened with default values for the shape. This property dialog will include the ability to select the type of shape to add, its position and size. The user can then change those default values exactly as in {\it Editing shapes}.
+
+	\item {\bf Adding Shapes}
+	\par \noindent
+	After the user is done editing the properties values in the dialog, he will hit the Return key and a new shape will be added with the properties the user specified.
+
+	\item {\bf Editing Shapes}
+	\par \noindent
+	With a shape selected, the user will press his menu key, a popup dialog will be displayed with the values of the properties for the current shape. The user will be able to edit those values and the changes will be apply on pressing the Return key.
+
+	\item {\bf Deleting Shapes}
+	The property dialog might contain a button for deleting an object.
+
+	\end{itemize}
+
+\end{itemize}
+
+\subsection{Command Based Editing}
+\par \noindent
+Using commands, includes the place or doesn't, can include some lay-outing commands.\\
+Editing diagrams using commands is the most feasible interactive method between all discussed methods. It requires actions from the user to edit/create a diagram, but at the same time it is easy to automate these actions or redo them through saving/executing the same commands. Here the user is presented with a text field where he can enter his commands, and then press the return key, which will cause the input command to be executed.
+
+\begin{itemize}
+\item {{\bf Choosing the Tool} and {\bf Adding Shapes}}
+\par \noindent
+Both actions are accomplished in one step, the command will represent the tool used as well as the minimal amount of arguments, and an ID for the shape. The shape will then be added using this minimal amount of arguments and the rest of the properties will be set to defaults.\\
+The commands for adding shapes can be something like this:\\
+rectangle x-pos y-pos width height
+
+\item {\bf Editing Shapes}
+\par \noindent
+The user can reference the shapes with their IDs previously entered and execute commands on them. There should be commands to change every possible property of the shape.\\
+For example to change the color the user can enter:\\
+color Obj-ID R G B A
+
+\item {\bf Deleting Shapes}
+\par \noindent
+simple commands can exist to delete the shapes.\\
+delete Obj-ID
+
+\item {\bf Connecting Shapes}
+\par \noindent
+Connecting shapes also is not that hard, the user will simply enter the connection command followed by the two objects IDs to connect.\\
+connect con-type Obj1-ID Obj-2ID
+
+\end{itemize}
+
+\paragraph{}
+the commands the user enters can be saved as macros or scripts that can be later executed to do the same actions on any diagram. Also some lay-outing and scripting commands can be added, such as commands to auto-layout the shapes, or to execute an external script in the current diagram.
+
+\subsection{Scripting}
+\par \noindent
+Scripting can be implemented in two different ways, one is to give a descriptive text input for what will the diagram include and how it will look like, but not including the exact positions and sizes of the shapes. This is not considered diagram editing and will not be discussed here. The other is to form the diagram through steps corresponding to executing commands that define the shapes and connections in sequence. Those commands could of course contain commands that are not help lay-outing the diagram or automate some parts of the creation.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Section End %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,59 @@
+\chapter{Background}\label{chap:background}
+%-----------------------
+\beginchapter
+%-----------------------
+
+In this chapter, you should present the background information needed for the
+proposed work of the thesis. 
+
+
+The background chapter is typically subdivided in several subsections.
+In some cases it is also more suitable to make more than one main
+chapter with very diverse theoretical backgrounds, if needed.
+The background chapter (or chapters) should not constitute
+more than 25-30\% of the total text.
+
+
+It is recommendable that each chapter begins by an introductory 
+paragraph or two. It is like a mini-introduction to this chapter. 
+
+
+\section{First Section}
+
+Especially important in the background  presentation are the references on
+the most acknowledged books, articles or crucial WWW-links.  The most
+efficient way to do it, is by use of the special tool called BibTeX.
+It is a simple date base with formalized entries for the referred
+literature.  An example of such entries you can find in the document
+''bachelor.bib''.  By running the BibTeX in the LaTeX Command
+Prompt window you can link from the \verb+.bib+ document only this entries,
+which are actually cited in your report.  This allows to use the same
+literature data base for different documents.  Your literature list
+attached at the end of the document will be either in the sequence of
+referring in the text or alphabetic.
+
+\subsection{Getting BibTeX working}
+\label{ss:bib-attach}
+
+To get the bibliography attached:
+
+\begin{enumerate}
+    \item prepare your reference data base document (here: bachelor.bib)
+    \item place the \verb"bibligraphystyle" command in backmatter.
+    %\item place the \verb"bibliography" command in backmatter.
+    \item run LaTeX
+    \item run \verb"Bibtex bachelor" in Command Prompt
+    \item run LaTeX twice
+\end{enumerate}
+
+\subsection{Examples of references}
+\label{ss:bib-ref-exe}
+
+
+This is for example the reference on a very common textbook ,
+and this is a reference on very interesting journal article .
+
+
+
+
+\section{Another Section}
