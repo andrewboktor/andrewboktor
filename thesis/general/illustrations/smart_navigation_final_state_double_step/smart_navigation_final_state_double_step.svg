@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="315pt" height="55pt" viewBox="0 0 315 55" version="1.1">
+<g id="surface0">
+<path style=" stroke:none;fill-rule: nonzero; fill: rgb(100%,100%,100%); fill-opacity: 1;" d="M 0 0 L 434 0 L 434 134 L 0 134 Z M 0 0 "/>
+<path style="fill-rule: nonzero; fill: rgb(100%,100%,100%); fill-opacity: 1;stroke-width: 0.1; stroke-linecap: butt; stroke-linejoin: miter; stroke: rgb(0%,0%,0%); stroke-opacity: 1;stroke-miterlimit: 10; " d="M 7.325 4 C 9.198828 4 9.198828 6.65 7.325 6.65 C 5.451172 6.65 5.451172 4 7.325 4 " transform="matrix(20,0,0,20,-119,-79)"/>
+<path style="fill-rule: nonzero; fill: rgb(100%,100%,100%); fill-opacity: 1;stroke-width: 0.1; stroke-linecap: butt; stroke-linejoin: miter; stroke: rgb(100%,0%,0%); stroke-opacity: 1;stroke-miterlimit: 10; " d="M 20.325 4 C 22.198828 4 22.198828 6.65 20.325 6.65 C 18.451172 6.65 18.451172 4 20.325 4 " transform="matrix(20,0,0,20,-119,-79)"/>
+<path style="fill: none; stroke-width: 0.1; stroke-linecap: butt; stroke-linejoin: miter; stroke: rgb(0%,0%,0%); stroke-opacity: 1;stroke-miterlimit: 10; " d="M 8.7 5.325 L 18.95 5.325 " transform="matrix(20,0,0,20,-119,-79)"/>
+</g>
+</svg>
