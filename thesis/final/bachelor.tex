@@ -68,16 +68,22 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
+
+\pagenumbering{Roman}
+
 \input{GUC_TitlePage}
 \input{GUC_TitlePage}
 \input{certification}
 
-\pagenumbering{Roman}
-\setcounter{page}{3}
+\include{abstract}
+\include{acknowledgments}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% List Of **** %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\include{list_of_tables}
+\include{list_of_figures}
+\include{list_of_abbreviations}
 
-%\include{acknowledgement}
-%\include{abstract}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \tableofcontents
 \clearpage
@@ -86,16 +92,15 @@
 
 \include{introduction}
 \include{background}
+\include{problem_description}
+\include{the_state_of_the_art}
 \include{concepts}
 \include{approach}
 \include{conclusion}
 
+\include{appendix_a}
 
-%The following adds references to the table of contents
-%\addcontentsline{toc}{chapter}{Acknowledgments}
-
-\bibliographystyle{plain}
-\bibliography{bachelor}
+\include{references}
 
 %\printindex
 %\addcontentsline{toc}{chapter}{Index}
@@ -103,5 +108,3 @@
 \end{document}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%\thispagestyle{empty}
-%\clearpage

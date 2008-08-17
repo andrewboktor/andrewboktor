@@ -3,9 +3,35 @@
 \beginchapter
 %-----------------------
 
-After presentation of the theoretical background, typically  your
-contribution should be introduced. This depends of the type of the
-project. This chapter can be divided in two or more separate
-chapters.
+%\paragraph{}
+The main concern of this chapter is to explain more the details of the implementation of the functionality implemented as the practical part of this thesis. Two keyboard navigation methods were implemented as well as one for keyboard editing. Why this method was chosen, how it was implemented and what where the challenges faced during the implementation will be discussed under each title.\\
+The tasks to be implemented were chosen to accomplish a complete keyboard diagram navigation and editing. Thus, for the keyboard navigation a complete approach, composed of Arrow keys navigation and smart navigation, was chosen. And for the keyboard editing the Command based editing was chosen as this is the main approach for diagram editing discussed in this thesis.
 
+\paragraph{}
+To implement the needed functionality, a prototype implemented by Frederic-Gerald Morcos and released under GPL was extended to demonstrate the three main functionalities to be developped in OpenGrafik. The prototype is developped in Objective-C and Cairo as a drawing library. The prototype has a struct representing the graph using two lists, one for nodes and one for edges. The node struct contains some properties that can be set for each node. The edge struct is only composed of 2 vertices, thus the edges, connections, don't have options to be set. Currently some of the node properties do not have visualization implemented although they are fully implemented in the code base. The algorithms for navigation and editing the diagrams are located under /src/algorithms/ taking reference the root folder of the prototype.
+
+\section{Tools and Technologies}
+This section will describe the tools and strategies used to implement the required functionality in the prototype.
+\begin{itemize}
+\item {\bf Programming Language: Objective-C}
+\par \noindent
+Objective-C was chosen to implement the prototype for many reasons. First because it is Object Oriented, thus emphasizing the productivity as well as the Object Oriented structure of the code. Second, it is a compiled language not an interpretted one, thus not requiring much memory space and of course faster that other interpretted languages. And finally because using c libraries withing Objective-C code is possible to be done easily thus allowing the use of other technologies chosen to implement the prototype.
+
+\item {\bf Graphics Library: Cairo}
+\par \noindent
+Cairo is one of the most powerful OpenSource graphics libraries. It was chosen because of its easiness and previous experience with it for the team members implementing OpenGrafik.
+
+\item {\bf Graphics User Interface Framework: GTK+}
+\par \noindent
+GTK+ is also one of the most powerful OpenSource GUI frameworks currently existing, it was also chosen due to previous experience with it.
+
+\item {\bf cmake}
+\end{itemize}
+
+\section{Diagram Navigation}
+
+\subsection{Arrow Keys Navigation}
+The arrow keys navigation in the prototype is implemented using the Smallest Deviation approach. This was basically the first idea about how it could be implemented. The Pseudo-code is in figure ADD FIGURE HERE.
+
+\subsection{Smart Navigation}
 
