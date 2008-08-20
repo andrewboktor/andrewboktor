@@ -3,7 +3,59 @@
 \beginchapter
 %-----------------------
 
-Write your conclusions here. Typically 1-2 paragraphs where you tell
-what was the problem and how it was solved. Then the main results in
-1-2 paragraphs or possibly as a list. In addition, you can describe 
-topics for future research in the last paragraph.
+\section{Conclusion}
+Currently, most of the existing diagramming tools support only navigation of diagrams using pointing devices. While the use of pointing devices might seem for some people the easiest and most efficient way for diagram navigation, for others, due to visual impairments or motoric disabilities, the use of such devices is very hard if not impossible. This prevents such people from using general purpose diagramming tools to express their ideas and/or do professional work using them. Professionals also are usually less productive when they need to switch often between the keyboard for textual input and a pointing device for diagram editing. 
+
+\paragraph{}
+To enable visually impaired people, and people with motoric disabilities to use diagramming tools effectively, an efficient method had to be developped to exclude pointing devices from the diagram creating and editing process. This paper contributes to the developpment of a such method in the following means:
+\begin{itemize}
+\item {\bf Doing a research} that investigates the currently existing diagramming tools, their futur planned features, and their accessibility tools giving a result about what is currently implemented and available in the market.
+\item {\bf Defining and Comparing concepts} related to the matter of efficient creation, editing, and navigation of diagrams using only the keyboard.
+\item {\bf Implementing} some of these concepts and providing example code to be ready for integration in commertial diagramming tools.
+\end{itemize}
+
+\paragraph{}
+A thorough investigation of the currently existing diagramming tools was conducted. The tools investigated were organized and checked if they have relevant features to the topic of this thesis or not. Most of the tools with relevant features were downloaded and installed, the relevant features were described in details regarding how they can be used and regarding their efficiency. A table was constructed to show the summary of the comparision of the tools. The details of investigated tools and their comparision can be found in the State of The Art Chapter (REFERENCE)
+
+\paragraph{}
+Throughout the work on this thesis, many concepts were defined and compared. A summary with the concepts discussed is displayed below. The concepts compared mainly reside in two groups, ``Keyboard Navigation of Diagrams'' and ``Keyboad Creation and Editing of Diagrams''. Many strategies and implementation approaches were discussed under each topic. The details of the comparision and discussion of those concepts can be found in the Concepts Chapter (RFERENCE)
+
+\par \noindent
+{\bf Summary of discussed concepts:}
+\begin{itemize}
+\item Keyboard Navigation
+\begin{itemize}
+ 	\item Tab Navigation
+	\item Arrow Keys Navigation
+	\item Smart Navigation Following Connections
+	\item Diagram Navigation Completeness
+\end{itemize}
+
+\item Diagram Editing Using the Keyboard
+\begin{itemize}
+ 	\item Editing Using Accelerators
+	\item Menu Based Editing
+	\item Command Based Editing
+	\item Scripting
+\end{itemize}
+
+\end{itemize}
+
+\paragraph{}
+After the definition and comparision of the concepts, some of them were chosen to be implemented. Those ones that were implemented and the details of their implementation are described in the Implementation Chapter (REFERENCE). Based on the implementation, some improvements for the implemented features were made, and other improvements were suggested as future work that can be done on this topic.
+
+
+\section{Recommendations for Future Work}
+As the view of this topic has been constantly changing throughout the research, comparision and implementation of related features. Some recommendation for the future work and/or research are state below. These recommendations for future work are aiming at enriching the person(s) willing to work on that topic with ideas about how to improve the existing or develop new features related to this topic.
+
+\begin{itemize}
+\item The actions triggered by the keyboard in order to achieve the needed navigation or editing of the diagram can be mapped to voice commands in order to facilitate them for the blind or disable people. As voice commands required no special movement of the hands or realization of exact distances as the case is when using the keyboard.
+
+\item According to the Scripting language described in the implementation chapter (REFERENCE), it can be extended to support drawing starting from a reference point, not only using absolute values for the position of the objects.
+
+\item The scripting language can also be extended to support the scaling of the canvas or the change of the coordinates before the insertion of the file, or any other chunk of code, which will allow the drawing of scaled, inverted, or shifted diagrams.
+
+\item Implementing different aspects of diagram navigatoin and keyboard editing and conducting a user evaluation on the implemented prototype will be very beneficial to define which of the different aspects is more usable and behaves naturally from the point of view of the user.
+
+\item The integration of all the previously mentioned implementations into a commercial diagramming tool will get these functionalities out of the research field to the market and thus allowing the target users to benefit from them.
+\end{itemize}

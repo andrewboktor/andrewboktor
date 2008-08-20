@@ -61,56 +61,114 @@
 + (void) exec_command: (char *) command: (Graph *) graph {
 	printf ("Script running\n");
 	char *tmp = malloc (sizeof (char) * strlen (command) + 2);
-	printf ("Script Done\n");
+	
 	strcpy (tmp, command);
 	strcat (tmp, "\0");
 
 	char *temp = strtok (tmp, " ");
-	if ( strcmp ( temp, "rectangle" ) == 0)
+	if ( strcmp ( temp, "new" ) == 0)
 	{
-		char *temp1 = strtok (NULL, " ");
-		char *temp2 = strtok (NULL, " ");
-		char *temp3 = strtok (NULL, " ");
-		char *temp4 = strtok (NULL, " ");
-		printf ("All parameters\n");
+		char *tmp_id = strtok (NULL, " ");
+		printf ("%s\n", tmp_id);
+		char *type = strtok (NULL, " ");
+		printf ("%s\n", type);
+		char *xpos = strtok (NULL, " ");
+		printf ("%s\n", xpos);
+		char *ypos = strtok (NULL, " ");
+		printf ("%s\n", ypos);
 		//drawhere
-		Node *x = [[[[[[[Node alloc] init] 
-				x: atoi(temp1)]
-			       	y: atoi(temp2)]
-			    width: atoi(temp3)]
-			   height: atoi(temp4)]
-			     type: RECTANGLE];
-
-		[graph addNode: x];
+		Node *new_node = [[Node alloc] init];
+		[new_node setnodeid: atoi(tmp_id)];
+		[new_node x: atoi(xpos)];
+		[new_node y: atoi(ypos)];
+		
+			    //setnodeid: tmp_id];
+		if (strcmp (type, "rectangle") == 0)
+		{
+			[new_node type: RECTANGLE];
+			[new_node width: 10];
+			[new_node height: 10];
+			//[new_node setnodeid: tmp_id];
+		}
+		else if (strcmp (type, "ellipse") == 0)
+		{
+			[[[new_node type: ELLIPSE]
+			       width: 10]
+			      height: 10];
+			//[new_node setnodeid: tmp_id];
+		}
+		else if (strcmp (type, "triangle") == 0)
+		{
+			[[[new_node type: TRIANGLE]
+			       width: 10]
+			      height: 10];
+			//[new_node setnodeid: tmp_id];
+		}
+		else if (strcmp (type, "note") == 0)
+		{
+			[[[new_node type: NOTE]
+			       width: 10]
+			      height: 10];
+			//[new_node setnodeid: tmp_id];
+		}
+		printf ("Script Done\n");
+		printf ("X IS %d\n",new_node );
+		[graph addNode: new_node];
+		
 	}
-	else if ( strcmp ( temp, "circle" ) == 0)
+	
+	else if ( strcmp ( temp, "edit" ) == 0)
 	{
-		char *temp1 = strtok (NULL, " ");
-		char *temp2 = strtok (NULL, " ");
-		char *temp3 = strtok (NULL, " ");
-		//drawhere
-		Node *x = [[[[[[[Node alloc] init]
-				x: atoi(temp1)]
-				y: atoi(temp2)]
-			    width: atoi(temp3)]
-			   height: atoi(temp3)]
-			     type: CIRCLE];
-		[graph addNode: x];
+		char *tmp_id = strtok (NULL, " ");
+		Node *x = [graph getNodeByID: atoi(tmp_id)];
+		
+		char *prop = strtok (NULL, " ");
+		
+		if (strcmp (prop, "lc") == 0)
+		{
+			//to be done according to marly
+		}
+		else if (strcmp (prop, "fc") == 0)
+		{
+			//to be done according to marly
+		}
+		else if (strcmp (prop, "position") == 0)
+		{
+			char *xpos = strtok (NULL, " ");
+			char *ypos = strtok (NULL, " ");
+			[[x x:atoi(xpos)]
+				y:atoi(ypos)];
+		}
+		else if (strcmp (prop, "size") == 0)
+		{
+			char *width = strtok (NULL, " ");
+			char *height = strtok (NULL, " ");
+			[[x width:atoi(width)]
+				height:atoi(height)];
+		}
+		else if (strcmp (prop, "line") == 0)
+		{
+			//to be done according to marly
+		}
 	}
-	else if ( strcmp ( temp, "square" ) == 0)
+	else if ( strcmp ( temp, "connect" ) == 0)
 	{
-		char *temp1 = strtok (NULL, " ");
-		char *temp2 = strtok (NULL, " ");
-		char *temp3 = strtok (NULL, " ");
-		//drawhere
-		Node *x = [[[[[[[Node alloc] init] 
-				x: atoi(temp1)]
-			       	y: atoi(temp2)]
-			    width: atoi(temp3)]
-			   height: atoi(temp3)]
-			     type: SQUARE];
-
-		[graph addNode: x];
+		
+		char *add = strtok (NULL, " ");
+		char *n1 = strtok (NULL, " ");
+		char *n2 = strtok (NULL, " ");
+		
+		Node *nd1 = [graph getNodeByID: atoi(n1)];
+		Node *nd2 = [graph getNodeByID: atoi(n2)];
+		if (strcmp (add, "add")==0)
+		{
+			printf ("Adding Connection\n");
+			Edge *e = [[[[Edge alloc] init] pointA: nd1] pointB: nd2];
+			[graph addEdge: e];
+		}
+		else if (strcmp (add, "remove")==0)
+		{
+		}
 	}
 	else if ( strcmp ( temp, "ellipse" ) == 0)
 	{
@@ -174,9 +232,9 @@
 		//drawhere
 		
 	}
-
-	free (temp);
-	printf ("Script Done\n\n");
+	
+	free (tmp);
+	printf ("Script Done Totaly\n\n");
 }
 @end
 

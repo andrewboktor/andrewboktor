@@ -36,6 +36,8 @@
 
 - (void) unselect_all_nodes;
 
+- (void) tab_next_node;
+
 - (void) node_to_right;
 
 - (void) node_to_left;

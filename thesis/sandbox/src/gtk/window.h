@@ -28,7 +28,5 @@
 - defaultSize: (int) width: (int) height;
 - maximize;
 
-- gtk_event: (Callback) cb: (gpointer) data;
-
 @end
 

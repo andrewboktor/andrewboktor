@@ -40,14 +40,14 @@
 	if (selected)
 	{
 		cairo_set_source_rgba(context, 0.0, 1.0, 0.0, 1.0);
-		cairo_set_line_width(context, 1.0);
+		cairo_set_line_width(context, 5);
 		cairo_move_to(context, [pointA x], [pointA y]);
 		cairo_line_to(context, [pointB x], [pointB y]);
 		cairo_stroke(context);
 	}
 
 	cairo_set_source_rgba(context, 0.0, 0.0, 0.0, 0.5);
-	cairo_set_line_width(context, 0.5);
+	cairo_set_line_width(context, 2);
 	cairo_move_to(context, [pointA x], [pointA y]);
 	cairo_line_to(context, [pointB x], [pointB y]);
 	cairo_stroke(context);

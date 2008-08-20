@@ -1,6 +1,6 @@
 \documentclass[12pt, a4paper, oneside]{book}
 
-\usepackage{fullpage}
+%\usepackage{fullpage}
 %\usepackage{amsmath}
 %\usepackage{amssymb}
 \usepackage{graphicx}
@@ -15,9 +15,12 @@
 %\usepackage{amssymb}
 %\usepackage{fleqn}
 %\usepackage{alltt,epsfig,array}
+\usepackage{listings}
+\usepackage[labelfont=bf,up,textfont=it,up]{caption}
 \usepackage{algorithmic}
 \usepackage{algorithm}
 \usepackage{makeidx}
+\usepackage{float}
 
 \geometry{total={155mm,235mm}}
 %\setlength{\parindent}{0pt}
@@ -29,14 +32,42 @@
 \newtheorem{definition}{Definition}
 \newtheorem{example}{Example}
 
-\newcommand{\incgen}[4]{%
-  \begin{figure}[htbp]\begin{center}
-     \includegraphics[#4]{#1}
-      \caption{#2}
-      \label{fig:#3}
-    \end{center}
-  \end{figure}
+\newcommand{\reffig}[1]{
+{\it Figure~\ref{fig:#1}}\noindent
 }
+
+\newcommand{\incgen}[4]{%
+	\begin{figure}[hHtb!]
+		\begin{center}
+			\includegraphics[#4]{illustrations/#1}
+			\caption{#2}
+			\label{fig:#3}
+		\end{center}
+	\end{figure}
+}
+
+\newcommand{\inctext}[3]{
+	\begin{figure}
+		{#1}
+		\caption{#2}
+		\label{fig:#3}
+	\end{figure}
+}
+
+\newcommand{\inclisting}[3]{
+	\begin{figure}[hHtb!]
+	\lstset{basicstyle=\footnotesize, numberstyle=\footnotesize, numbers=left, frame=single, tabsize=2}
+	\lstinputlisting{code/#1}
+	\caption{#2}
+	\label{listing:#3}
+	\end{figure}
+}
+
+\newcommand{\reflisting}[1]{
+{\it Listing~\ref{listing:#1}}\noindent
+}
+
+
 \newcommand{\incps}[3]{\incgen{ps/#1.ps}{#2}{#3}{scale=0.3,angle=270}}
 \newcommand{\incfig}[3]{\incgen{fig/#1.eps}{#2}{#3}{scale=0.58}}
 
@@ -60,7 +91,17 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Formatting Commands %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newcommand{\superscript}[1]{\ensuremath{^{\textnormal{#1}}}}
 \newcommand{\subscript}[1]{\ensuremath{_{\textnormal{#1}}}}
-\newcommand{\beginchapter}[0]{\vspace{-0.5cm}\hrule\vspace{0.02cm}\hrule\vspace{0.01cm}\hrulefill\hrule\hrule\vspace{1cm}}
+\newcommand{\beginchapter}[0]{
+\vspace{-0.5cm}
+\hrule
+\vspace{0.02cm}
+\hrule
+\vspace{0.01cm}
+\hrulefill
+\hrule
+\hrule
+\vspace{1cm}
+}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%% Document Initialization %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \makeindex
@@ -74,7 +115,6 @@
 \input{GUC_TitlePage}
 \input{GUC_TitlePage}
 \input{certification}
-
 \include{abstract}
 \include{acknowledgments}
 
@@ -98,7 +138,8 @@
 \include{approach}
 \include{conclusion}
 
-\include{appendix_a}
+\appendix
+\include{list_of_investigated_tools}
 
 \include{references}
 

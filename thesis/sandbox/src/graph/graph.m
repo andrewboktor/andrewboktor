@@ -45,12 +45,24 @@
 	return [super free];
 }
 
+
+
 #ifdef NAVIGATION_ENABLE
 - (Navigation *) get_navigation {
-	printf ("Get Navigation\n");
 	return navigation;
 }
 #endif
+
+- (Node *) getNodeByID: (int) search_id {
+	int i = 0;
+	while (i<[nodeList size])
+	{
+		printf ("## %d ##   -> ID: %d, NodeID: %d\n", i, search_id, [[nodeList getItem: i] getnodeid]);
+		if (search_id == [[nodeList getItem: i] getnodeid] )
+			return [nodeList getItem: i];
+		i++;
+	}
+}
 - expose: (cairo_t *) context {
 	int i = 0;
 	while (i < [nodeList size]) {

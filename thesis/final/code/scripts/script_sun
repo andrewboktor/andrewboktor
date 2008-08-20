@@ -1,0 +1,12 @@
+new 1 rectangle 350 20
+new 2 rectangle 330 80
+new 3 rectangle 320 150
+new 4 rectangle 380 200
+new 5 rectangle 450 230
+new 6 ellipse 450 120
+edit 6 size 50 50
+connect add 6 1
+connect add 6 2
+connect add 6 3
+connect add 6 4
+connect add 6 5

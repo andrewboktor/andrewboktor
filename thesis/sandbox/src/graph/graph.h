@@ -42,9 +42,11 @@
 - init;
 - free;
 
+
 #ifdef NAVIGATION_ENABLE
 - (Navigation *) get_navigation;
 #endif
+- (Node *) getNodeByID: (int) ID;
 - expose: (cairo_t *) context;
 - (List *) nodeList;
 - (List *) edgeList;

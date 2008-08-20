@@ -35,7 +35,8 @@ static gboolean area_motion(GtkWidget *, GdkEventMotion *, gpointer);
 static void scale_valuechanged(GtkRange *, gpointer);
 static void wall_toggle(GtkToggleButton *, gpointer);
 static gboolean area_config(GtkWidget *, GdkEventConfigure *, gpointer);
-static int event_handler (GtkWindow *, GdkEvent *, gpointer);
+static int command_text_key_event_handler (GtkWidget *widget, GdkEvent *event, gpointer data);
+static int app_key_event_handler (GtkWidget *widget, GdkEvent *event, gpointer data);
 
 
 SBApp *app = NULL;
@@ -59,7 +60,8 @@ int main(int argc, char* argv[])
 	[app->walltog onToggled: (GCallback) wall_toggle: NULL];
 	[app->drawarea onConfigure: (GCallback) area_config: NULL];
 	[app->save onClicked: (GCallback) save_click: NULL];
-	[app->commandtext gtk_event: (GCallback) event_handler: NULL];
+	[app->commandtext onKeyPress: (GCallback) command_text_key_event_handler: NULL];
+	[app onKeyPress: (GCallback) app_key_event_handler: NULL];
 	graph = [[Graph alloc] init];
 	(void)area_config(NULL, NULL, NULL);
 	
@@ -69,44 +71,20 @@ int main(int argc, char* argv[])
 	return 0;
 }
 
-static int event_handler (GtkWindow *window, GdkEvent *event, gpointer data) {
+static int app_key_event_handler (GtkWidget *widget, GdkEvent *event, gpointer data) {
 	static int navigating;
-
 	if (event->type == GDK_KEY_PRESS)
 	{
-		
-		printf ("Key Pressed\n");
-		/*
-		if (((GdkEventKey *) event)->keyval == 'z')
+		if ((((GdkEventKey *) event)->keyval == 'n' |((GdkEventKey *) event)->keyval == 'm') && ((GdkEventKey *) event)->state && GDK_CONTROL_MASK) 
 		{
-			printf ("Script called\n");
-			[Script exec_command: "file /home/drew/Desktop/script": graph];
-			//[Script exec_commands: "rectangle 100 100 50 50\ncircle 200 200 30\nrectangle 300 300 30 50": graph];
-			//[Script exec_file: "/home/drew/Desktop/script": graph];
-			[app->drawarea queueDraw];
-		}
-		*/
-		if (((GdkEventKey *) event)->keyval == GDK_Return)
-		{
-			GtkTextIter end, start;
-			gtk_text_buffer_get_start_iter (app->commandbuffer, &start);
-			gtk_text_buffer_get_end_iter (app->commandbuffer, &end);
-			char *command = gtk_text_buffer_get_text (app->commandbuffer, &start, &end, TRUE);
-			gtk_text_buffer_set_text (app->commandbuffer, "", 0);
-			[Script exec_command: command: graph];
-			[app->drawarea queueDraw];
-			return 1;
-		}
-		/*
-		if (((GdkEventKey *) event)->keyval == 'n' |((GdkEventKey *) event)->keyval == 'm') 
 			if (navigating) navigating = 0;
 			else navigating = ((GdkEventKey *) event)->keyval;
-		*/
-
-		if ([graph get_navigation] && navigating)
+		}
+		else if ([graph get_navigation] && navigating)
 		{
 			if (navigating == 'n')
-			{	
+			{
+				printf ("Navigating: Smart\n");
 				switch (((GdkEventKey *) event)->keyval)
 				{
 					case 's':
@@ -117,10 +95,9 @@ static int event_handler (GtkWindow *window, GdkEvent *event, gpointer data) {
 						break;
 				}
 			}
-
 			if (navigating == 'm')
 			{
-	
+				printf ("Navigating: Arrows\n");
 				switch (((GdkEventKey *) event)->keyval)
 				{
 					case GDK_Left:
@@ -136,15 +113,38 @@ static int event_handler (GtkWindow *window, GdkEvent *event, gpointer data) {
 						[[graph get_navigation] node_to_down];
 						break;
 				}
-
 			}
-			[app->drawarea queueDraw];
+		}else if ([graph get_navigation] && ((GdkEventKey *) event)->keyval == GDK_Tab)
+		{
+			[[graph get_navigation] tab_next_node];
 		}
-
-		
+		[app->drawarea queueDraw];
+		return 1;
 	}
 
-	else return;
+	return 0;
+}
+
+static int command_text_key_event_handler (GtkWidget *widget, GdkEvent *event, gpointer data) {
+	static int navigating;
+	printf ("Key Pressed\n");
+	if (event->type == GDK_KEY_PRESS)
+	{
+		
+		if (((GdkEventKey *) event)->keyval == GDK_Return)
+		{
+			GtkTextIter end, start;
+			gtk_text_buffer_get_start_iter (app->commandbuffer, &start);
+			gtk_text_buffer_get_end_iter (app->commandbuffer, &end);
+			char *command = gtk_text_buffer_get_text (app->commandbuffer, &start, &end, TRUE);
+			gtk_text_buffer_set_text (app->commandbuffer, "", 0);
+			[Script exec_command: command: graph];
+			[app->drawarea queueDraw];
+			return 1;
+		}
+		else return 0;
+	}
+	return 0;
 }
 
 static void execute_click(GtkButton *widget, gpointer data) {

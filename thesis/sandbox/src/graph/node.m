@@ -40,6 +40,16 @@
 	return [super free];
 }
 
+- (int) getnodeid {
+	return node_id;
+}
+
+- setnodeid: (int) new_id {
+	node_id = new_id;
+	printf ("Set ID %d\n", node_id);
+	return self;
+}
+
 - expose: (cairo_t *) context {
 	if (locked)
 		cairo_set_source_rgba(context, 1.0, 0.0, 0.0, 0.5);
@@ -56,13 +66,27 @@
 					height);
 			break;
 
-		case CIRCLE:
+		case ELLIPSE:
 			cairo_arc (context, 
 					x,
 					y,
 					width / 2,
 					0,
 					2 * M_PI);
+			break;
+			
+		case TRIANGLE:
+			cairo_move_to (context, x-width/2, y+height/2);
+			cairo_rel_line_to (context, width/2, -height);
+			cairo_rel_line_to (context, width/2, height);
+			cairo_close_path (context);
+			break;
+			
+		case NOTE:
+			width = 35;
+			height = 13;
+			cairo_move_to (context, x-13, y+4);
+			cairo_text_path (context, "NOTE");
 			break;
 
 		default:
@@ -74,16 +98,18 @@
 					height);
 			break;
 	}
-
-
+	
+	
 	if (selected) {
+		cairo_set_line_width (context, 2);
 		cairo_fill_preserve(context);
 		cairo_set_source_rgb(context, 0.0, 1.0, 0.0);
 		cairo_stroke(context);
 	}
 	else
-		cairo_fill(context);
-
+	{
+			cairo_fill(context);
+	}
 	return self;
 }
 

@@ -1,19 +1,32 @@
 Abstract [1]
 
-Introduction [2]
+Introduction [3]
 	Background Information
 	Motivation
+		paraphrasing of the proposal
+		why this project
+		opengrafik and MIE
 	Thesis Overview
-	
-Background Information [2]
-	Graphs [1]
-	Diagrams [1]
-	
-The State Of The Art [7]
+		what every chapter talks about
+
+Technical Background [1]
+	Graphs [.5]
+	Diagrams [.5]
+
+Problem Description [2]
+	Current System State
+		how things are already working in the existing tools
 	Problem Description
+		problems resulting form the current state
+		software problems
+		general problems
+	Thesis proposal
+		paraphrasing from the proposal
+
+The State Of The Art [6]
 	Investigated Tools
 		(add a part about graphviz)
-	
+		investigated tools, their problems, functionality for each tool
 
 Concepts [15]
 	keyboard navigation [9]
@@ -41,24 +54,44 @@ Concepts [15]
 		scripting
 
 Implementation [10]
+	Introduction
 	Arrow keys navigation
+		which approach
 		prototype
 	
 	Smart Navigation
+		which approach
 		prototype
-		
+	
+	Tools and Technologies
+	
 	Use-Cases for both
+		which type of user use each feature(can be removed)
 	
 	Problems that i faced
+		Connection definition in DIA
+		
 	
 Conclusion [4]
 	Conclusion
 	Recommendations for future work
 	TODO
 	
+Appendix A
+	List with all the tools investigated in the state of the art with links to their websites
+	
+References
 	
 	
-	
+################################## TODO ########################################
+Add the rest of the pseudo-codes
+Add figures to latex
+Future work: talk about adding drawings according to references, and allowing the scalin of some drawings.
+Concepts: add the same
+################################################################################
+
+################################ MEETINGS ######################################
+
 **Meeting 13th August 2008
 BFORE:
 	Ask about the SVG
@@ -71,3 +104,10 @@ AFTER:
 	differenciate between semantics
 	other scripting like pstex
 	check papers on the graphviz website
+	
+#######################################
+
+**Meeting 20th August 2008
+BEFORE:
+	
+################################################################################

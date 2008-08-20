@@ -2,24 +2,22 @@
 %-----------------------
 \beginchapter
 %-----------------------
-\par \noindent
 This chapter will talk about different concepts or strategies used to navigate and/or edit a diagram.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Section Start %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Keyboard Navigation}
-\par \noindent
 The most common way used to navigate diagrams are implemented and used with the help of some sort of pointing devices. These provide a very easy way to the user to pinpoint the shape/node he wants and just select it with the pointing device he/she is using. It is also the most natural way of selecting things as it relatively emulates the normal behavior of human beings towards objects, the user will move his hand towards the object he/she wants to deal with, and then grab it (or click it). On the other hand, navigation using pointing devices can be a little bit hard for the developer to detect the exact edges of the shape and toggle the selection in the right way. It also can be very challenging for people with some disabilities in their hands that prevents them form using pointing devices accurately if not at all. Although navigation using pointing devices is the closest to the natural way people would like to select things, in some points one could think of a better way to do it because in diagrams, connections between shapes means some sort of relation between them, and when navigating a diagram using a pointing divide, the interpretation of the meanings of the connections are left to the user. For example, if the user wants to select the parent node of another certain node, he/she will have to look at the connections, determine where is the parent, and then select it. This piece of information cannot be processed by the computer in case of the use of pointing devices, because the selection is only triggered based on the coordinates ignoring any information about previously selected nodes/shapes and their relation or connections to their neighbor nodes.
+
 \paragraph{}
 This is why we thought about implementing diagram navigation in another way, using only the keyboard, this will allow people that are not able to handle pointing devices to navigate diagrams as easy as others do, and will also allow the processing of the meanings of the connections to be done by the computer. Also keyboard keys could be mapped to voice commands which will allow people with further disabilities to use the system. We investigated three ways to navigate the diagram using the keyboard.
 
 \subsection{Tab Navigation}
-\par \noindent
 The first way is Tab Navigation. This is the most trivial way of navigation using the keyboard. The user will navigate using a single key, with each press, the selection will change between the nodes/shapes based on a predefined order, probably the order they were created, and thus leaving the user with no choice but to follow that order. It is sometimes very inefficient, especially when nodes/shapes created in sequence are laid out dispersedly on the screen.
 
 \subsection{Arrow Keys Navigation}
-\par \noindent
 An improvement on the Tab Navigation would be to give the user the ability to control where the selection will go. This can be done using the Arrow Keys Navigation, where the user will user the arrow keys to change the selection throughout the diagram in the direction he prefers. This navigation poses a challenge to the developers choosing the way they will sort the nodes in order to retrieve the closest node in the direction the user wants to navigate in. This method can completely replace the Tab Navigation. But still this mode of navigation doesn't interpret the meaning or the connections nor base the target node/shape based on its connections.
 Arrow keys navigation can either be implemented to navigate nodes/shapes or to navigate connections. Both will be implemented exactly the same way.
+
 \paragraph{}
 As mentioned before, this method can provide a challenge for the programmer in the way he will choose to simulate something that would seem natural for human beings. Three approaches were proposed to implement this method of navigation.
 
@@ -47,7 +45,8 @@ Pseudo-Code:
 \STATE $considered$.sort()
 \STATE select($considered$[0])
 \end{algorithmic}
-\par \noindent
+
+\paragraph{}
 As the name for this methods suggests, the screen is divided into four quadrants and only the nodes in the quadrant corresponding to the arrow key pressed are considered. The considered nodes are sorted relative to their absolute distance from the central node. Then the one with the smallest distance will be selected. But this method also has some behavior that doesn't seem very natural to humans. This method yields results that are much more natural to human beings because it considers both, the direction and the distance to the target node. The only drawback of this method is that it prioritizes the nodes in one quadrant based only on their distance from the central node and doesn't give any further priority to nodes based on their relative position to the central node.
 
 \paragraph{Why they failed?}
@@ -66,8 +65,9 @@ The second would be to consider something else other than the distance and the d
 \end{itemize}
 
 \subsection{Smart Navigation Following Connections}
-\par \noindent
-A third way of navigation that would take into account the connections between the nodes/shapes would be the Smart Navigation Following Connections. In this navigation mode, the user can switch selection between a connected part of the diagram based on the connections between the nodes/shapes. As this method of navigation follows connections, I will only navigate a connected subgraph without having the ability to go to other parts that are not connected to the subgraph being navigated. Thus it will have to be accompanied with another navigation method to ensure the presence of this functionality.\\
+A third way of navigation that would take into account the connections between the nodes/shapes would be the Smart Navigation Following Connections. In this navigation mode, the user can switch selection between a connected part of the diagram based on the connections between the nodes/shapes. As this method of navigation follows connections, It will only allow the navigation of a connected subgraph without having the ability to go to other parts that are not connected to the subgraph being navigated. Thus it will have to be accompanied with another navigation method to ensure the presence of this functionality. Taking the direction of connections, in directed graphs/diagrams, into consideration is possible here, allowing the user to follow the connections in their specified directions only adding more sematics into the navigation of the diagram. In other words, considering the directions of the connections while navigating will make this navigation based on the meaning of the diagram not only its look.
+
+\paragraph{}
 In this method, the user is given the option to switch between the connections going in and/or out from the currently selected node/shape, then he will choose the connection he/she would like to follow. The user selects the shape where he would like to start the navigation from the then clicks the ``navigation-next-connection-clockwise'' or the ``navigation-next-connection-counterclockwise'' button which will cause one of the connections going in or out of this shape to be selected as well. With each press of the previously mentioned buttons, the selected connection will change in a clockwise or counter clockwise matter respectively taking the center to be the node the user initially selected. Once the user has settled on the connection he would like to follow he will press the ``navigation-follow-connection'' button, this will allow him to follow this connection. Following the connection can be implemented in two almost completely different ways, Single Stepped and Double Stepped.
 
 \begin{itemize}
@@ -84,9 +84,12 @@ The double stepped navigation, on contrary to the single stepped navigation, tot
 Also as the double stepped navigation cannot reference connections, thus the connections that act like shapes will normally cause problems. For example, in figure *, if we have the node at the left selected it will not be possible to move to the node at the bottom right corner, because for this graph to be realized, the connection between the left and top right shapes also has to be considered also as a shape so that other connections could connect to it.
 
 \subsection{Diagram Navigation Completeness}
-\par \noindent
-To ensure that the navigation method implemented is complete, using only the keyboard, we have to make sure that using these methods of navigation we can visit each and every node/shape and connection in the diagram considering every all types of diagrams of course.\\
-To do that we have to consider visiting all nodes and connections in connected as well as non connected diagrams or graphs. We have then to consider including the ability to move between non connected subgraphs, the ability to select connections and the ability to select nodes. To implement such a complete keyboard diagram navigation we have to implement a set of navigation methods in conjunction. The exact set is subject to change based on the application and the user preferences. But to ensure that it is complete a set has to be chosen so that it fulfills all the criteria in table ADD TABLE HERE.\\
+To ensure that the navigation method implemented is complete, using only the keyboard, we have to make sure that using these methods of navigation we can visit each and every node/shape and connection in the diagram considering every all types of diagrams of course.
+
+\paragraph{}
+To do that we have to consider visiting all nodes and connections in connected as well as non connected diagrams or graphs. We have then to consider including the ability to move between non connected subgraphs, the ability to select connections and the ability to select nodes. To implement such a complete keyboard diagram navigation we have to implement a set of navigation methods in conjunction. The exact set is subject to change based on the application and the user preferences. But to ensure that it is complete a set has to be chosen so that it fulfills all the criteria in table ADD TABLE HERE.
+
+\paragraph{}
 The possibilities are either to implement a single mode arrow keys navigation with a single mode only for shapes, along with a single stepped smart navigation. Or an arrow keys navigation with two modes, for nodes and for connections, along with a double stepped smart navigation. Or one could implement the two types of arrow keys navigation, either separate, or both integrated into a single navigation mode. But this will not offer navigation based on nodes/shapes connections to others.
 
 \end{itemize}
@@ -95,12 +98,10 @@ The possibilities are either to implement a single mode arrow keys navigation wi
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Section Start %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Diagram Editing Using the Keyboard}
-\par \noindent
 As diagram navigation, the most common way to edit a diagram is done using pointing devices. The user can easily point the tool he wants, and drags on the canvas to draw the shape. But again, away from pointing devices, how to accomplish this task using only the keyboard might be a little challenging. Different paradigms of keyboard diagram editing are discussed below.\\
 To fully edit a diagram we need to provide five functionalities, choosing the tool, adding, editing, deleting, and connecting shapes.
 
 \subsection{Editing Using Accelerators}
-\par \noindent
 Accomplishing the previously mentioned functionality is possible through various ways. One of which is using Keyboard Accelerators. Using this method, the user will have to press a combination of keys representing the action he wants to perform on the diagram. Then he might be required to enter some other necessary arguments.
 
 \begin{itemize}
@@ -136,7 +137,6 @@ Connecting shapes is not an easy task to implement using keyboard accelerators, 
 \end{itemize}
 
 \subsection{Menu Based Editing}
-\par \noindent
 In menu based editing, the user will have a menu key that he will press to access all the functions he can perform on a shape. For example, after selecting a shape, the user will press the menu key, and that would display either a menu or a dialog, both leading to someplace where the user can edit the object properties. In both options, it will not enable connecting shapes. Thus we will not investigate this point here.
 
 \begin{itemize}
@@ -187,7 +187,6 @@ The other way to implement the menu based editing, is to display a dialog with a
 \end{itemize}
 
 \subsection{Command Based Editing}
-\par \noindent
 Using commands, includes the place or doesn't, can include some lay-outing commands.\\
 Editing diagrams using commands is the most feasible interactive method between all discussed methods. It requires actions from the user to edit/create a diagram, but at the same time it is easy to automate these actions or redo them through saving/executing the same commands. Here the user is presented with a text field where he can enter his commands, and then press the return key, which will cause the input command to be executed.
 
@@ -220,7 +219,6 @@ connect con-type Obj1-ID Obj-2ID
 the commands the user enters can be saved as macros or scripts that can be later executed to do the same actions on any diagram. Also some lay-outing and scripting commands can be added, such as commands to auto-layout the shapes, or to execute an external script in the current diagram.
 
 \subsection{Scripting}
-\par \noindent
 Scripting can be implemented in two different ways, one is to give a descriptive text input for what will the diagram include and how it will look like, but not including the exact positions and sizes of the shapes. This is not considered diagram editing and will not be discussed here. The other is to form the diagram through steps corresponding to executing commands that define the shapes and connections in sequence. Those commands could of course contain commands that are not help lay-outing the diagram or automate some parts of the creation.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Section End %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

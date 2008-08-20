@@ -111,6 +111,24 @@
 	else return x;
 }
 
+- (void) tab_next_node {
+	int i=0;
+	while (i<[graph_nodelist size])
+	{
+		if([graph_nodelist getItem: i] == current_node)
+		{
+			[current_node unselect];
+			i++;
+			i=i%[graph_nodelist size];
+			[self set_current_node: [[graph_nodelist getItem: i] select]];
+			return;
+		}
+		i++;
+	}
+	if([graph_nodelist size]>=1)
+		[self set_current_node: [[graph_nodelist getItem: 0] select]]; 
+}
+
 - (void) node_to_right {
 	List *temp = [[List alloc] init];
 	int smallest = -1, smallest_i=-1, i=0;

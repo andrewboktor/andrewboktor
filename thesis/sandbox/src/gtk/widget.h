@@ -38,6 +38,7 @@ typedef void (*Callback)(void);
 - queueDraw;
 - doubleBuffered: (BOOL) val;
 - redrawOnAllocate: (BOOL) val;
+- onKeyPress: (Callback) cb: (gpointer) data;
 
 @end
 

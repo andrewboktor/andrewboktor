@@ -30,11 +30,14 @@
 	int width, height;
 	BOOL locked, selected;
 	Properties *properties;
+	int node_id;
 }
 
 - init;
 - free;
 
+- (int) getnodeid;
+- setnodeid: (int) new_id;
 - expose: (cairo_t *) context;
 - (int) width;
 - (int) height;

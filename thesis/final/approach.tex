@@ -2,14 +2,138 @@
 %-----------------------
 \beginchapter
 %-----------------------
-
-%\paragraph{}
-The main concern of this chapter is to explain more the details of the implementation of the functionality implemented as the practical part of this thesis. Two keyboard navigation methods were implemented as well as one for keyboard editing. Why this method was chosen, how it was implemented and what where the challenges faced during the implementation will be discussed under each title.\\
+The main concern of this chapter is to explain more the details of the implementation of the functionality implemented as the practical part of this thesis. Three keyboard navigation methods were implemented as well as one for keyboard editing. Why this method was chosen, how it was implemented and what where the challenges faced during the implementation will be discussed under each title.\\
 The tasks to be implemented were chosen to accomplish a complete keyboard diagram navigation and editing. Thus, for the keyboard navigation a complete approach, composed of Arrow keys navigation and smart navigation, was chosen. And for the keyboard editing the Command based editing was chosen as this is the main approach for diagram editing discussed in this thesis.
 
 \paragraph{}
 To implement the needed functionality, a prototype implemented by Frederic-Gerald Morcos and released under GPL was extended to demonstrate the three main functionalities to be developped in OpenGrafik. The prototype is developped in Objective-C and Cairo as a drawing library. The prototype has a struct representing the graph using two lists, one for nodes and one for edges. The node struct contains some properties that can be set for each node. The edge struct is only composed of 2 vertices, thus the edges, connections, don't have options to be set. Currently some of the node properties do not have visualization implemented although they are fully implemented in the code base. The algorithms for navigation and editing the diagrams are located under /src/algorithms/ taking reference the root folder of the prototype.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Section Start %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Dia and Prototype}
+\subsection{Dia}
+The basic idea was to build the needed implementation upon an already existing diagramming tool. The diagramming tool of choice was Dia [REFERENCE], as it is one of the most developped Open Source diagramming tools. During the work on Dia's code, many problems were faced slowing down the development and shifting the focus somehow to understanding the code rather than really implementing and improving on the needed diagramming functionality. To focus back on the core of the project which is implementing and improving diagram keyboard support, it was decided to stop the work on Dia although some little work has already been integrated into Dia. Most of the problems faced with Dia will be stated under the {\it In Dia} title in the related part of the implementation.
+
+\subsection{Prototype}
+After the decision to stop the work on Dia was taken, implementing a prototype to demostrate the ideas and the concepts was the other alternative. As mentioned before, the prototype implemented by Frederic-Gerald Morcos was chosen to build upon the rest of the work. The prototype is a simple Objective-C/Gtk+ application supporting a simple graph structure. It supports changing nodes colors, dragging nodes, and some random diagram creation functions used for testing. The rest of the work is based on the prototype, and the integration of the work back into Dia was left to be done after the end of the thesis. How the implementation was done as well as the difficuties faces are stated under the {\it In Prototype} title in the related part of the implementation.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Section End %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Section Start %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Diagram Navigation}
+Three types of keyboard based diagram navigation were implemented in the prototype. Those three types, discussed in details in the subsection below, were added as functionality in a class called {\it Navigation}. Instances from the {\it Navigation} class are used to hold the data needed for navigation, such as the previously selected shape, list of all connections connected to that shape, and so on instead of overloading the {\it Graph} data structure with all the extra information. The {\it Navigation}. class also has methods corresponding to many types of navigation, for example a method was implemented to return the next node for each type of navigation. Also the {\it Navigation} class contains some other helper methods.
+
+\paragraph{}
+An instance of the {\it Navigation} class is placed as an instance in the {\it Graph} data structure, initialized with it, and then used to hold the information and decide which are the next nodes for which navigation patterns. All types of diagram navigation implemented are integrated into the {\it Navigation} class.
+
+
+\subsection{Tab Navigation}
+\begin{itemize}
+\item {\it In Prototype}
+\par \noindent
+The implementation of the tab navigation into the prototype was very much straight forward. A pointer to the last selected node exists in the {\it Navigation} class, this pointer is used to search for the current node in the list of nodes, and then this node is deselected and the one next to it in the list is selected.
+
+\item {\it In Dia}
+\par \noindent
+The implementation is done in the exact same way in the prototype, searching for the object, deselecting it, and selecting the one next to it in the list.
+\end{itemize}
+
+
+\subsection{Arrow Keys Navigation}
+\begin{itemize}
+\item {\it In Prototype}
+\par \noindent
+The arrow keys navigation in the prototype is implemented using the Smallest Deviation approach. This was the basic and the easiest idea about how it could be implemented.
+The steps to implement it are simply as follows:
+\begin{itemize}
+\item Neglect all nodes opposite to the direction required
+\item Sort the remaining nodes by the distance perpendicular to the direction required
+\item choose the node with the least distance
+\end{itemize}
+The Pseudo-code for the implementation shown in ADD FIGURE HERE shows how those steps were implemented.
+
+\item {\it In Dia}
+\par \noindent
+Not Implemented.
+\end{itemize}
+
+\subsection{Smart Navigation}
+\begin{itemize}
+\item {\it In Prototype}
+\par \noindent
+In the prototype, double stepped smart navigation is fully implemented. 
+The implementation consists of:
+\begin{itemize}
+\item {\bf A list of connections connected to the selected shape}, which has to be reconstructed everytime the selected shape changes. This list is constructed once the shape is selected to save the time of creation when the user starts changing between those connections.
+\item {\bf An index of the currently selected connection} in the previously mentioned connections list. This index saves the time for searching for the currently selected connection in the list, thus making it easier to move to the next connection.
+\item {\bf Keyboard listener} which calls the correspondant function to each action required by the user.
+\end{itemize}
+Once the user selects a node, with any method of node selection, a function is called to construct the previously mentioned lists. Then on pressing the `s' key, the selected connection will change based on the order of creation. Then with the `d' key, the used can move following that connection to the shape at the other end.
+
+
+\item {\it In Dia}
+\par \noindent
+The main problem faced while implementing the smart navigation into Dia is that Dia does not differenciate much between connections and shapes. In Dia, each shape has a set of connection points and a set of handles. The connection points serve as holes and the handles serve as bolts, besides other functionality of resizing the shape and so on. When the user drags a handle over a connection point, the bolt falls through the hole and the handle snaps to that connection point, and the two shapes are connected. Through connecting a line, which is a normal shape, between two other shapes, the edge meaning of the graph is achieved although for Dia, this is recognized as a set of shapes connected to each other without representing any of them as connections and the rest as normal shapes.
+
+\paragraph{}
+An approach that can be taken to overcome this problem is to use a single stepped smart navigation, and consider both connections and normal shapes the same way. The navigation will allow moving from one shape to an adjacent one in each single step, and it will not to need the differenciation between the shapes and the connections anymore.
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Section End %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Section Start %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Keyboard Editing}
+The keyboard editing to be implemented in the prototype was chosen to be the easiest and the most professional at the same time. 
+\subsection{Command Based Editing}
+Simple command based editing was implemented in the prototype. It has a set of simple commands used to create the required diagram. A context free language understandable by the script engine in the sandbox is presented in \reffig{script_language_grammar}.
+
+\inctext{
+\begin{itemize}
+\item S $\rightarrow$ Create $|$ Edit $|$ Connect $|$ Remove $|$ File 
+\item Create $\rightarrow$ new Shape [Rectangle $|$ Ellipse $|$ Triangle $|$ Note]
+\item Edit $\rightarrow$ edit Shape [LineColor $|$ FillColor $|$ Size $|$ Position $|$ Comment $|$ LineStyle]
+\item Connect $\rightarrow$ connect [add $|$ remove] Shape Shape
+\item Remove $\rightarrow$ remove Shape
+\item File $\rightarrow$ file char*
+\item Shape $\rightarrow$ int
+\item Rectangle $\rightarrow$ rectangle int int int int
+\item Ellipse $\rightarrow$ ellipse int int int int
+\item Triangle $\rightarrow$ triangle int int int int
+\item Note $\rightarrow$ note int int
+\item LineColor $\rightarrow$ lc Color
+\item FillColor $\rightarrow$ fc Color
+\item Color $\rightarrow$ int int int int
+\item Position $\rightarrow$ position Coordinates
+\item Size $\rightarrow$ size Coordinates
+\item Coordinates $\rightarrow$ int int
+\item LineStyle $\rightarrow$ line [dashed $|$ continuous]
+\item Comment $\rightarrow$ comment char*
+\end{itemize}
+}{Scripting Language Grammar}{script_language_grammar}
+
+\paragraph{} 
+The commands are composed of five categories, adding shapes, editing shape properties, connecting shapes, removing shapes, and running a script from a file.
+Some of the shapes take a limited amount of arguments at creation time, and thus require editing the shape after that. Like the Notes, once you create a note, you only specify the position, and then it has to be followed by ``edit shape note char*''. Also for most of the editing and the connecting commands, referencing a specific shape is necessary, this is done through the shape ID like this ``edit shape\_id lc int int int int''. This ID has to be specified at creation time of the shape in a very similar way ``new shape\_id rectangle int int int int''. The shape ID is a normal int.
+The command ``file url'' allows the execution of a script defined in an external file. It is not only for execution from inside the program, it can also be used in a file to allow nested execution of scripts. In the case of execution of a nested script, the script engine executes the scripts as if the contents of the file were inserted in the place of the ``file url'' command. Thus, allowing the referencing of shapes created in other files if their IDs were known.
+Commands to edit the properties of the connections are possible and can be easily added, but as the prototype currently doesn't support proprties for the connections, it defines the connection as a set of two points, thus this was not possible to implement.
+
+\paragraph{}
+A simple GUI (Graphical User Interface)(LIST OF ABBREVIATIONS) was made to accept the commands as input from the keyboard, and execute them on the press of the Return key. The GUI is shown in \reffig{script_screenshot}, the GtkTextView at the bottom of the screen is responsible for taking the input commands. The execute file feature is only available through this input field.
+
+\incgen{script_screenshot/script_screenshot.pdf}{Scripting Screenshot}{script_screenshot}{width=15cm}
+
+\inclisting{scripts/script}{script}{script_all}
+\inclisting{scripts/script_sun}{script\_sun}{script_sun}
+\inclisting{scripts/script_home}{script\_home}{script_home}
+
+\paragraph{}
+The result of executing the script represented in \reflisting{script_all} is shows in \reffig{script_screenshot}. The \reflisting{script_all} is composed of two commands to execute two external files, which are shown in \reflisting{script_sun} and \reflisting{script_home}. Line numbers in the three listings are added only to enhance the readability of the code and referencing it.
+
+\paragraph{}
+The resulting diagram represented in \reffig{script_screenshot} was created using the script in \reflisting{script_all} in the following manner, \reflisting{script_all} invokes two files, \reflisting{script_sun} and \reflisting{script_home}, which draw the sun and the home respectively. Sometimes the creation of the shape with the required look takes more than one step, such as creating the code of the sun in \reflisting{script_sun} lines 6 and 7. First the shape is created and added in place, and then the size is changed. Choosing to break up the arguments into 2 parts, such as position and size was done to minimize the number of arguments the user has to remember and their order.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Section End %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Section Start %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Tools and Technologies}
 This section will describe the tools and strategies used to implement the required functionality in the prototype.
 \begin{itemize}
@@ -25,13 +149,9 @@ Cairo is one of the most powerful OpenSource graphics libraries. It was chosen b
 \par \noindent
 GTK+ is also one of the most powerful OpenSource GUI frameworks currently existing, it was also chosen due to previous experience with it.
 
-\item {\bf cmake}
+\item {\bf CMake}
+\par \noindent
+CMake is the build automation tool chosen for the prototype. It is one of the most well known and used open source build automation tool. It is used in many major open source projects like KDE (REFERENCE).
 \end{itemize}
-
-\section{Diagram Navigation}
-
-\subsection{Arrow Keys Navigation}
-The arrow keys navigation in the prototype is implemented using the Smallest Deviation approach. This was basically the first idea about how it could be implemented. The Pseudo-code is in figure ADD FIGURE HERE.
-
-\subsection{Smart Navigation}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Section End %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 

@@ -45,9 +45,5 @@
 	return self;
 }
 
-- gtk_event: (Callback) cb: (gpointer) data {
-	g_signal_connect (G_OBJECT(widget), "key-press-event", G_CALLBACK(cb), data);
-	return self;
-}
 @end
 
