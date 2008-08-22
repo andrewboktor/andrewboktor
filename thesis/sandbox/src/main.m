@@ -119,7 +119,7 @@ static int app_key_event_handler (GtkWidget *widget, GdkEvent *event, gpointer d
 			[[graph get_navigation] tab_next_node];
 		}
 		[app->drawarea queueDraw];
-		return 1;
+		return 0;
 	}
 
 	return 0;

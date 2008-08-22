@@ -1,4 +1,5 @@
 \chapter{My Own Approach [This chapter is complete]}
+\labelchapter{approach}
 %-----------------------
 \beginchapter
 %-----------------------
@@ -117,19 +118,19 @@ The command ``file url'' allows the execution of a script defined in an external
 Commands to edit the properties of the connections are possible and can be easily added, but as the prototype currently doesn't support proprties for the connections, it defines the connection as a set of two points, thus this was not possible to implement.
 
 \paragraph{}
-A simple GUI (Graphical User Interface)(LIST OF ABBREVIATIONS) was made to accept the commands as input from the keyboard, and execute them on the press of the Return key. The GUI is shown in \reffig{script_screenshot}, the GtkTextView at the bottom of the screen is responsible for taking the input commands. The execute file feature is only available through this input field.
+A simple GUI (Graphical User Interface)(LIST OF ABBREVIATIONS) was made to accept the commands as input from the keyboard, and execute them on the press of the Return key. The GUI is shown in\reffig{script_screenshot}, the GtkTextView at the bottom of the screen is responsible for taking the input commands. The execute file feature is only available through this input field.
 
-\incgen{script_screenshot/script_screenshot.pdf}{Scripting Screenshot}{script_screenshot}{width=15cm}
+\incfig{script_screenshot/script_screenshot.pdf}{Scripting Screenshot}{script_screenshot}{width=15cm}
 
-\inclisting{scripts/script}{script}{script_all}
-\inclisting{scripts/script_sun}{script\_sun}{script_sun}
-\inclisting{scripts/script_home}{script\_home}{script_home}
-
-\paragraph{}
-The result of executing the script represented in \reflisting{script_all} is shows in \reffig{script_screenshot}. The \reflisting{script_all} is composed of two commands to execute two external files, which are shown in \reflisting{script_sun} and \reflisting{script_home}. Line numbers in the three listings are added only to enhance the readability of the code and referencing it.
+\inccode{scripts/script}{script}{script_all}
+\inccode{scripts/script_sun}{script\_sun}{script_sun}
+\inccode{scripts/script_home}{script\_home}{script_home}
 
 \paragraph{}
-The resulting diagram represented in \reffig{script_screenshot} was created using the script in \reflisting{script_all} in the following manner, \reflisting{script_all} invokes two files, \reflisting{script_sun} and \reflisting{script_home}, which draw the sun and the home respectively. Sometimes the creation of the shape with the required look takes more than one step, such as creating the code of the sun in \reflisting{script_sun} lines 6 and 7. First the shape is created and added in place, and then the size is changed. Choosing to break up the arguments into 2 parts, such as position and size was done to minimize the number of arguments the user has to remember and their order.
+The result of executing the script represented in\refcode{script_all} is shows in\reffig{script_screenshot}. The\refcode{script_all} is composed of two commands to execute two external files, which are shown in\refcode{script_sun} and\refcode{script_home}. Line numbers in the three listings are added only to enhance the readability of the code and referencing it.
+
+\paragraph{}
+The resulting diagram represented in\reffig{script_screenshot} was created using the script in\refcode{script_all} in the following manner,\refcode{script_all} invokes two files,\refcode{script_sun} and\refcode{script_home}, which draw the sun and the home respectively. Sometimes the creation of the shape with the required look takes more than one step, such as creating the code of the sun in\refcode{script_sun} lines 6 and 7. First the shape is created and added in place, and then the size is changed. Choosing to break up the arguments into 2 parts, such as position and size was done to minimize the number of arguments the user has to remember and their order.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Section End %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -155,3 +156,12 @@ CMake is the build automation tool chosen for the prototype. It is one of the mo
 \end{itemize}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Section End %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Section Start %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Use-Cases}
+\begin{itemize}
+ \item {\bf Use-Case 1}
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Section End %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\ref{chapter:approach}

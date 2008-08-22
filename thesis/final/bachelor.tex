@@ -19,10 +19,23 @@
 \usepackage[labelfont=bf,up,textfont=it,up]{caption}
 \usepackage{algorithmic}
 \usepackage{algorithm}
-\usepackage{makeidx}
-\usepackage{float}
+%\usepackage{makeidx}
+%\usepackage{float}
+%\usepackage{array}
+\usepackage{verbatim}
+\usepackage[
+	pdftex,
+	plainpages=false,
+	pdfpagelabels,
+	colorlinks=false,
+	pdftitle={Keyboard Supported Diagram Editing and Navigating},    % title
+	pdfsubject={Bachelor Thesis},
+	pdfauthor={Andrew M. B. Boktor},     % author
+	pdfkeywords={diagram keyboard editing edit creation create navigation navigate accessibility accessibilities}
+]{hyperref}
 
 \geometry{total={155mm,235mm}}
+
 %\setlength{\parindent}{0pt}
 
 \thispagestyle{plain}
@@ -33,15 +46,15 @@
 \newtheorem{example}{Example}
 
 \newcommand{\reffig}[1]{
-{\it Figure~\ref{fig:#1}}\noindent
+{\em Figure~\ref{figure:#1}}\noindent
 }
 
-\newcommand{\incgen}[4]{%
+\newcommand{\incfig}[4]{%
 	\begin{figure}[hHtb!]
 		\begin{center}
 			\includegraphics[#4]{illustrations/#1}
 			\caption{#2}
-			\label{fig:#3}
+			\label{figure:#3}
 		\end{center}
 	\end{figure}
 }
@@ -50,26 +63,43 @@
 	\begin{figure}
 		{#1}
 		\caption{#2}
-		\label{fig:#3}
+		\label{figure:#3}
 	\end{figure}
 }
 
-\newcommand{\inclisting}[3]{
+\newcommand{\inccode}[3]{
 	\begin{figure}[hHtb!]
 	\lstset{basicstyle=\footnotesize, numberstyle=\footnotesize, numbers=left, frame=single, tabsize=2}
 	\lstinputlisting{code/#1}
 	\caption{#2}
-	\label{listing:#3}
+	\label{figure:#3}
 	\end{figure}
 }
 
-\newcommand{\reflisting}[1]{
-{\it Listing~\ref{listing:#1}}\noindent
+\newcommand{\refcode}[1]{
+{\em Figure~\ref{figure:#1}}\noindent
 }
 
+\newcommand{\labelchapter}[1]{
+\label{chapter:#1}
+}
+\newcommand{\refchapter}[1]{
+{\em Chapter~\ref{chapter:#1}}\noindent
+}
 
-\newcommand{\incps}[3]{\incgen{ps/#1.ps}{#2}{#3}{scale=0.3,angle=270}}
-\newcommand{\incfig}[3]{\incgen{fig/#1.eps}{#2}{#3}{scale=0.58}}
+\newcommand{\labelsection}[1]{
+\label{section:#1}
+}
+\newcommand{\refsection}[1]{
+{\em Section~\ref{section:#1}}\noindent
+}
+
+\newcommand{\labelsubsection}[1]{
+\label{subsection:#1}
+}
+\newcommand{\refsubsection}[1]{
+{\em Section~\ref{subsection:#1}}\noindent
+}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%% Thesis Specific Commands %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %Submission Date
@@ -113,8 +143,8 @@
 \pagenumbering{Roman}
 
 \input{GUC_TitlePage}
-\input{GUC_TitlePage}
-\input{certification}
+\include{GUC_TitlePage}
+\include{certification}
 \include{abstract}
 \include{acknowledgments}
 
@@ -133,7 +163,7 @@
 \include{introduction}
 \include{background}
 \include{problem_description}
-\include{the_state_of_the_art}
+%\include{the_state_of_the_art}
 \include{concepts}
 \include{approach}
 \include{conclusion}
