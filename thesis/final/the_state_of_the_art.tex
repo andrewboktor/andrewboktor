@@ -19,7 +19,8 @@ add conclusion @ the end\\
 Before the start of the implemetation, a review of currently existing diagramming tools was done regarding the features they provide as well as the future planned ones. This review was necessary to find out the features related to keyboard navigation and editing in current diagramming tools. Also previous research done in that field was considered.
 
 \section{Currently Available Tools}
-The tools investigated fall under many categories, UML tools, general purpose diagramming tools, and so on. In total NUMBER OF TOOLS were investigated. The investigation checked if the tools contain any of the six features listed below, how well is it developped, its usability and efficiency. Only the tools containing relevat features were considered. The relevant tools were organized in a table REFERENCE TABLE and compared based on the presence of one or more of the six features subject of investigation.
+\subsection{Comparision}
+The tools investigated fall under many categories, UML tools, general purpose diagramming tools, and so on. In total NUMBER OF TOOLS were investigated. The investigation checked if the tools contain any of the six features listed below, how well is it developped, its usability and efficiency. Only the tools containing relevat features were considered. The relevant tools were organized in\reftable{comparision_of_tools} and compared based on the presence of one or more of the six features subject of investigation.
 
 \begin{itemize}
 \item {\bf Feature 1:}
@@ -48,24 +49,65 @@ Creating diagram using a script.
 \end{itemize}
 
 \begin{center}
-	%\begin{table}
-	\begin{tabular}{ | p{3.5cm} | l | l | l | l | l | l |}
+	\begin{table}[h]
+	\footnotesize
+	{\bf Table Legend:}\\
+	{\bf F.} stands for {\bf Feature}.\\
+	- not implemented.\\
+	+ implemented in an unusable, inefficient, or incomplete way.\\
+	++ fully implemented in a usable and efficient way.\\
+	\begin{tabular}{ | l | l | l | l | l | l | l |}
 	\hline
-	{\bf Tool} & {\bf Feat. 1} & {\bf Feat. 2} & {\bf Feat. 3} & {\bf Feat. 4} & {\bf Feat. 5} & {\bf Feat. 6}\\ \hline \hline 
-	Papyrus UML & + & ++ & - & - & - & -\\ \hline
-	ArgoUML & - & ++ & ++ & - & - & -\\ \hline
-	Violet UML Editor & - & ++ & - & - & - & -\\ \hline
-	yEd & ++ & ++ & - & - & - & -\\ \hline
-	OpenOffice Draw & - & ++ & ++ & + & - & -\\ \hline
-	xfig & - & - & - & - & -* & -\\ \hline
-	%IBM Webshpere Studio & + & ++ & ++ & ++ & ++ & -\\ \hline
-	IBM Rational Application Developer & ++ & ++ & ++ & - & - & -\\
-	\hline
-	\end{tabular}
-	%\caption{Comparision of Tools}
-	%\label{table:comparision_of_tools)}
-	%\end{table}
+	{\bf Tool} & {\bf F. 1} & {\bf F. 2} & {\bf F. 3} & {\bf F. 4} & {\bf F. 5} & {\bf F. 6}\\ \hline \hline 
+	Papyrus UML\cite{papyrus} & + & ++ & - & - & - & -\\ \hline
+	ArgoUML\cite{argouml} & - & ++ & ++ & - & - & -\\ \hline
+	Violet UML Editor\cite{violet} & - & ++ & - & - & - & -\\ \hline
+	yEd\cite{yed} & ++ & ++ & - & - & - & -\\ \hline
+	OpenOffice Draw\cite{oo_draw} & - & ++ & ++ & ++ & - & -\\ \hline
+	Xfig\cite{xfig} & - & - & - & - & -* & -\\ \hline
+	IBM WebSphere Studio\cite{ibm_websphere_studio} & + & ++ & ++ & ++ & ++ & -\\ \hline
+	IBM Rational Application Developer\cite{ibm_rational_application_developper} & + & ++ & ++ & - & - & -\\ \hline
+	Graphviz\cite{graphviz} & - & - & - & - & - & +\\ \hline
+	BPLOT2\cite{bplot2} & - & - & - & - & - & ++\\ \hline
+	\end{tabular}\\
+	\footnotesize
+	{* Xifg has keyboard accelerators to almost every item in the toolbox but it doesn't support drawing with the keyboard.}
+	\caption{Comparision of Tools}
+	\labeltable{comparision_of_tools}
+	\end{table}
 \end{center}
+
+\subsection{Features}
+This subsection will state how each tool provides one or more of the investigated features to the user and how the user can access and use these investigated features.
+\begin{itemize}
+\item {\bf Feature 1:} {\em Smart Navigation considering the position of the nodes and its connections}
+\par \noindent
+{\em Papyrus UML} includes only arrow keys navigation through pressing the arrow keys after selecting a shape. On the other hand {\em yEd} is one of the tools that have implemeted a very good keyboard navigation for the diagram, you simply can select the connection that you want to follow using the arrow keys while pressing Alt, the right arrow to toggle the connections in a clockwise order, and the left arrow for a counter clockwise order, and then you simple release the Alt and press the arrow in the direction you want to follow for the selected connection. {\em OpenOffice Draw} only offers tab navigation through the shapes, and doesn't support any type of smart navigation. {\em IBM WebSphere Studio} supports the following functionality using the keyboard, Toggling through single shape selections, Toggling through single connector selections, Selecting multiple shapes, Selecting multiple connectors, Deselecting or reselecting a selected shape, and Deselecting or reselecting a selected connector. {\em IBM Ratinal Application Developper} supports similar functionality, it gives the ability to navigate in 3 modes, Node Traversal, Connection Traversal, and Draggin mode.
+
+
+\item {\bf Feature 2:} {\em Deleting shapes using keyboard}
+\par \noindent
+Many tools include this feature through pressing the delete key after selecting the shapes to delete. Among the tools that include this feature are {\em Papyrus UML}, {\em ArgoUML}, {\em Violet UML Editor}, {\em yEd}, {\em OpenOffice Draw}, {\em IBM WebSphere Studio}, and {\em IBM Rational Application Developper}.
+
+\item {\bf Feature 3:} {\em Dragging shapes using keyboard}
+\par \noindent
+{\em ArgoUML} supports dragging shapes using the keyboard in two modes, either directly using the arrow keys which will drag the node in very small steps, or using the arrow keys while pressing the Alt key, which will cause the dragging to be done in much larger steps to allow dragging for long distances. Also {\em OpenOffice Draw} supports dragging shapes using the arrow keys. {\em IBM WebSphere Studion} also supports moving shapes within the diagram using only the keyboard. Dragging is possible in {\em IBM Rational Application Developper} through their dragging navigation mode.
+
+\item {\bf Feature 4:} {\em Editing shape properties using keyboard}
+\par \noindent
+{\em OpenOffice Draw} implements the Menu Based Editing [REFERENCE] by pressing the properties key and then choosing the property to edit from the menu. After choosing the wanted property the user is presented with a dialog with the current value for that property, the user can navigate and change these values and apply the changes by pressing the ``ok'' button, or the Return key. The user can also change the text in a shape in {\em OpenOffice Draw} by simply typing the new text, and then pressing Esc after he is done. {\em IBM WebSphere Studio} supports resizing shapes as well as editing their properties using only the keyboard. It also supports editing connections, adding bend points, and moving their labels.
+
+
+\item {\bf Feature 5:} {\em Adding shapes using keyboard}
+\par \noindent
+{\em Xifg} has keyboard accelerators to almost every item in the toolbox but it doesn't support drawing with the keyboard. Also {\em IBM WebSphere Studion} supports adding shapes to the diagram using only the keyboard, it also supports connecting them.
+
+\item {\bf Feature 6:} {\em Creating diagram using a script}
+\par \noindent
+Only two tools were found to implement this feature, {\em Graphviz} and {\em BPLOT2}. Graphviz takes a textual description of the needed graph/diagram written in the Dot Language\cite{dot_lang}. Graphviz creates lays out the diagram automatically and outputs it in many formats. Although {\em Graphviz} is not a diagramming tool, it implements a very similar functionality to the ones investigated. On the other hand, {\em BPLOT2}, being a diagramming (graphics creation) tool intended for the blind as well as the sighted, it offers a very good and easy language to describe the needed diagram exactly as one would want it to look like, for example, placing the shapes at exact coordinates. The language supports importing external files and drawing them in a virtual customizable coordinates. For example one could define the coordinates to scale the imported file to 50\% or reverse it.
+
+\end{itemize}
 
 
 \section{Previous Research}
+Very few researches were previously conducted on the topic investigated. We could only find one related research ,BPLOT2 \cite{bplot2}, done on a system entended for blind as well as sighted people to create graphics to be printed on braille printers. The research investigated the language used as well as other things specific to the braille printing.

@@ -19,6 +19,7 @@
 \usepackage[labelfont=bf,up,textfont=it,up]{caption}
 \usepackage{algorithmic}
 \usepackage{algorithm}
+\usepackage{setspace}
 %\usepackage{makeidx}
 %\usepackage{float}
 %\usepackage{array}
@@ -101,6 +102,20 @@
 {\em Section~\ref{subsection:#1}}\noindent
 }
 
+\newcommand{\labeltable}[1]{
+\label{table:#1}
+}
+\newcommand{\reftable}[1]{
+{\em Table~\ref{table:#1}}\noindent
+}
+
+\newcommand{\labelappendix}[1]{
+\label{appendix:#1}
+}
+\newcommand{\refappendix}[1]{
+{\em Appendix~\ref{appendix:#1}}\noindent
+}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%% Thesis Specific Commands %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %Submission Date
 \newcommand{\submissionDay}[0]{2\superscript{nd}}
@@ -161,9 +176,9 @@
 \pagenumbering{arabic}
 
 \include{introduction}
-\include{background}
+%\include{background}
 \include{problem_description}
-%\include{the_state_of_the_art}
+\include{the_state_of_the_art}
 \include{concepts}
 \include{approach}
 \include{conclusion}

@@ -3,39 +3,39 @@
 %-----------------------
 \beginchapter
 %-----------------------
-The main concern of this chapter is to explain more the details of the implementation of the functionality implemented as the practical part of this thesis. Three keyboard navigation methods were implemented as well as one for keyboard editing. Why this method was chosen, how it was implemented and what where the challenges faced during the implementation will be discussed under each title.\\
-The tasks to be implemented were chosen to accomplish a complete keyboard diagram navigation and editing. Thus, for the keyboard navigation a complete approach, composed of Arrow keys navigation and smart navigation, was chosen. And for the keyboard editing the Command based editing was chosen as this is the main approach for diagram editing discussed in this thesis.
+The main concern of this chapter is to explain more the details of the implementation of the functionality implemented as the practical part of this thesis. Three keyboard navigation methods were implemented as well as one for keyboard editing. Why these methods were chosen, how they were implemented and what where the challenges faced during the implementation will be discussed under each title.\\
+The tasks to be implemented were chosen to accomplish a complete keyboard diagram navigation and editing. Thus, for the keyboard navigation a complete approach, composed of arrow keys navigation and smart navigation, was chosen. And for the keyboard editing the command based editing was chosen as this is the main approach for diagram editing discussed in this thesis.
 
 \paragraph{}
-To implement the needed functionality, a prototype implemented by Frederic-Gerald Morcos and released under GPL was extended to demonstrate the three main functionalities to be developped in OpenGrafik. The prototype is developped in Objective-C and Cairo as a drawing library. The prototype has a struct representing the graph using two lists, one for nodes and one for edges. The node struct contains some properties that can be set for each node. The edge struct is only composed of 2 vertices, thus the edges, connections, don't have options to be set. Currently some of the node properties do not have visualization implemented although they are fully implemented in the code base. The algorithms for navigation and editing the diagrams are located under /src/algorithms/ taking reference the root folder of the prototype.
+To implement the needed functionality, a prototype implemented by Frederic-Gerald Morcos and released under GPL was extended to demonstrate the three main functionalities to be developped in OpenGrafik. The prototype is developped in Objective-C and Cairo as a drawing library.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Section Start %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Dia and Prototype}
 \subsection{Dia}
-The basic idea was to build the needed implementation upon an already existing diagramming tool. The diagramming tool of choice was Dia [REFERENCE], as it is one of the most developped Open Source diagramming tools. During the work on Dia's code, many problems were faced slowing down the development and shifting the focus somehow to understanding the code rather than really implementing and improving on the needed diagramming functionality. To focus back on the core of the project which is implementing and improving diagram keyboard support, it was decided to stop the work on Dia although some little work has already been integrated into Dia. Most of the problems faced with Dia will be stated under the {\it In Dia} title in the related part of the implementation.
+The basic idea was to build the needed implementation upon an already existing diagramming tool. The diagramming tool of choice was Dia [REFERENCE], as it is one of the most developped open source diagramming tools, thus seemed to fit well with the requirements of OpenGrafik. During the work on Dia's code, many problems were faced slowing down the development and shifting the focus somehow to understanding the code rather than really implementing and improving on the needed diagramming functionality. To focus back on the core of the project which is implementing and improving diagram keyboard support, it was decided to stop the work on Dia. Most of the problems faced with Dia will be stated under the {\it In Dia} title in the related part of the implementation.
 
 \subsection{Prototype}
-After the decision to stop the work on Dia was taken, implementing a prototype to demostrate the ideas and the concepts was the other alternative. As mentioned before, the prototype implemented by Frederic-Gerald Morcos was chosen to build upon the rest of the work. The prototype is a simple Objective-C/Gtk+ application supporting a simple graph structure. It supports changing nodes colors, dragging nodes, and some random diagram creation functions used for testing. The rest of the work is based on the prototype, and the integration of the work back into Dia was left to be done after the end of the thesis. How the implementation was done as well as the difficuties faces are stated under the {\it In Prototype} title in the related part of the implementation.
+After the decision to stop the work on Dia was taken, implementing a prototype to demostrate the ideas and the concepts was the other alternative. As mentioned before, the prototype implemented by Frederic-Gerald Morcos was chosen to build upon the rest of the work. The rest of the work is based on the prototype, and the integration of the work back into Dia was left to be done after the end of the thesis. The prototype is a simple Objective-C/Gtk+ application supporting a simple graph structure. It represents the graph using two lists, one for nodes and one for edges. The node struct contains some properties that can be set for each node. The edge struct is only composed of 2 vertices, thus the edges, connections, don't have options to be set. Currently some of the node properties do not have visualization implemented although they are fully implemented in the code base. The algorithms for navigation and editing the diagrams are located under /src/algorithms/ taking reference the root folder of the prototype. The prototype also contains some random diagram creation functions used for testing.  How the implementation was done as well as the difficuties faces are stated under the {\it In Prototype} title in the related part of the implementation.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Section End %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Section Start %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Diagram Navigation}
-Three types of keyboard based diagram navigation were implemented in the prototype. Those three types, discussed in details in the subsection below, were added as functionality in a class called {\it Navigation}. Instances from the {\it Navigation} class are used to hold the data needed for navigation, such as the previously selected shape, list of all connections connected to that shape, and so on instead of overloading the {\it Graph} data structure with all the extra information. The {\it Navigation}. class also has methods corresponding to many types of navigation, for example a method was implemented to return the next node for each type of navigation. Also the {\it Navigation} class contains some other helper methods.
+Three types of keyboard based diagram navigation were implemented in the prototype. Those three types, discussed in details in the subsection below, were added as functionality in a class called {\it Navigation}. Instances from the {\it Navigation} class are used to hold the data needed for navigation, such as the previously selected shape, list of all connections connected to that shape, and so on instead of overloading the {\it Graph} data structure with all the extra information. The {\it Navigation} class also has methods corresponding to many types of navigation, for example a method was implemented to return the next node for each type of navigation. Also the {\it Navigation} class contains some other helper methods.
 
 \paragraph{}
-An instance of the {\it Navigation} class is placed as an instance in the {\it Graph} data structure, initialized with it, and then used to hold the information and decide which are the next nodes for which navigation patterns. All types of diagram navigation implemented are integrated into the {\it Navigation} class.
+An instance of the {\it Navigation} class is placed as an instance in the {\it Graph} data structure, initialized with it, and then used to hold the information and decide which are the next nodes for which navigation patterns.
 
 
 \subsection{Tab Navigation}
 \begin{itemize}
 \item {\it In Prototype}
 \par \noindent
-The implementation of the tab navigation into the prototype was very much straight forward. A pointer to the last selected node exists in the {\it Navigation} class, this pointer is used to search for the current node in the list of nodes, and then this node is deselected and the one next to it in the list is selected.
+The implementation of the tab navigation into the prototype was very much straight forward. A pointer to the last selected node exists in the {\it Navigation} class, this pointer is used to search for the current node in the list of nodes, and then this node is deselected and the one next to it in the list is selected. The list of nodes is ordered in the order of creation of the nodes, thus the navigation will be in the order of creation. Once the user reaches the end of the list, he is routed back to the first node. The tab navigation implemented only toggles through shapes although, it can be easily extended to toggle through connections as well. Also a dual mode tab navigation can be implemented to navigate shapes, or connections each separately.
 
 \item {\it In Dia}
 \par \noindent
-The implementation is done in the exact same way in the prototype, searching for the object, deselecting it, and selecting the one next to it in the list.
+The implementation is done in the exact same way as in the prototype, searching for the object, deselecting it, and selecting the one next to it in the list.
 \end{itemize}
 
 
@@ -66,17 +66,19 @@ The implementation consists of:
 \begin{itemize}
 \item {\bf A list of connections connected to the selected shape}, which has to be reconstructed everytime the selected shape changes. This list is constructed once the shape is selected to save the time of creation when the user starts changing between those connections.
 \item {\bf An index of the currently selected connection} in the previously mentioned connections list. This index saves the time for searching for the currently selected connection in the list, thus making it easier to move to the next connection.
-\item {\bf Keyboard listener} which calls the correspondant function to each action required by the user.
 \end{itemize}
-Once the user selects a node, with any method of node selection, a function is called to construct the previously mentioned lists. Then on pressing the `s' key, the selected connection will change based on the order of creation. Then with the `d' key, the used can move following that connection to the shape at the other end.
+Once the user selects a node, with any other method of selection, a function is called to construct the previously mentioned lists. Then on pressing the down arrow, the selected connection will change based on the order of creation. Then with the right arrow, the user can move following that connection to the shape at the other end.
 
 
 \item {\it In Dia}
 \par \noindent
-The main problem faced while implementing the smart navigation into Dia is that Dia does not differenciate much between connections and shapes. In Dia, each shape has a set of connection points and a set of handles. The connection points serve as holes and the handles serve as bolts, besides other functionality of resizing the shape and so on. When the user drags a handle over a connection point, the bolt falls through the hole and the handle snaps to that connection point, and the two shapes are connected. Through connecting a line, which is a normal shape, between two other shapes, the edge meaning of the graph is achieved although for Dia, this is recognized as a set of shapes connected to each other without representing any of them as connections and the rest as normal shapes.
+The main problem faced while implementing the smart navigation into Dia is that Dia does not differenciate much between connections and shapes. In Dia, each shape has a set of connection points and a set of handles. The connection points serve as holes and the handles serve as bolts, besides other functionality of resizing the shape and so on. When the user drags a handle over a connection point, the bolt falls through the hole and the handle snaps to that connection point, and the two shapes are connected. Through connecting a line, which is a normal shape, between two other shapes, the edge meaning of the graph is achieved although for Dia, this is recognized as a set of shapes connected to each other without representing any of them as connections.
 
 \paragraph{}
 An approach that can be taken to overcome this problem is to use a single stepped smart navigation, and consider both connections and normal shapes the same way. The navigation will allow moving from one shape to an adjacent one in each single step, and it will not to need the differenciation between the shapes and the connections anymore.
+
+\paragraph{}
+There also exists another approach to solve this issue into Dia. In this approach one could consider a way to guess which shapes are most probably to be connections and treat them that way while treating the rest as shapes. This could be achieved through counting the number of connectable handles for each shape, if that number exceeds 1, i.e. 2 or more, then this shape could be guessed to be a connection.
 \end{itemize}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Section End %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -85,27 +87,32 @@ An approach that can be taken to overcome this problem is to use a single steppe
 \section{Keyboard Editing}
 The keyboard editing to be implemented in the prototype was chosen to be the easiest and the most professional at the same time. 
 \subsection{Command Based Editing}
-Simple command based editing was implemented in the prototype. It has a set of simple commands used to create the required diagram. A context free language understandable by the script engine in the sandbox is presented in \reffig{script_language_grammar}.
+Simple command based editing was implemented in the prototype. It has a set of simple commands used to create the required diagram. A context free language understandable by the script engine in the prototype is presented in \reffig{script_language_grammar}. This language is a very sortened form of SVG [ABBREVIATION], all extra information and attributes like ``width='' and ``height='' were removed. The language only contains commands for the supported types by the prototype but this can easily be extended in the case of using it with another diagramming tool.x
 
 \inctext{
 \begin{itemize}
 \item S $\rightarrow$ Create $|$ Edit $|$ Connect $|$ Remove $|$ File 
-\item Create $\rightarrow$ new Shape [Rectangle $|$ Ellipse $|$ Triangle $|$ Note]
-\item Edit $\rightarrow$ edit Shape [LineColor $|$ FillColor $|$ Size $|$ Position $|$ Comment $|$ LineStyle]
-\item Connect $\rightarrow$ connect [add $|$ remove] Shape Shape
-\item Remove $\rightarrow$ remove Shape
+\item Create $\rightarrow$ new Shape\_ID [Rectangle $|$ Ellipse $|$ Triangle $|$ Note]
+\item Edit $\rightarrow$ edit Shape\_ID [LineColor $|$ FillColor $|$ Size $|$ Position $|$ Comment $|$ LineStyle]
+\item Connect $\rightarrow$ connect [add $|$ remove] Shape\_ID Shape\_ID
+\item Remove $\rightarrow$ remove Shape\_ID
 \item File $\rightarrow$ file char*
-\item Shape $\rightarrow$ int
-\item Rectangle $\rightarrow$ rectangle int int int int
-\item Ellipse $\rightarrow$ ellipse int int int int
-\item Triangle $\rightarrow$ triangle int int int int
+\item Shape\_ID $\rightarrow$ int
+\item Rectangle $\rightarrow$ rectangle int int
+\item Ellipse $\rightarrow$ ellipse int int
+\item Triangle $\rightarrow$ triangle int int
 \item Note $\rightarrow$ note int int
 \item LineColor $\rightarrow$ lc Color
 \item FillColor $\rightarrow$ fc Color
 \item Color $\rightarrow$ int int int int
 \item Position $\rightarrow$ position Coordinates
 \item Size $\rightarrow$ size Coordinates
-\item Coordinates $\rightarrow$ int int
+\item Coordinates $\rightarrow$ X Y
+\item Extent $\rightarrow$ Width Height
+\item X $\rightarrow$ int
+\item y $\rightarrow$ int
+\item Width $\rightarrow$ int
+\item Height $\rightarrow$ int
 \item LineStyle $\rightarrow$ line [dashed $|$ continuous]
 \item Comment $\rightarrow$ comment char*
 \end{itemize}
@@ -113,34 +120,35 @@ Simple command based editing was implemented in the prototype. It has a set of s
 
 \paragraph{} 
 The commands are composed of five categories, adding shapes, editing shape properties, connecting shapes, removing shapes, and running a script from a file.
-Some of the shapes take a limited amount of arguments at creation time, and thus require editing the shape after that. Like the Notes, once you create a note, you only specify the position, and then it has to be followed by ``edit shape note char*''. Also for most of the editing and the connecting commands, referencing a specific shape is necessary, this is done through the shape ID like this ``edit shape\_id lc int int int int''. This ID has to be specified at creation time of the shape in a very similar way ``new shape\_id rectangle int int int int''. The shape ID is a normal int.
+Some of the shapes take a limited amount of arguments at creation time, and thus require editing the shape after that. Like the Notes, once you create a note, you only specify the position, and then it has to be followed by ``edit shape\_id note char*'', this commands adds the note given in the char* to the shape with the given shape\_id. Choosing to break up the arguments into two parts, such as position and size was done to minimize the number of arguments the user has to remember and their order. Also for most of the editing and the connecting commands, referencing a specific shape is necessary, this is done through the shape ID like this ``edit shape\_id lc int int int int'', the later command simply changes the like color of the shape with ID shape\_id to the given values as R G B A respectively. This ID has to be specified at creation time of the shape in a very similar way ``new shape\_id rectangle int int int int''. The shape ID is a normal int, it would be a better idea to use strings, but due to some implementation details this couldn't be done. Commands to edit the properties of the connections are possible and can be easily added, but as the prototype currently doesn't support proprties for the connections, it defines the connection as a set of two points, thus this was not possible to implement.
+
+\paragraph{}
 The command ``file url'' allows the execution of a script defined in an external file. It is not only for execution from inside the program, it can also be used in a file to allow nested execution of scripts. In the case of execution of a nested script, the script engine executes the scripts as if the contents of the file were inserted in the place of the ``file url'' command. Thus, allowing the referencing of shapes created in other files if their IDs were known.
-Commands to edit the properties of the connections are possible and can be easily added, but as the prototype currently doesn't support proprties for the connections, it defines the connection as a set of two points, thus this was not possible to implement.
 
 \paragraph{}
 A simple GUI (Graphical User Interface)(LIST OF ABBREVIATIONS) was made to accept the commands as input from the keyboard, and execute them on the press of the Return key. The GUI is shown in\reffig{script_screenshot}, the GtkTextView at the bottom of the screen is responsible for taking the input commands. The execute file feature is only available through this input field.
 
-\incfig{script_screenshot/script_screenshot.pdf}{Scripting Screenshot}{script_screenshot}{width=15cm}
+\incfig{script_screenshot/script_screenshot.pdf}{Scripting Screenshot}{script_screenshot}{width=\textwidth}
 
 \inccode{scripts/script}{script}{script_all}
 \inccode{scripts/script_sun}{script\_sun}{script_sun}
 \inccode{scripts/script_home}{script\_home}{script_home}
 
 \paragraph{}
-The result of executing the script represented in\refcode{script_all} is shows in\reffig{script_screenshot}. The\refcode{script_all} is composed of two commands to execute two external files, which are shown in\refcode{script_sun} and\refcode{script_home}. Line numbers in the three listings are added only to enhance the readability of the code and referencing it.
+The result of executing the script represented in\refcode{script_all} is shown in\reffig{script_screenshot}. The\refcode{script_all} is composed of two commands to execute two external files, which are shown in\refcode{script_sun} and\refcode{script_home}. Line numbers in the three listings are added only to enhance the readability of the code and referencing it.
 
 \paragraph{}
-The resulting diagram represented in\reffig{script_screenshot} was created using the script in\refcode{script_all} in the following manner,\refcode{script_all} invokes two files,\refcode{script_sun} and\refcode{script_home}, which draw the sun and the home respectively. Sometimes the creation of the shape with the required look takes more than one step, such as creating the code of the sun in\refcode{script_sun} lines 6 and 7. First the shape is created and added in place, and then the size is changed. Choosing to break up the arguments into 2 parts, such as position and size was done to minimize the number of arguments the user has to remember and their order.
+The resulting diagram represented in\reffig{script_screenshot} was created using the script in\refcode{script_all} in the following manner,\refcode{script_all} invokes two files,\refcode{script_sun} and\refcode{script_home}, which draw the sun and the home respectively. Sometimes the creation of the shape with the required look takes more than one step, such as creating the code of the sun in\refcode{script_sun} lines 6 and 7. First the shape is created and added in place, and then the size is changed.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Section End %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Section Start %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Tools and Technologies}
-This section will describe the tools and strategies used to implement the required functionality in the prototype.
+This section will describe the tools and technologies used to implement the required functionality in the prototype.
 \begin{itemize}
 \item {\bf Programming Language: Objective-C}
 \par \noindent
-Objective-C was chosen to implement the prototype for many reasons. First because it is Object Oriented, thus emphasizing the productivity as well as the Object Oriented structure of the code. Second, it is a compiled language not an interpretted one, thus not requiring much memory space and of course faster that other interpretted languages. And finally because using c libraries withing Objective-C code is possible to be done easily thus allowing the use of other technologies chosen to implement the prototype.
+Objective-C was chosen to implement the prototype for many reasons. First because it is Object Oriented, thus emphasizing the productivity as well as the Object Oriented structure of the code. Second, it is a compiled language not an interpreted one, thus not requiring much memory space and of course faster that other interpretted languages. And finally because using normal c code withing Objective-C is possible, thus giving the possibility to use c libraries as well.
 
 \item {\bf Graphics Library: Cairo}
 \par \noindent
@@ -158,10 +166,279 @@ CMake is the build automation tool chosen for the prototype. It is one of the mo
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Section Start %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Use-Cases}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Tab Navigation}
 \begin{itemize}
- \item {\bf Use-Case 1}
+
+\item {\bf \em Rationale}
+\par \noindent
+Enables the user to navigate nodes with no initial node selected.
+
+\item {\bf \em Participating Actors}
+\par \noindent
+User
+
+\item {\bf \em Brief Description}
+\par \noindent
+Allows the user to navigate between shapes based on the order of creation.
+
+\item {\bf \em Flow of Events}
+\begin{itemize}
+
+\item {\bf \em Pre-Conditions}
+\par \noindent
+The user must have a diagram open with one or more shapes.
+
+\item {\bf \em Main Flow of Events}
+
+\begin{itemize}
+
+\item {\bf \em Normal Sequence}
+\par \noindent
+The user will press the Tab key.
+
+\item {\bf \em Alternative Events}
+\par \noindent
+No alternative events.
+
+\item {\bf \em Exceptional Events}
+\par \noindent
+If there are no shapes in the diagram, nothing will happen.
+
+\end{itemize}
+
+\item {\bf \em Post-Conditions}
+\par \noindent
+If there was a selected node, this node will get deselected, and the next node, based on the order of creation, will be selected. If there was no selected nodes, then the first node will be selected.
+
+\end{itemize}
+
+\item {\bf \em Associations to other use cases}
+
+\begin{itemize}
+
+\item {\bf \em Includes}
+\par \noindent
+Doesn't include any other use-cases.
+
+\item {\bf \em Extends}
+\par \noindent
+Doesn't extend any other use-cases.
+
+\item {\bf \em Generalize}
+\par \noindent
+Doesn't generalize any other use-cases.
+\end{itemize}
+
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Arrow Keys Navigation}
+\begin{itemize}
+
+\item {\bf \em Rationale}
+\par \noindent
+Enables the user to navigate based on the relative positions of the shapes.
+
+\item {\bf \em Participating Actors}
+\par \noindent
+User
+
+\item {\bf \em Brief Description}
+\par \noindent
+Allows the user to navigate from the selected shape to other shapes moving in the direction he chooses using the arrow keys.
+
+\item {\bf \em Flow of Events}
+\begin{itemize}
+
+\item {\bf \em Pre-Conditions}
+\par \noindent
+The user must have a diagram open with one or more selected shapes.
+
+\item {\bf \em Main Flow of Events}
+
+\begin{itemize}
+
+\item {\bf \em Normal Sequence}
+\par \noindent
+The user will press Ctrl+m to enter the arrow keys navigation mode.\\
+The user will press the arrow key in the direction he wants to navigate in as many times as he wants.\\
+The user will press Ctrl+m again to exit the arrow keys navigation mode.
+
+
+\item {\bf \em Alternative Events}
+\par \noindent
+No alternative events.
+
+\item {\bf \em Exceptional Events}
+\par \noindent
+No exceptional events.
+
+\end{itemize}
+
+\item {\bf \em Post-Conditions}
+\par \noindent
+After pressing Ctrl+m the user will enter the arrow keys navigation mode, in the arrow keys navigation mode only 4 keys are enabled which are the arrow keys. Once the user presses any of the arrow keys, the last selected node will be considered as the initial node, and then this node will be deselected, and the closest node to the initial node from the direction of the key presses will be selected. After the user presses Ctrl+m for the second time, he will exit the arrow keys navigation mode.
+
+\end{itemize}
+
+\item {\bf \em Associations to other use cases}
+
+\begin{itemize}
+
+\item {\bf \em Includes}
+\par \noindent
+If the user has no nodes selected initially, he has to use the {\em Tab Navigation} to select the first node from which he will can start navigating the rest of the diagram.
+
+\item {\bf \em Extends}
+\par \noindent
+Doesn't extend any other use-cases.
+
+\item {\bf \em Generalize}
+\par \noindent
+Doesn't generalize any other use-cases.
+
+\end{itemize}
+
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Double Stepped Smart Navigation}
+\begin{itemize}
+
+\item {\bf \em Rationale}
+\par \noindent
+Enables the user to toggle between the connections connected to a shape.
+
+\item {\bf \em Participating Actors}
+\par \noindent
+User
+
+\item {\bf \em Brief Description}
+\par \noindent
+This use-case is one part of the {\rm Double Stepped Smart Navigation}, it allows the user to choose which connection to follow.
+
+\item {\bf \em Flow of Events}
+\begin{itemize}
+
+\item {\bf \em Pre-Conditions}
+\par \noindent
+The user must have a diagram open with one or more selected shapes.
+
+\item {\bf \em Main Flow of Events}
+
+\begin{itemize}
+
+\item {\bf \em Normal Sequence}
+\par \noindent
+The user will press the Ctrl+n key to enter the smart navigation mode.\\
+The user will press the `s' key to change the selected connection.\\
+The user will press the `d' key to follow the selected connection.\\
+The user will press the Ctrl+n key to quit the smart navigation mode.
+
+\item {\bf \em Alternative Events}
+\par \noindent
+No alternative events.
+
+\item {\bf \em Exceptional Events}
+\par \noindent
+No exceptional events.
+
+\end{itemize}
+
+\item {\bf \em Post-Conditions}
+\par \noindent
+After pressing Ctrl+n the user will enter the smart navigation mode, in the arrow keys navigation mode only 2 keys are enabled which are the `s' and `d' keys. Once the user presses the `s' key, the last selected node will be considered as the initial node for the navigation, and then one of the connections connected to this node will be selected as well, with each press of the `s' the selected connection will change. When the user presses the `d' key with a connection selected, the initial shape will be deselected as well as the current connection, and the shape at the other end of the connection will be selected. The user can keep repeating selecting a connection and following it as long as he wants. The user will then press Ctrl+n to quit the smart navigation mode.
+
+\end{itemize}
+
+\item {\bf \em Associations to other use cases}
+\par \noindent
+
+\begin{itemize}
+
+\item {\bf \em Includes}
+\par \noindent
+Doesn't include any other use-cases.
+
+\item {\bf \em Extends}
+\par \noindent
+Doesn't extend any other use-cases.
+
+\item {\bf \em Generalize}
+\par \noindent
+Doesn't generalize any other use-cases.
+\end{itemize}
+
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Using Commands}
+
+\begin{itemize}
+
+\item {\bf \em Rationale}
+\par \noindent
+Enables editing the diagram using commands.
+
+\item {\bf \em Participating Actors}
+\par \noindent
+User
+
+\item {\bf \em Brief Description}
+\par \noindent
+Allows the user to enter a command referencing any shape he wants to do the required moditication by either adding, removing or editing shapes.
+
+\item {\bf \em Flow of Events}
+
+\begin{itemize}
+
+\item {\bf \em Pre-Conditions}
+\par \noindent
+The must have a diagram open.
+\item {\bf \em Main Flow of Events}
+
+\begin{itemize}
+
+\item {\bf \em Normal Sequence}
+\par \noindent
+The user will enter the command required in the specific text field and then press the Return key. The command entered must follow the language represented in\reffig{script_language_grammar}.
+
+\item {\bf \em Alternative Events}
+\par \noindent
+No alternative events.
+
+\item {\bf \em Exceptional Events}
+\par \noindent
+No alternative events.
+
+\end{itemize}
+
+\item {\bf \em Post-Conditions}
+\par \noindent
+The command will be executed and the changes specified by the command applied to the shapes.
+
+\end{itemize}
+
+\item {\bf \em Associations to other use cases}
+
+\begin{itemize}
+
+\item {\bf \em Includes}
+\par \noindent
+Doesn't include any other use-cases.
+
+\item {\bf \em Extends}
+\par \noindent
+Doesn't extend any other use-cases.
+
+\item {\bf \em Generalize}
+\par \noindent
+Doesn't generalize any other use-cases.
+
+\end{itemize}
+
 \end{itemize}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Section End %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\ref{chapter:approach}
