@@ -5,14 +5,4 @@ all:
 	pdflatex bachelor.tex
 
 clean:
-	rm *~ &
-	rm *.aux &
-	rm *.log &
-	rm *.bbl &
-	rm *.blg &
-	rm *.toc &
-	rm *.lof &
-	rm *.lot &
-	rm *.idx &
-	rm *.backup &
-	rm bachelor.pdf
+	rm *~  *.aux *.log *.bbl *.blg *.toc *.lof *.lot *.idx *.out *.backup bachelor.pdf

@@ -1,4 +1,4 @@
-\chapter{My Own Approach [This chapter is complete]}
+\chapter{My Own Approach}
 \labelchapter{approach}
 %-----------------------
 \beginchapter
@@ -7,15 +7,15 @@ The main concern of this chapter is to explain more the details of the implement
 The tasks to be implemented were chosen to accomplish a complete keyboard diagram navigation and editing. Thus, for the keyboard navigation a complete approach, composed of arrow keys navigation and smart navigation, was chosen. And for the keyboard editing the command based editing was chosen as this is the main approach for diagram editing discussed in this thesis.
 
 \paragraph{}
-To implement the needed functionality, a prototype implemented by Frederic-Gerald Morcos and released under GPL was extended to demonstrate the three main functionalities to be developped in OpenGrafik. The prototype is developped in Objective-C and Cairo as a drawing library.
+To implement the needed functionality, a prototype implemented by Frederic-Gerald Morcos and released under GPL was extended to demonstrate the three main functionalities to be developed in OpenGrafik. The prototype is developed in Objective-C and Cairo as a drawing library.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Section Start %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Dia and Prototype}
 \subsection{Dia}
-The basic idea was to build the needed implementation upon an already existing diagramming tool. The diagramming tool of choice was Dia [REFERENCE], as it is one of the most developped open source diagramming tools, thus seemed to fit well with the requirements of OpenGrafik. During the work on Dia's code, many problems were faced slowing down the development and shifting the focus somehow to understanding the code rather than really implementing and improving on the needed diagramming functionality. To focus back on the core of the project which is implementing and improving diagram keyboard support, it was decided to stop the work on Dia. Most of the problems faced with Dia will be stated under the {\it In Dia} title in the related part of the implementation.
+The basic idea was to build the needed implementation upon an already existing diagramming tool. The diagramming tool of choice was Dia [REFERENCE], as it is one of the most developed open source diagramming tools, thus seemed to fit well with the requirements of OpenGrafik. During the work on Dia's code, many problems were faced slowing down the development and shifting the focus somehow to understanding the code rather than really implementing and improving on the needed diagramming functionality. To focus back on the core of the project which is implementing and improving diagram keyboard support, it was decided to stop the work on Dia. Most of the problems faced with Dia will be stated under the {\it In Dia} title in the related part of the implementation.
 
 \subsection{Prototype}
-After the decision to stop the work on Dia was taken, implementing a prototype to demostrate the ideas and the concepts was the other alternative. As mentioned before, the prototype implemented by Frederic-Gerald Morcos was chosen to build upon the rest of the work. The rest of the work is based on the prototype, and the integration of the work back into Dia was left to be done after the end of the thesis. The prototype is a simple Objective-C/Gtk+ application supporting a simple graph structure. It represents the graph using two lists, one for nodes and one for edges. The node struct contains some properties that can be set for each node. The edge struct is only composed of 2 vertices, thus the edges, connections, don't have options to be set. Currently some of the node properties do not have visualization implemented although they are fully implemented in the code base. The algorithms for navigation and editing the diagrams are located under /src/algorithms/ taking reference the root folder of the prototype. The prototype also contains some random diagram creation functions used for testing.  How the implementation was done as well as the difficuties faces are stated under the {\it In Prototype} title in the related part of the implementation.
+After the decision to stop the work on Dia was taken, implementing a prototype to demonstrate the ideas and the concepts was the other alternative. As mentioned before, the prototype implemented by Frederic-Gerald Morcos was chosen to build upon the rest of the work. The rest of the work is based on the prototype, and the integration of the work back into Dia was left to be done after the end of the thesis. The prototype is a simple Objective-C/Gtk+ application supporting a simple graph structure. It represents the graph using two lists, one for nodes and one for edges. The node struct contains some properties that can be set for each node. The edge struct is only composed of 2 vertices, thus the edges, connections, don't have options to be set. Currently some of the node properties do not have visualization implemented although they are fully implemented in the code base. The algorithms for navigation and editing the diagrams are located under /src/algorithms/ taking reference the root folder of the prototype. The prototype also contains some random diagram creation functions used for testing.  How the implementation was done as well as the difficulties faces are stated under the {\it In Prototype} title in the related part of the implementation.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Section End %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -54,7 +54,7 @@ The Pseudo-code for the implementation shown in ADD FIGURE HERE shows how those 
 
 \item {\it In Dia}
 \par \noindent
-Not Implemented.
+Not Implemented due to the decision to stop the work on Dia.
 \end{itemize}
 
 \subsection{Smart Navigation}
@@ -64,7 +64,7 @@ Not Implemented.
 In the prototype, double stepped smart navigation is fully implemented. 
 The implementation consists of:
 \begin{itemize}
-\item {\bf A list of connections connected to the selected shape}, which has to be reconstructed everytime the selected shape changes. This list is constructed once the shape is selected to save the time of creation when the user starts changing between those connections.
+\item {\bf A list of connections connected to the selected shape}, which has to be reconstructed every time the selected shape changes. This list is constructed once the shape is selected to save the time of creation when the user starts changing between those connections.
 \item {\bf An index of the currently selected connection} in the previously mentioned connections list. This index saves the time for searching for the currently selected connection in the list, thus making it easier to move to the next connection.
 \end{itemize}
 Once the user selects a node, with any other method of selection, a function is called to construct the previously mentioned lists. Then on pressing the down arrow, the selected connection will change based on the order of creation. Then with the right arrow, the user can move following that connection to the shape at the other end.
@@ -72,13 +72,13 @@ Once the user selects a node, with any other method of selection, a function is 
 
 \item {\it In Dia}
 \par \noindent
-The main problem faced while implementing the smart navigation into Dia is that Dia does not differenciate much between connections and shapes. In Dia, each shape has a set of connection points and a set of handles. The connection points serve as holes and the handles serve as bolts, besides other functionality of resizing the shape and so on. When the user drags a handle over a connection point, the bolt falls through the hole and the handle snaps to that connection point, and the two shapes are connected. Through connecting a line, which is a normal shape, between two other shapes, the edge meaning of the graph is achieved although for Dia, this is recognized as a set of shapes connected to each other without representing any of them as connections.
+The main problem faced while implementing the smart navigation into Dia is that Dia does not differentiate much between connections and shapes. In Dia, each shape has a set of connection points and a set of handles. The connection points serve as holes and the handles serve as bolts, besides other functionality of resizing the shape and so on. When the user drags a handle over a connection point, the bolt falls through the hole and the handle snaps to that connection point, and the two shapes are connected. Through connecting a line, which is a normal shape, between two other shapes, the edge meaning of the graph is achieved although for Dia, this is recognized as a set of shapes connected to each other without representing any of them as connections.
 
 \paragraph{}
-An approach that can be taken to overcome this problem is to use a single stepped smart navigation, and consider both connections and normal shapes the same way. The navigation will allow moving from one shape to an adjacent one in each single step, and it will not to need the differenciation between the shapes and the connections anymore.
+An approach that can be taken to overcome this problem is to use a single stepped smart navigation, and consider both connections and normal shapes the same way. The navigation will allow moving from one shape to an adjacent one in each single step, and it will not to need the differentiation between the shapes and the connections anymore.
 
 \paragraph{}
-There also exists another approach to solve this issue into Dia. In this approach one could consider a way to guess which shapes are most probably to be connections and treat them that way while treating the rest as shapes. This could be achieved through counting the number of connectable handles for each shape, if that number exceeds 1, i.e. 2 or more, then this shape could be guessed to be a connection.
+There also exists another approach to solve this issue into Dia. In this approach one could consider a way to guess which shapes are most probably to be connections and treat them that way while treating the rest as shapes. This could be achieved through counting the number of connect-able handles for each shape, if that number exceeds 1, i.e. 2 or more, then this shape could be guessed to be a connection.
 \end{itemize}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Section End %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -87,7 +87,7 @@ There also exists another approach to solve this issue into Dia. In this approac
 \section{Keyboard Editing}
 The keyboard editing to be implemented in the prototype was chosen to be the easiest and the most professional at the same time. 
 \subsection{Command Based Editing}
-Simple command based editing was implemented in the prototype. It has a set of simple commands used to create the required diagram. A context free language understandable by the script engine in the prototype is presented in \reffig{script_language_grammar}. This language is a very sortened form of SVG [ABBREVIATION], all extra information and attributes like ``width='' and ``height='' were removed. The language only contains commands for the supported types by the prototype but this can easily be extended in the case of using it with another diagramming tool.x
+Simple command based editing was implemented in the prototype. It has a set of simple commands used to create the required diagram. A context free language understandable by the script engine in the prototype is presented in \reffig{script_language_grammar}. This language is a very sortened form of SVG [ABBREVIATION], all extra information and attributes like ``width='' and ``height='' were removed. The language only contains commands for the supported types by the prototype but this can easily be extended in the case of using it with another diagramming tool.
 
 \inctext{
 \begin{itemize}
@@ -110,7 +110,7 @@ Simple command based editing was implemented in the prototype. It has a set of s
 \item Coordinates $\rightarrow$ X Y
 \item Extent $\rightarrow$ Width Height
 \item X $\rightarrow$ int
-\item y $\rightarrow$ int
+\item Y $\rightarrow$ int
 \item Width $\rightarrow$ int
 \item Height $\rightarrow$ int
 \item LineStyle $\rightarrow$ line [dashed $|$ continuous]
@@ -128,6 +128,7 @@ The command ``file url'' allows the execution of a script defined in an external
 \paragraph{}
 A simple GUI (Graphical User Interface)(LIST OF ABBREVIATIONS) was made to accept the commands as input from the keyboard, and execute them on the press of the Return key. The GUI is shown in\reffig{script_screenshot}, the GtkTextView at the bottom of the screen is responsible for taking the input commands. The execute file feature is only available through this input field.
 
+[CHANGE THE FIGURE TO A REAL DIAGRAM]
 \incfig{script_screenshot/script_screenshot.pdf}{Scripting Screenshot}{script_screenshot}{width=\textwidth}
 
 \inccode{scripts/script}{script}{script_all}
@@ -148,11 +149,11 @@ This section will describe the tools and technologies used to implement the requ
 \begin{itemize}
 \item {\bf Programming Language: Objective-C}
 \par \noindent
-Objective-C was chosen to implement the prototype for many reasons. First because it is Object Oriented, thus emphasizing the productivity as well as the Object Oriented structure of the code. Second, it is a compiled language not an interpreted one, thus not requiring much memory space and of course faster that other interpretted languages. And finally because using normal c code withing Objective-C is possible, thus giving the possibility to use c libraries as well.
+Objective-C was chosen to implement the prototype for many reasons. First because it is Object Oriented, thus emphasizing the productivity as well as the Object Oriented structure of the code. Second, it is a compiled language not an interpreted one, thus not requiring much memory space and of course faster that other interpreted languages. And finally because using normal c code withing Objective-C is possible, thus giving the possibility to use c libraries as well.
 
 \item {\bf Graphics Library: Cairo}
 \par \noindent
-Cairo is one of the most powerful OpenSource graphics libraries. It was chosen because of its easiness and previous experience with it for the team members implementing OpenGrafik.
+Cairo is one of the most powerful open source graphics libraries. It was chosen because of its easiness and previous experience with it for the team members implementing OpenGrafik.
 
 \item {\bf Graphics User Interface Framework: GTK+}
 \par \noindent
@@ -388,7 +389,7 @@ User
 
 \item {\bf \em Brief Description}
 \par \noindent
-Allows the user to enter a command referencing any shape he wants to do the required moditication by either adding, removing or editing shapes.
+Allows the user to enter a command referencing any shape he wants to do the required modification by either adding, removing or editing shapes.
 
 \item {\bf \em Flow of Events}
 

@@ -5,14 +5,15 @@
 %-----------------------
 
 \section{Current State}
-Most of the available diagramming tools depend heavily on the users' interaction using pointing devices. The use of such pointing devices might be hard if not impossiple for people having some disabilities. Some of the existing diagramming tools provide some accessibility tools that allow the user to use the tool without having to use a pointing device, but in most tools such accessibility is either absent or poorly developped. Thus, making the disabled users still unable to use diagramming tools efficiently.
+Most of the available diagramming tools depend heavily on the users' interaction using pointing devices. The use of such pointing devices might be hard if not impossible for people having some disabilities. Some of the existing diagramming tools provide some accessibility tools that allow the user to use the tool without having to use a pointing device, but in most tools such accessibility is either absent or poorly developed. Thus, making the disabled users still unable to use diagramming tools efficiently.
 
 \subsection{Diagram Navigation}
-There are good diagramming navigation methods already implemented, such as in yEd [REFERENCE] though, there are still two main disadvantages about these currently implemented navigation techniques. First, they are not tightly bound to other keyboard based diagram editing, or to other keyboard based navigation techniques. Second, they are available only in commercial, closed source diagramming tools, and thus not available to other developpers who want to include such functionality in their tools.
+There are good diagramming navigation methods already implemented, such as in yEd \cite{yed} though, there are still two main disadvantages about these currently implemented navigation techniques. First, they are not tightly bound to other keyboard based diagram editing, or to other keyboard based navigation techniques. Second, they are available only in commercial, closed source diagramming tools, and thus not available to other developers who want to include such functionality in their tools.
 
 \subsection{Keyboard Editing}
-Most the current support of keyboard editing is not mainly intended for the use as accessibility tools, it is mainly intended to automating the diagram creation process, or creating a diagram based on a textual description, this is the case in Graphviz [REFERENCE]. Other support that currently exists for keyboard editing is intended to blind people to create diagrams to be printed on braille printers, such as in BPLOT2. \cite{bplot2}
+Mostly, the current support of keyboard editing is not mainly intended for the use as accessibility tools. It is mainly intended to automate the diagram creation process, or create a diagram based on a textual description. This is the case in Graphviz \cite{graphviz}. Other support that currently exists for keyboard editing is intended to blind people to create diagrams to be printed on braille printers, such as in BPLOT2. \cite{bplot2}
 
+\begin{comment}
 
 \section{Problem Description}
 Most diagramming tools base their interface on drag and drop actions performed by the user to place, move, or resize shapes. This causes problems for people who cannot handle pointing devices or don't have any.
@@ -20,14 +21,16 @@ Most diagramming tools base their interface on drag and drop actions performed b
 The main problem is the lack of well designed software to support the blind, people with motoric disabilities, or simply someone that doesn't have his point device handy to create, edit and navigate diagrams efficiently.
 The currently available software either supports diagram navigation, or diagram editing using the keyboard, but very rare software supports both to be working together. For example, in yEd [REFERENCE] there is very good support for diagram navigation using only the keyboard, while editing the node properties after finding the needed node is not supported to be done using the keyboard. Thus again requiring the using to use a pointing device.
 
+\end{comment}
+
 \section{Project Proposal}
 \subsection{Project Idea}
-The idea of this project is to get a details background about the existing support for keyboard based creation, editing and navigation of diagrams. Use this background to categorize the methods of creation, editing and navigation, and compare them. Then develop new or improve on the current existing methods. Taking into account the integrity of all the developped features and their usability all together.
+The idea of this project is to get a details background about the existing support for keyboard based creation, editing and navigation of diagrams. Use this background to categorize the methods of creation, editing and navigation, and compare them. Then develop new or improve on the current existing methods. Taking into account the integrity of all the developed features and their usability all together.
 
 \subsection{Formal Thesis Proposal - Keyboard Supported Diagram Editing and Navigating}
-Most diagramming tools are based on a mouse driven drag and drop editing concept. However, through that these diagramming tools are almost unusable for blind people or people with motoric disabilities. Such users would benefit much from a well designed keyboard support in a diagramming tool. And also for professional users of diagramming tools a good keyboard support would surely increase their productivity.
+Most diagramming tools are based on a mouse driven drag and drop editing concept. However, though that these diagramming tools are almost unusable for blind people or people with motoric disabilities. Such users would benefit much from a well designed keyboard support in a diagramming tool. And also for professional users of diagramming tools a good keyboard support would surely increase their productivity.
 
-\par \noindent
+\paragraph{}
 The topic of this Bachelor Thesis is a study on keyboard support in diagramming tools.
 
 \paragraph{}
