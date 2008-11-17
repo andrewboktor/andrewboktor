@@ -8,22 +8,19 @@
 Currently, most of the existing diagramming tools support only navigation of diagrams using pointing devices. While the use of pointing devices might seem for some people the easiest and most efficient way for diagram navigation, for others, due to visual impairments or motoric disabilities, the use of such devices is very hard if not impossible. This prevents such people from using general purpose diagramming tools to express their ideas and/or do professional work using them. Furthermore, professionals also are usually less productive when they need to switch often between the keyboard for textual input and a pointing device for diagram editing. 
 
 \paragraph{}
-To enable visually impaired people, and people with motoric disabilities to use diagramming tools effectively, an efficient method had to be developed to the whole diagram creating and editing process without any poiting devices. This thesis contributes to the development of such a method in the following means:
+To enable visually impaired people, and people with motoric disabilities to use diagramming tools effectively, an efficient method had to be developed to the whole diagram creating and editing process without any pointing devices. This thesis contributes to the development of such a method in the following means:
 \begin{itemize}
-\item {\bf Doing a research} that investigates the currently existing diagramming tools, their future planned features, and their accessibility tools giving a result about what is currently implemented and available in the market.
-\item {\bf Defining and Comparing concepts} related to the matter of efficient creation, editing, and navigation of diagrams using only the keyboard.
-\item {\bf Implementing} some of these concepts and providing example code to be ready for integration in commercial diagramming tools.
+\item {\bf A research has been made} that investigates the currently existing diagramming tools, their future planned features, and their accessibility tools giving a result about what is currently implemented and available in the market.
+\item {\bf Concepts were defined and compared} related to the matter of efficient creation, editing, and navigation of diagrams using only the keyboard.
+\item {\bf A prototype was implemented} including some of these concepts and providing example code to be ready for integration in commercial diagramming tools.
 \end{itemize}
 
 \paragraph{}
-A thorough investigation of the currently existing diagramming tools was conducted. The tools investigated were organized and checked if they have relevant features to the topic of this thesis or not. Most of the tools with relevant features were downloaded and installed, the relevant features were described in details regarding how they can be used and regarding their efficiency. A table was constructed to show the summary of the comparison of the tools. The details of investigated tools and their comparison can be found in the State of The Art Chapter (REFERENCE)
+A thorough investigation of the currently existing diagramming tools was conducted. The tools investigated were organized and checked if they have relevant features to the topic of this thesis or not. Most of the tools with relevant features were downloaded and installed, the relevant features were described in details regarding how they can be used and regarding their efficiency. A table was constructed to show the summary of the comparison of the tools.
 
 \paragraph{}
-Throughout the work on this thesis, many concepts were defined and compared. A summary with the concepts discussed is displayed below. The concepts compared mainly reside in two groups, ``Keyboard Navigation of Diagrams'' and ``Keyboard Creation and Editing of Diagrams''. Many strategies and implementation approaches were discussed under each topic. The details of the comparison and discussion of those concepts can be found in the Concepts Chapter (RFERENCE)
+The concepts that were defined and compared mainly reside in two groups, ``Keyboard Navigation of Diagrams'' and ``Keyboard Creation and Editing of Diagrams''.
 
-\begin{spacing}{2}\end{spacing}
-\par \noindent
-{\bf Summary of discussed concepts:}
 \begin{itemize}
 \item {\bf Keyboard Navigation}
 
@@ -38,7 +35,7 @@ Throughout the work on this thesis, many concepts were defined and compared. A s
 
 	\item {\bf Smart Navigation Following Connections}
 	\par \noindent
-	Smart Navigation considers the semantics of the connections while navigating, it can also change its behavior based on the meaning of the connections, e.g. in directed graphs. It can be used combined with {\em Arrow Keys Navigation} to provide compelete navigation of the diagram.
+	Smart Navigation considers the semantics of the connections while navigating, it can also change its behavior based on the meaning of the connections, e.g. in directed graphs. It can be used combined with {\em Arrow Keys Navigation} to provide complete navigation of the diagram.
 
 	\item {\bf Diagram Navigation Completeness}
 	\par \noindent
@@ -67,16 +64,16 @@ Throughout the work on this thesis, many concepts were defined and compared. A s
 \end{itemize}
 
 \paragraph{}
-After the definition and comparison of the concepts, some of them were chosen to be implemented. Those ones that were implemented and the details of their implementation are described in the Implementation Chapter (REFERENCE). During the implementation, a prototype demostrating how many of the functions described can be integrated together in one tool and how each can be implemented and used in an efficient way. The prototype includes the {\em Command Based Editing} functionality for which a small grammar was defined and used. It includes also many types of navigation like {\em Tab Navigation}, {\em Arrow Keys Navigation} and {\em Double Stepped Smart Navigation} all integrate to work in cooperation with each other and with the commands. Based on the implementation, some improvements for the implemented features were made, and other improvements were suggested as future work that can be done on this topic.
+After the definition and comparison of the concepts, some of them were chosen to be implemented. During the implementation, a prototype was implemented demonstrating how some of the functions described can be integrated together in one tool and how each can be implemented and used in an efficient way. The prototype includes the {\em Command Based Editing} functionality for which a small grammar was defined and used. It includes also many types of navigation like {\em Tab Navigation}, {\em Arrow Keys Navigation} and {\em Double Stepped Smart Navigation} all integrated to work in cooperation with each other and with the commands. Based on the implementation, some improvements for the implemented features were made, and other improvements were suggested as future work that can be done on this topic.
 
 
 \section{Recommendations for Future Work}
-Due to the short time and the big amount of work, the implemented features were limited. Thus, some recommendation for the future work and/or research are stated below. These recommendations for future work are aiming at enriching the persons willing to work on that topic with ideas about how to improve the existing or develop new features related to this topic.
+Due to the short time and the big amount of work, the implemented features were limited. Thus, some recommendation for the future work and/or research are stated below. These recommendations for future work are aiming at enriching the persons willing to work on that topic with ideas about how to improve the existing functions or develop new features related to this topic.
 
 \begin{itemize}
 \item The actions triggered by the keyboard in order to achieve the needed navigation or editing of the diagram can be mapped to voice commands in order to facilitate them for the disable people. As voice commands require no special movement of the hands or realization of exact distances as it is the case when using the keyboard.
 
-\item According to the Scripting language described in the implementation chapter (REFERENCE), it can be extended to support drawing starting from a reference point, not only using absolute values for the position of the objects.
+\item According to the Scripting language described in\refchapter{implementation} , it can be extended to support drawing starting from a reference point, not only using absolute values for the position of the objects.
 
 \item The scripting language can also be extended to support the scaling of the canvas or the change of the coordinates before the insertion of a script file, or any other chunk of code, which will allow the drawing of scaled, inverted, or shifted diagrams.
 

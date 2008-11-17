@@ -3,7 +3,7 @@ img_extIsRegExp=false
 img_extensions=.eps .jpg .jpeg .png .pdf .ps .fig .gif
 kileprversion=2
 kileversion=2.0
-lastDocument=concepts.tex
+lastDocument=conclusion.tex
 masterDocument=
 name=Bachelor
 pkg_extIsRegExp=false
@@ -17,39 +17,48 @@ QuickBuild=
 
 [item:GUC_TitlePage.tex]
 archive=true
-column=20
+column=33
 encoding=UTF-8
 highlight=LaTeX
-line=34
+line=16
 open=false
-order=7
+order=2
 
-[item:abstract.tex]
+[item:US_TitlePage.tex]
 archive=true
-column=1308
+column=31
 encoding=UTF-8
 highlight=LaTeX
-line=22
+line=39
 open=false
 order=1
 
-[item:acknowledgments.tex]
+[item:abstract.tex]
 archive=true
-column=14
+column=0
 encoding=UTF-8
 highlight=LaTeX
-line=1
+line=0
+open=true
+order=4
+
+[item:acknowledgments.tex]
+archive=true
+column=262
+encoding=UTF-8
+highlight=LaTeX
+line=7
 open=false
 order=3
 
 [item:approach.tex]
 archive=true
-column=60
+column=9
 encoding=UTF-8
 highlight=LaTeX
-line=56
-open=false
-order=4
+line=128
+open=true
+order=2
 
 [item:bachelor.kilepr]
 archive=true
@@ -65,45 +74,36 @@ archive=true
 column=0
 encoding=UTF-8
 highlight=LaTeX
-line=74
+line=146
 open=true
-order=0
-
-[item:background.tex]
-archive=true
-column=14
-encoding=UTF-8
-highlight=LaTeX
-line=1
-open=false
-order=5
+order=6
 
 [item:certification.tex]
 archive=true
-column=12
+column=6
 encoding=UTF-8
 highlight=LaTeX
-line=10
+line=12
 open=false
 order=6
 
 [item:concepts.tex]
 archive=true
-column=1
+column=14
 encoding=UTF-8
 highlight=LaTeX
 line=17
 open=true
-order=4
+order=5
 
 [item:conclusion.tex]
 archive=true
-column=14
+column=1
 encoding=UTF-8
 highlight=LaTeX
-line=1
-open=false
-order=8
+line=78
+open=true
+order=3
 
 [item:introduction.tex]
 archive=true
@@ -116,12 +116,12 @@ order=2
 
 [item:list_of_abbreviations.tex]
 archive=true
-column=79
+column=0
 encoding=
 highlight=LaTeX
-line=10
-open=false
-order=2
+line=0
+open=true
+order=1
 
 [item:list_of_figures.tex]
 archive=true
@@ -138,7 +138,7 @@ column=0
 encoding=UTF-8
 highlight=LaTeX
 line=82
-open=true
+open=false
 order=1
 
 [item:list_of_tables.tex]
@@ -152,21 +152,21 @@ order=6
 
 [item:problem_description.tex]
 archive=true
-column=0
+column=188
 encoding=UTF-8
 highlight=LaTeX
-line=32
+line=21
 open=false
 order=4
 
 [item:references.bib]
 archive=true
-column=46
+column=0
 encoding=UTF-8
 highlight=BibTeX
-line=57
+line=0
 open=true
-order=2
+order=0
 
 [item:references.tex]
 archive=true
@@ -179,9 +179,9 @@ order=8
 
 [item:the_state_of_the_art.tex]
 archive=true
-column=119
+column=14
 encoding=UTF-8
 highlight=LaTeX
-line=22
-open=true
+line=51
+open=false
 order=3

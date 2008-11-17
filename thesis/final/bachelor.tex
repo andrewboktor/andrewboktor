@@ -17,8 +17,8 @@
 %\usepackage{alltt,epsfig,array}
 \usepackage{listings}
 \usepackage[labelfont=bf,up,textfont=it,up]{caption}
-\usepackage{algorithmic}
-\usepackage{algorithm}
+%\usepackage{algorithmic}
+%\usepackage{algorithm}
 \usepackage{setspace}
 %\usepackage{makeidx}
 %\usepackage{float}
@@ -117,6 +117,50 @@
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%% Thesis Specific Commands %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%% Information About the First University %%%%%%%%%%
+%University One
+\newcommand{\universityOne}{German University in Cairo}
+
+%Group One
+\newcommand{\groupOne}{Engineering}
+
+%Faculty One
+\newcommand{\facultyOne}{Faculty of Media Engineering and Technology}
+
+%Major One
+\newcommand{\majorOne}{Computer Science and Engineering}
+
+%%%%%%%%%% Information About the Second University %%%%%%%%%%
+%University Two
+\newcommand{\universityTwo}{Universit\"at Stuttgart}
+
+%Faculty Two
+\newcommand{\facultyTwo}{Fakult\"at Informatik}
+
+%Faculty Two Information
+\newcommand{\facultyTwoInformation}{
+\facultyTwo, Elektrotechnik und Informationstechnik\\
+Institut f\"ur Visualisierung und Interaktive System (VIS)\\
+Universit\"atsstra\ss e 38\\
+70569 Stuttgart
+}
+
+%Institute Two
+\newcommand{\instituteTwo}{Institute of Visualization and Interactive Systems}
+
+%Project Number Two
+\newcommand{\projectNumberTwo}{2180}
+
+%CR Classification
+\newcommand{\crClassification}[0]{H.5.2, I.3.4, D.2.2}
+
+
+%Starting Date
+\newcommand{\startingDay}[0]{1\superscript{st}}
+\newcommand{\startingMonth}[0]{July}
+\newcommand{\startingYear}[0]{2008}
+\newcommand{\startingDate}[0]{\startingDay~of~\startingMonth,~\startingYear}
+
 %Submission Date
 \newcommand{\submissionDay}[0]{30\superscript{th}}
 \newcommand{\submissionMonth}[0]{September}
@@ -125,10 +169,13 @@
 
 %Thesis
 \newcommand{\typeOfThesis}[0]{Bachelor Thesis}
-\newcommand{\titleOfThesisOne}[0]{Keyboard Supported Diagram Editing and Navigating}
+\newcommand{\titleOfThesis}[0]{Keyboard Supported Diagram Editing and Navigating}
+\newcommand{\titleOfThesisOne}{Keyboard Supported}
+\newcommand{\titleOfThesisTwo}{Diagram Editing}
+\newcommand{\titleOfThesisThree}{and Navigating}
 
 %Author and Reviewers
-\newcommand{\authorOfThesis}[0]{Andrew M. B. Boktor}
+\newcommand{\authorOfThesis}[0]{Andrew Mofid Botros Boktor}
 \newcommand{\supervisorOne}[0]{Dipl. Inf. Steffen Koch}
 \newcommand{\supervisorTwo}[0]{Dipl. Inf. Christiane Taras}
 \newcommand{\reviewerOne}[0]{Prof. Dr. Thomas Ertl}
@@ -151,15 +198,18 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%% Document Initialization %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \makeindex
 \makeindex
-
+\setlength \oddsidemargin{0.5cm}
+%\setlength \evensidemarlgin{0.5cm}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
 
 \pagenumbering{Roman}
 
-\input{GUC_TitlePage}
+\input{US_TitlePage}
+%\input{GUC_TitlePage}
+%\include{US_TitlePage}
 \include{GUC_TitlePage}
-\include{certification}
+%\include{certification}
 \include{abstract}
 \include{acknowledgments}
 
@@ -187,6 +237,7 @@
 \include{list_of_investigated_tools}
 
 \include{references}
+\include{certification}
 
 %\printindex
 %\addcontentsline{toc}{chapter}{Index}

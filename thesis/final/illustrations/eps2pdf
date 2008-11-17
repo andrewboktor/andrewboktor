@@ -1,4 +1,4 @@
 LIST=`find -name "*.eps"`
 for i in $LIST;
-do epstopdf $i;
+do epstopdf $i && echo $i;
 done
