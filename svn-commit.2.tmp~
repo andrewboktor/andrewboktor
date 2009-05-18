@@ -1,0 +1,31 @@
+
+--This line, and those below, will be ignored--
+
+M    thesis/final/introduction.tex
+M    thesis/final/certification.tex
+A    thesis/final/US_TitlePage.tex
+M    thesis/final/acknowledgments.tex
+M    thesis/final/approach.tex
+M    thesis/final/problem_description.tex
+M    thesis/final/abstract.tex
+M    thesis/final/bachelor.kilepr
+M    thesis/final/list_of_abbreviations.tex
+M    thesis/final/the_state_of_the_art.tex
+M    thesis/final/GUC_TitlePage.tex
+M    thesis/final/conclusion.tex
+M    thesis/final/references.bib
+M    thesis/final/illustrations/script_screenshot/script_screenshot.pdf
+M    thesis/final/illustrations/eps2pdf
+M    thesis/final/illustrations/smart_navigation_final_state_double_step/smart_navigation_final_state_double_step.dia
+M    thesis/final/illustrations/smart_navigation_final_state_double_step/smart_navigation_final_state_double_step.eps
+M    thesis/final/illustrations/smart_navigation_final_state_double_step/smart_navigation_final_state_double_step.pdf
+M    thesis/final/illustrations/smart_navigation_final_state_single_step/smart_navigation_final_state_single_step.eps
+M    thesis/final/illustrations/smart_navigation_final_state_single_step/smart_navigation_final_state_single_step.pdf
+M    thesis/final/illustrations/smart_navigation_final_state_single_step/smart_navigation_final_state_single_step.dia
+M    thesis/final/illustrations/smart_navigation_single_step_advantage/smart_navigation_single_step_advantage.pdf
+M    thesis/final/illustrations/smart_navigation_initial_state/smart_navigation_initial_state.eps
+M    thesis/final/illustrations/smart_navigation_initial_state/smart_navigation_initial_state.pdf
+M    thesis/final/illustrations/smart_navigation_initial_state/smart_navigation_initial_state.dia
+M    thesis/final/concepts.tex
+M    thesis/final/bachelor.tex
+D    thesis/final/background.tex

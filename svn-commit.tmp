@@ -1,0 +1,25 @@
+
+--This line, and those below, will be ignored--
+
+M    thesis/general/drew-thesis.odt
+M    thesis/general/ideas.xml
+M    thesis/general/latex/introduction.tex
+M    thesis/general/latex/abstract.tex
+M    thesis/general/latex/GUC_TitlePage.tex
+M    thesis/general/latex/conclusion.tex
+M    thesis/general/latex/approach.tex
+M    thesis/general/latex/bachelor.tex
+M    thesis/general/latex/background.tex
+A    thesis/sandbox
+A    thesis/sandbox/src/main.m
+A    thesis/sandbox/src/gtk/gtk.h
+A    thesis/sandbox/src/gtk/CMakeLists.txt
+A    thesis/sandbox/src/algorithms/script.m
+A    thesis/sandbox/src/algorithms/navigation.h
+A    thesis/sandbox/src/algorithms/navigation.m
+A    thesis/sandbox/src/algorithms/script.h
+A    thesis/sandbox/src/algorithms/script_grammar
+A    thesis/sandbox/src/algorithms/CMakeLists.txt
+A    thesis/sandbox/src/ui/app.h
+A    thesis/sandbox/src/ui/app.m
+D    trunk/sandbox
