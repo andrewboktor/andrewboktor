@@ -1,0 +1,24 @@
+new 7 triangle 120 150
+new 8 triangle 20 300
+new 9 triangle 220 300
+connect add 7 8
+connect add 7 9
+connect add 9 8
+new 10 rectangle 20 450
+new 11 rectangle 220 450
+connect add 8 10
+connect add 9 11
+connect add 10 11
+new 12 ellipse 120 250
+edit 12 size 40 40
+new 13 note 70 320
+new 14 note 170 320
+new 15 rectangle 90 450
+new 16 rectangle 150 450
+new 17 rectangle 90 370
+new 18 rectangle 150 370
+connect add 15 16
+connect add 16 18
+connect add 18 17
+connect add 17 15
+new 19 ellipse 105 410

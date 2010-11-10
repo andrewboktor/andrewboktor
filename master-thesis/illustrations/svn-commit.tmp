@@ -1,0 +1,34 @@
+
+--This line, and those below, will be ignored--
+
+A    graph
+A    graph/graph.svg
+AM   graph/graph.png
+A    graph/graph.eps
+AM   graph/graph.pdf
+A    graph/graph.dia
+AM   eps2pdf
+A    smart_navigation_final_state_double_step
+A    smart_navigation_final_state_double_step/smart_navigation_final_state_double_step.dia
+A    smart_navigation_final_state_double_step/smart_navigation_final_state_double_step.svg
+AM   smart_navigation_final_state_double_step/smart_navigation_final_state_double_step.png
+A    smart_navigation_final_state_double_step/smart_navigation_final_state_double_step.eps
+AM   smart_navigation_final_state_double_step/smart_navigation_final_state_double_step.pdf
+A    smart_navigation_final_state_single_step
+A    smart_navigation_final_state_single_step/smart_navigation_final_state_single_step.eps
+A    smart_navigation_final_state_single_step/smart_navigation_final_state_single_step.pdf
+A    smart_navigation_final_state_single_step/smart_navigation_final_state_single_step.dia
+A    smart_navigation_final_state_single_step/smart_navigation_final_state_single_step.svg
+AM   smart_navigation_final_state_single_step/smart_navigation_final_state_single_step.png
+A    smart_navigation_single_step_advantage
+A    smart_navigation_single_step_advantage/smart_navigation_single_step_advantage.eps
+AM   smart_navigation_single_step_advantage/smart_navigation_single_step_advantage.pdf
+A    smart_navigation_single_step_advantage/smart_navigation_single_step_advantage.dia
+A    smart_navigation_single_step_advantage/smart_navigation_single_step_advantage.svg
+AM   smart_navigation_single_step_advantage/smart_navigation_single_step_advantage.png
+A    smart_navigation_initial_state
+AM   smart_navigation_initial_state/smart_navigation_initial_state.png
+A    smart_navigation_initial_state/smart_navigation_initial_state.eps
+A    smart_navigation_initial_state/smart_navigation_initial_state.pdf
+A    smart_navigation_initial_state/smart_navigation_initial_state.dia
+A    smart_navigation_initial_state/smart_navigation_initial_state.svg

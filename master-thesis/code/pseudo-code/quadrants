@@ -1,0 +1,11 @@
+list considered
+forall node i in graph do
+	if i is in quadrant then
+		considered.insert(i)
+	endif
+endfor
+forall node i in considered do
+	i.distance = sqrt(power(x-xi,2)+power(y-yi,2))
+endofr
+considered.sort(distance)
+select(considered[0])

@@ -1,0 +1,247 @@
+\documentclass[12pt, a4paper, oneside]{book}
+
+%\usepackage{fullpage}
+%\usepackage{amsmath}
+%\usepackage{amssymb}
+\usepackage{graphicx}
+%\usepackage{alltt}
+%\usepackage{latexsym}
+%\usepackage{url}
+%\usepackage[iso]{umlaute}
+%\usepackage[arrow,matrix,frame,curve,ps]{xy}
+\usepackage[vcentering,dvips]{geometry}
+%\usepackage{xypic}
+%\usepackage[iso]{umlaute}
+%\usepackage{amssymb}
+%\usepackage{fleqn}
+%\usepackage{alltt,epsfig,array}
+\usepackage{listings}
+\usepackage[labelfont=bf,up,textfont=it,up]{caption}
+%\usepackage{algorithmic}
+%\usepackage{algorithm}
+\usepackage{setspace}
+%\usepackage{makeidx}
+%\usepackage{float}
+%\usepackage{array}
+\usepackage{verbatim}
+\usepackage[
+	pdftex,
+	plainpages=false,
+	pdfpagelabels,
+	colorlinks=false,
+	pdftitle={Keyboard Supported Diagram Editing and Navigating},    % title
+	pdfsubject={Bachelor Thesis},
+	pdfauthor={Andrew M. B. Boktor},     % author
+	pdfkeywords={diagram keyboard editing edit creation create navigation navigate accessibility accessibilities}
+]{hyperref}
+
+\geometry{total={155mm,235mm}}
+
+%\setlength{\parindent}{0pt}
+
+\thispagestyle{plain}
+
+%Create your own environments
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% inclusion commands %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newtheorem{definition}{Definition}
+\newtheorem{example}{Example}
+
+\newcommand{\reffig}[1]{
+{\em Figure~\ref{figure:#1}}\noindent
+}
+
+\newcommand{\incfig}[4]{%
+	\begin{figure}[hHtb!]
+		\begin{center}
+			\includegraphics[#4]{illustrations/#1}
+			\caption{#2}
+			\label{figure:#3}
+		\end{center}
+	\end{figure}
+}
+
+\newcommand{\inctext}[3]{
+	\begin{figure}
+		{#1}
+		\caption{#2}
+		\label{figure:#3}
+	\end{figure}
+}
+
+\newcommand{\inccode}[3]{
+	\begin{figure}[hHtb!]
+	\lstset{basicstyle=\footnotesize, numberstyle=\footnotesize, numbers=left, frame=single, tabsize=2}
+	\lstinputlisting{code/#1}
+	\caption{#2}
+	\label{figure:#3}
+	\end{figure}
+}
+
+\newcommand{\refcode}[1]{
+{\em Figure~\ref{figure:#1}}\noindent
+}
+
+\newcommand{\labelchapter}[1]{
+\label{chapter:#1}
+}
+\newcommand{\refchapter}[1]{
+{\em Chapter~\ref{chapter:#1}}\noindent
+}
+
+\newcommand{\labelsection}[1]{
+\label{section:#1}
+}
+\newcommand{\refsection}[1]{
+{\em Section~\ref{section:#1}}\noindent
+}
+
+\newcommand{\labelsubsection}[1]{
+\label{subsection:#1}
+}
+\newcommand{\refsubsection}[1]{
+{\em Subsection~\ref{subsection:#1}}\noindent
+}
+
+\newcommand{\labeltable}[1]{
+\label{table:#1}
+}
+\newcommand{\reftable}[1]{
+{\em Table~\ref{table:#1}}\noindent
+}
+
+\newcommand{\labelappendix}[1]{
+\label{appendix:#1}
+}
+\newcommand{\refappendix}[1]{
+{\em Appendix~\ref{appendix:#1}}\noindent
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% Thesis Specific Commands %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%% Information About the First University %%%%%%%%%%
+%University One
+\newcommand{\universityOne}{German University in Cairo}
+
+%Group One
+\newcommand{\groupOne}{Engineering}
+
+%Faculty One
+\newcommand{\facultyOne}{Faculty of Media Engineering and Technology}
+
+%Major One
+\newcommand{\majorOne}{Computer Science and Engineering}
+
+%%%%%%%%%% Information About the Second University %%%%%%%%%%
+%University Two
+\newcommand{\universityTwo}{Universit\"at Stuttgart}
+
+%Faculty Two
+\newcommand{\facultyTwo}{Fakult\"at Informatik}
+
+%Faculty Two Information
+\newcommand{\facultyTwoInformation}{
+\facultyTwo, Elektrotechnik und Informationstechnik\\
+Institut f\"ur Visualisierung und Interaktive System (VIS)\\
+Universit\"atsstra\ss e 38\\
+70569 Stuttgart
+}
+
+%Institute Two
+\newcommand{\instituteTwo}{Institute of Visualization and Interactive Systems}
+
+%Project Number Two
+\newcommand{\projectNumberTwo}{2180}
+
+%CR Classification
+\newcommand{\crClassification}[0]{H.5.2, I.3.4, D.2.2}
+
+
+%Starting Date
+\newcommand{\startingDay}[0]{1\superscript{st}}
+\newcommand{\startingMonth}[0]{July}
+\newcommand{\startingYear}[0]{2008}
+\newcommand{\startingDate}[0]{\startingDay~of~\startingMonth,~\startingYear}
+
+%Submission Date
+\newcommand{\submissionDay}[0]{30\superscript{th}}
+\newcommand{\submissionMonth}[0]{September}
+\newcommand{\submissionYear}[0]{2008}
+\newcommand{\submissionDate}[0]{\submissionDay~of~\submissionMonth,~\submissionYear}
+
+%Thesis
+\newcommand{\typeOfThesis}[0]{Bachelor Thesis}
+\newcommand{\titleOfThesis}[0]{Keyboard Supported Diagram Editing and Navigating}
+\newcommand{\titleOfThesisOne}{Keyboard Supported}
+\newcommand{\titleOfThesisTwo}{Diagram Editing}
+\newcommand{\titleOfThesisThree}{and Navigating}
+
+%Author and Reviewers
+\newcommand{\authorOfThesis}[0]{Andrew Mofid Botros Boktor}
+\newcommand{\supervisorOne}[0]{Dipl. Inf. Steffen Koch}
+\newcommand{\supervisorTwo}[0]{Dipl. Inf. Christiane Taras}
+\newcommand{\reviewerOne}[0]{Prof. Dr. Thomas Ertl}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Formatting Commands %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\superscript}[1]{\ensuremath{^{\textnormal{#1}}}}
+\newcommand{\subscript}[1]{\ensuremath{_{\textnormal{#1}}}}
+\newcommand{\beginchapter}[0]{
+\vspace{-0.5cm}
+\hrule
+\vspace{0.02cm}
+\hrule
+\vspace{0.01cm}
+\hrulefill
+\hrule
+\hrule
+\vspace{1cm}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% Document Initialization %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\makeindex
+\makeindex
+\setlength \oddsidemargin{0.5cm}
+%\setlength \evensidemarlgin{0.5cm}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+\pagenumbering{Roman}
+
+\input{US_TitlePage}
+%\input{GUC_TitlePage}
+%\include{US_TitlePage}
+\include{GUC_TitlePage}
+%\include{certification}
+\include{abstract}
+\include{acknowledgments}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% List Of **** %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\include{list_of_tables}
+\include{list_of_figures}
+\include{list_of_abbreviations}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\tableofcontents
+\clearpage
+
+\pagenumbering{arabic}
+
+\include{introduction}
+%\include{background}
+\include{problem_description}
+\include{the_state_of_the_art}
+\include{concepts}
+\include{approach}
+\include{conclusion}
+
+\appendix
+\include{list_of_investigated_tools}
+
+\include{references}
+\include{certification}
+
+%\printindex
+%\addcontentsline{toc}{chapter}{Index}
+
+\end{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+

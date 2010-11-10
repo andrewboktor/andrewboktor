@@ -1,0 +1,37 @@
+#weighted_coordinates_differences
+
+weight_big;
+weight_small;
+list considered;
+foreach (node n in graph)
+	switch(key_pressed)
+	case(up_arrow)
+		if(i.y<initial_node.y) 
+			considered.add(n);
+			n.weight = weight_big*(abs(n.x-initial_node.x))+
+								weight_small*(abs(n.y-initial_node.y));
+		endif
+	
+	case(down_arrow)
+		if(i.y>initial_node.y) 
+			considered.add(n);
+			n.weight = weight_big*(abs(n.x-initial_node.x))+
+								weight_small*(abs(n.y-initial_node.y));
+		endif
+
+	case(right_arrow)
+		if(i.x>initial_node.x) 
+			considered.add(n);
+			n.weight = weight_small*(abs(n.x-initial_node.x))+
+								weight_big*(abs(n.y-initial_node.y));
+		endif
+
+	case(down_arrow)
+		if(i.x<initial_node.x) 
+			considered.add(n);
+			n.weight = weight_small*(abs(n.x-initial_node.x))+
+								weight_big*(abs(n.y-initial_node.y));
+		endif
+endforeach
+considered.sort(n.weight);
+select(considered[[0]);
