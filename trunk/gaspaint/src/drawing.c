@@ -98,6 +98,9 @@ void changeColor ( GdkColor color )
 void fillh ( int R0, int G0, int B0, int R1, int G1, int B1, int x, int y )
 {
 	
+	static int count = 0;
+	count++;
+	//	if (count > 10000) return;
 	GdkColor initial, final;
 	initial.red = R0;
 	initial.green = G0;
@@ -119,32 +122,50 @@ void fillh ( int R0, int G0, int B0, int R1, int G1, int B1, int x, int y )
 	
 	glReadPixels( x, y, 1, 1, GL_RGB, GL_FLOAT, pixel_color );
 	
+	pixel_color[0]*=0xff;
+	pixel_color[1]*=0xff;
+	pixel_color[2]*=0xff;
+	
 	
 	if 	(
-			( (int)(pixel_color[0]*255) == initial.red && (int)(pixel_color[1]*255) == initial.green && (int)(pixel_color[2]*255) == initial.blue )
+			( (int)(pixel_color[0]) == initial.red && (int)(pixel_color[1]) == initial.green && (int)(pixel_color[2]) == initial.blue )
 			&&
-			! ( (int)(pixel_color[0]*255) == final.red && (int)(pixel_color[1]*255) == final.green && (int)(pixel_color[2]*255) == final.blue )
+			! ( (int)(pixel_color[0]) == final.red && (int)(pixel_color[1]) == final.green && (int)(pixel_color[2]) == final.blue )
 		)
 	{
 		
-		
-		
+		printf("Filling %d,%d i: %u,%u,%u. f: %u,%u,%u. a: %f,%f,%f\n", x, y, R0, G0, B0, R1, G1, B1, pixel_color[0], pixel_color[1], pixel_color[2]);
 		glBegin ( GL_POINT );
-		glVertex2i ( x, 640-y );
+		glVertex2i ( x+1, 640 - y );
 		glEnd ();
 		
+		float *pixel_color2 = malloc ( sizeof( float )*3 );
+	
+		glReadPixels( x, y, 1, 1, GL_RGB, GL_FLOAT, pixel_color2 );
 		
-		fillh ( R0, G0, B0, R1, G1, B1, x+1, y );
-		fillh ( R0, G0, B0, R1, G1, B1, x, y+1 );
-		fillh ( R0, G0, B0, R1, G1, B1, x, y-1 );
-		fillh ( R0, G0, B0, R1, G1, B1, x-1, y );
+		pixel_color2[0]*=0xff;
+		pixel_color2[1]*=0xff;
+		pixel_color2[2]*=0xff;
+		printf("Just wrote color: %f,%f,%f\n", pixel_color2[0], pixel_color2[1], pixel_color2[2]);
+		
+		if (x < 799 && (640-y) < 599){
+			fillh ( R0, G0, B0, R1, G1, B1, x+1, y );
+			fillh ( R0, G0, B0, R1, G1, B1, x, y+1 );
+			fillh ( R0, G0, B0, R1, G1, B1, x, y-1 );
+			fillh ( R0, G0, B0, R1, G1, B1, x-1, y );
+		}
+	} else {
+		printf("Terminating Fill %d,%d i: %u,%u,%u. f: %u,%u,%u. a: %f,%f,%f\n", x, y, R0, G0, B0, R1, G1, B1, pixel_color[0], pixel_color[1], pixel_color[2]);
 	}
+	
 	free ( pixel_color );
 }
 
+void fillh2 ( GdkColor initial, GdkColor final, int x, int y );
 /* gets the current color of the pixel clicked and calls fillh to implement filling */
 void fill ( int x, int y )
 {
+	//OpenGL has inverted y directions
 	y=640-y;
 	float *pixel_color = malloc ( sizeof( float )*3 );
 	
@@ -153,15 +174,27 @@ void fill ( int x, int y )
 	//printf ( "Should be int: %d\n", (int)(pixel_color[0]*255 ));
 	if ( ! ( pixel_color[0]*255 == current_color.red/255 && pixel_color[1]*255 == current_color.green/255 && pixel_color[2]*255 == current_color.blue/256 ) )
 	{
+#ifndef OLD_FILL
+		printf("Filling: %d, %d\n", x, y);
 		fillh ( (int)(pixel_color[0]*255), (int)(pixel_color[1]*255), (int)(pixel_color[2]*255), current_color.red/256, current_color.green/256, current_color.blue/256 , x, y );
+#else
+		GdkColor initial, final;
+		initial.red = (int)(pixel_color[0]*255);
+		initial.green = (int)(pixel_color[1]*255);
+		initial.blue = (int)(pixel_color[2]*255);
+		final.red = current_color.red/256;
+		final.green = current_color.green/256;
+		final.blue = current_color.blue/256;
+		fillh2 (initial, final, x, y);
+#endif
 	}
 	free ( pixel_color );
 }
 
+
 /* OLD Filling Function, please DONOT delete untill the new one COMPLETELY works
  */
-/*
-void fill ( GdkColor initial, GdkColor final, int x, int y )
+void fillh2 ( GdkColor initial, GdkColor final, int x, int y )
 {
 	if ( initial.red == final.red && initial.green == final.green && initial.blue == final.blue )
 		return;
@@ -193,16 +226,15 @@ void fill ( GdkColor initial, GdkColor final, int x, int y )
 		glVertex2i ( x, y );
 		glEnd ();
 		glFlush ();
-		fill ( initial, final, x+1, y );
-		fill ( initial, final, x-1, y );
-		fill ( initial, final, x, y+1 );
-		fill ( initial, final, x, y-1 );
+		fillh2 ( initial, final, x+1, y );
+		fillh2 ( initial, final, x-1, y );
+		fillh2 ( initial, final, x, y+1 );
+		fillh2 ( initial, final, x, y-1 );
 		
 		printf ( "SHOULD DRAW\n" );
 	}
 }
-* 
-*/
+
 
 /**
  * void drawRect ( int x0, int y0, int x1, int y1) - Draws a rectangle with the corners at the specified points.

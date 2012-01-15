@@ -20,7 +20,7 @@
  * along with GasPaint.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <gtk/gtk.h>
+#include <gtk-2.0/gtk/gtk.h>
 #include <string.h>
 
 #include "callbacks.h"
