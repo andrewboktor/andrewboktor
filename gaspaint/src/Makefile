@@ -3,7 +3,7 @@ SRC=callbacks.c drawarea.c drawing.c event.c main.c ui.c
 HDR=callbacks.h config.h drawarea.h drawing.h event.h main.h public.h ui.h
 
 all:
-	gcc ${SRC} -o ../bin/${BIN} `pkg-config --libs --cflags gtk+-2.0 gtkglext-1.0` -lglut
+	gcc ${SRC} -ggdb -O0 -o ../bin/${BIN} `pkg-config --libs --cflags gtk+-2.0 gtkglext-1.0` -lglut -lm
 
 
 run:

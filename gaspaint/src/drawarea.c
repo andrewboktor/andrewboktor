@@ -71,6 +71,8 @@ void draw_area_clicked (GtkWidget *widget, GdkEventButton *event)
 		current_x0 = x;
 		current_y0 = y;
 		
+		printf("Click at %d, %d\n", x, y);
+
 		if (current_tool == FILL)
 		{
 			char command [25];
