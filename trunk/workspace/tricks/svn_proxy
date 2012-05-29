@@ -1,0 +1,3 @@
+~/.subversion/servers
+http-proxy-host = xxx.xxx.xxx.com
+http-proxy-port = 8080
