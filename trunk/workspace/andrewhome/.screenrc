@@ -2,15 +2,16 @@ startup_message off
 
 backtick 1 1 1 $HOME/scripts/screen/screenrc.acpi.sh
 backtick 2 3600 3600 $HOME/scripts/screen/screenrc.updates.archlinux.sh
-bindkey -k k2 screen
-bindkey -k k3 prev
-bindkey -k k4 next
+backtick 3 1 1 $HOME/scripts/screen/screenrc.load.sh
+bindkey -k F1 prev
+bindkey -k F2 next
 #bindkey -k k5 
-bindkey -k k6 detach
-bindkey -k k7 copy
-bindkey -k k8 title
+bindkey -k k2 screen
+bindkey -k k3 detach
+bindkey -k k4 copy
+bindkey -k k5 title
 #bindkey -k k9
 #caption always
 hardstatus alwayslastline
 #hardstatus string '%{= kG}[ %{G}%H %{g}][%= %{= kw}%?%-Lw%?%{r}(%{W}%n*%f%t%?(%u)%?%{r})%{w}%?%+Lw%?%?%= %{g}][%{B} %m-%d %{W}%c %{g}]'
-hardstatus string '%{=b .wB} A %{-}%{=b .kW} Archlinux %{-}%{= .kY}[ %-w%{-}%{=b .kg}%n*%t%{-}%{= .kY}%+w%= ]%{-}%{= .kw}|%{=b .mW}%1`%{-}|%{=b .rW}%2`!%{-}|%l|%{=b .ky}%u%{-}%{= .kg}%H|%D %d %M%C:%s %A%{-}'
+hardstatus string '%{=b .wB} A %{-}%{=b .kW} Archlinux %{-}%{= .kY}[ %-w%{-}%{=b .kg}%n*%t%{-}%{= .kY}%+w%= ]%{-}%{= .kw}|%{=b .mW}%1`%{-}|%{=b .rW}%2`!%{-}|%3`|%{=b .ky}%u%{-}%{= .kg}%H|%D %d %M%C:%s %A%{-}'
