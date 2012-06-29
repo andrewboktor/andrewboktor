@@ -13,3 +13,6 @@ set list
 "inoremap <expr> <CR> pumvisible()?"\<C-y>":"\<C-g>u\<C-R>"
 colorscheme wombat256
 syntax on
+
+"Adding syntax highlighting for .ispc files
+au BufNewFile,BufRead *.ispc setlocal ft=c
