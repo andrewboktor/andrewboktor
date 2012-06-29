@@ -1,0 +1,5 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =3
+let g:netrw_dirhist_1='/home/boktor/work'
+let g:netrw_dirhist_2='/home/boktor/p4depot/gpgpu_sim_research/fermi/simulation/run/HOTSP-FT'
+let g:netrw_dirhist_3='/home/boktor/p4depot/gpgpu_sim_research/fermi/simulation/run/HOTSP-FT/rodinit-test-fermi-ptxplus'

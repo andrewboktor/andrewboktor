@@ -6,6 +6,9 @@
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
+#This script contains a bunch of environment variables likes EDITOR ...
+source $DIR/scripts/andrew-env.sh
+
 # Source colors first thing (other scripts use it)
 source $DIR/scripts/andrew-colors.sh
 
