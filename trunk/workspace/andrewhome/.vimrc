@@ -11,7 +11,8 @@ set list
 "set mouse=a
 "set completeopt=longest,menuone
 "inoremap <expr> <CR> pumvisible()?"\<C-y>":"\<C-g>u\<C-R>"
-colorscheme wombat256
+"colorscheme wombat256
+colorscheme desertEx
 syntax on
 
 "Adding syntax highlighting for .ispc files
