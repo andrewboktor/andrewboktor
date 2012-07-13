@@ -19,3 +19,5 @@ alias lla='ls -la'
 alias llh='ls -lh'
 alias llah='ls -lah'
 
+# Print the stack with one directory per line
+alias dirs='dirs -p'
