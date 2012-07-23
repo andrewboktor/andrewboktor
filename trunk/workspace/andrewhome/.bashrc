@@ -28,3 +28,7 @@ source $DIR/scripts/andrew-alias.sh
 #PERFORCE P4
 #export P4CONFIG='.p4config'
 #export P4EDITOR='vim'
+
+if [ -f $HOME/.source.sh ]; then
+	source $HOME/.source.sh
+fi
