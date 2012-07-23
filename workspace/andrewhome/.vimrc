@@ -12,7 +12,7 @@ set list
 "set completeopt=longest,menuone
 "inoremap <expr> <CR> pumvisible()?"\<C-y>":"\<C-g>u\<C-R>"
 "colorscheme wombat256
-colorscheme desertEx
+colorscheme wombat
 syntax on
 
 "Adding syntax highlighting for .ispc files
