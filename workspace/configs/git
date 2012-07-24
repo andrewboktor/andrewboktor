@@ -1,3 +1,10 @@
+# colors
 git config --global color.status auto
 git config --global color.diff auto
+
+# output format
 git config --global status.showuntrackedfiles no
+
+# username and e-mail
+git config --global user.name "Your Name"
+git config --global user.email you@example.com
