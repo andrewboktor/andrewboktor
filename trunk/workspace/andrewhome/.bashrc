@@ -18,7 +18,6 @@ source $DIR/scripts/andrew-PS1.sh
 
 #test -s ~/.alias && . ~/.alias || true
 
-
 source $DIR/scripts/andrew-alias.sh
 
 #export TERM='xterm-256color'
@@ -28,6 +27,11 @@ source $DIR/scripts/andrew-alias.sh
 #PERFORCE P4
 #export P4CONFIG='.p4config'
 #export P4EDITOR='vim'
+
+# enable bash completion
+if [ -f /etc/bash_completion ]; then
+	source /etc/bash_completion
+fi
 
 if [ -f $HOME/.source.sh ]; then
 	source $HOME/.source.sh
