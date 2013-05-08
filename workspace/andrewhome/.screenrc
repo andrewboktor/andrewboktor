@@ -1,5 +1,7 @@
 startup_message off
 
+defscrollback 1000000
+term screen-256color
 backtick 1 1 1 $HOME/scripts/screen/screenrc.acpi.sh
 backtick 2 3600 3600 $HOME/scripts/screen/screenrc.updates.archlinux.sh
 backtick 3 1 1 $HOME/scripts/screen/screenrc.load.sh
