@@ -1,7 +1,7 @@
 #!/bin/bash
 ANDREWHOME_ROOT="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-FILES=".bashrc .vimrc .vim .screenrc .rtorrent.rc scripts"
+FILES=".bashrc .bash_profile .vimrc .vim .screenrc .rtorrent.rc scripts"
 
 RAND=$RANDOM
 
